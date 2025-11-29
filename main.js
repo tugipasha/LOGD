@@ -286,4 +286,3 @@ const defaultConfig = {
         }
 
         initializeApp();
-
