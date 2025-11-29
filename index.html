@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="tr">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LOGD - Liseli Oyun Geliştiriciler Derneği</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="/_sdk/data_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body><!-- Intro Screen -->
+  <div id="intro-screen">
+   <div class="intro-content">
+    <div class="intro-logo">
+     LOGD
+    </div>
+    <div class="intro-subtitle">
+     Liseli Oyun Geliştiriciler Derneği
+    </div>
+   </div>
+  </div>
+  <nav class="navbar">
+   <div class="navbar-container">
+    <div class="logo" onclick="navigateTo('home')">
+     LOGD
+    </div>
+    <ul class="nav-links">
+     <li><a onclick="navigateTo('home')" data-page="home">Ana Sayfa</a></li>
+     <li><a onclick="navigateTo('about')" data-page="about">Hakkımızda</a></li>
+     <li><a onclick="navigateTo('events')" data-page="events">Etkinlikler</a></li>
+     <li><a onclick="navigateTo('stats')" data-page="stats">İstatistikler</a></li>
+     <li><a onclick="navigateTo('membership')" data-page="membership">Üyelik</a></li>
+     <li><a onclick="navigateTo('contact')" data-page="contact">İletişim</a></li>
+    </ul><button class="theme-toggle" id="theme-toggle" title="Dark mode">
+     <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5" /> <line x1="12" y1="1" x2="12" y2="3"></line> <line x1="12" y1="21" x2="12" y2="23"></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line> <line x1="1" y1="12" x2="3" y2="12"></line> <line x1="21" y1="12" x2="23" y2="12"></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+     </svg>
+     <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+     </svg></button>
+   </div>
+  </nav><!-- HOME PAGE -->
+  <div id="home" class="page active">
+   <section class="hero">
+    <div class="hero-content">
+     <h1 id="main-title">Liseli geliştiricilerin oyun dünyasına açılan kapısı</h1>
+     <p id="subtitle">Türkiye'nin dört bir yanındaki oyun geliştiricileri bir araya getiriyor, öğrenme ve üretme kültürünü büyütüyoruz.</p>
+     <div class="cta-buttons"><button class="btn-primary" id="cta-primary" onclick="navigateTo('events')">Etkinliklere Göz At</button> <button class="btn-secondary" id="cta-secondary" onclick="navigateTo('membership')">Topluluğa Katıl</button>
+     </div>
+    </div>
+    <div class="hero-visual">
+     <svg class="hero-icon" viewbox="0 0 400 400" xmlns="http://www.w3.org/2000/svg"><defs>
+       <lineargradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#5856D6;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#7648EE;stop-opacity:1" />
+       </lineargradient>
+      </defs> <rect x="120" y="100" width="160" height="200" rx="15" fill="url(#grad1)" opacity="0.9" /> <circle cx="200" cy="180" r="25" fill="white" opacity="0.3" /> <rect x="160" y="240" width="30" height="30" rx="5" fill="white" opacity="0.4" /> <rect x="210" y="240" width="30" height="30" rx="5" fill="white" opacity="0.4" /> <rect x="160" y="280" width="80" height="8" rx="4" fill="white" opacity="0.5" /> <path d="M 80 320 Q 200 280 320 320" stroke="#3AAFFF" stroke-width="4" fill="none" opacity="0.6" /> <circle cx="80" cy="320" r="8" fill="#FF8A3D" /> <circle cx="200" cy="285" r="8" fill="#3AAFFF" /> <circle cx="320" cy="320" r="8" fill="#FF8A3D" />
+     </svg>
+    </div>
+   </section>
+   <section class="about-mini">
+    <div class="about-mini-container">
+     <h2 class="section-title" id="about-title">LOGD Nedir?</h2>
+     <p class="about-text">Liseler Oyun Geliştirme Derneği, öğrenci geliştiricilerin bir araya gelip birlikte üretmesini amaçlayan Türkiye çapında bir topluluktur. Oyun geliştirme alanındaki genç yetenekleri destekler, eğitim ve etkinlikler düzenler, geleceğin geliştirici ekosistemini inşa eder.</p>
+    </div>
+   </section>
+   <section class="stats-section">
+    <div class="stats-container">
+     <div class="stat-card">
+      <div class="stat-number">
+       500+
+      </div>
+      <div class="stat-label">
+       Üye
+      </div>
+      <p class="stat-description">Farklı okullardan, farklı yeteneklere sahip genç geliştiriciler aynı çatı altında.</p>
+     </div>
+     <div class="stat-card">
+      <div class="stat-number">
+       10+
+      </div>
+      <div class="stat-label">
+       Topluluk
+      </div>
+      <p class="stat-description">Türkiye'nin çeşitli liselerinden öğrenci grupları LOGD ağıyla bağlanıyor.</p>
+     </div>
+     <div class="stat-card">
+      <div class="stat-number">
+       Sürekli
+      </div>
+      <div class="stat-label">
+       Etkinlikler
+      </div>
+      <p class="stat-description">Game Jam'ler, buluşmalar, workshoplar ve daha fazlası.</p>
+     </div>
+    </div>
+   </section>
+   <section class="content-section">
+    <h2 class="section-title">Ne Yapıyoruz?</h2>
+    <div class="events-grid">
+     <div class="event-card">
+      <svg class="event-icon" viewbox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="30" fill="#5856D6" opacity="0.2" /> <path d="M 20 32 L 28 24 L 28 40 Z" fill="#5856D6" /> <rect x="32" y="24" width="12" height="16" fill="#7648EE" />
+      </svg>
+      <h3>Game Jams</h3>
+      <p>48-72 saatlik oyun geliştirme maratonlarıyla yaratıcılığı ateşleyen etkinlikler. Hem öğrenme hem de üretme ortamı.</p><a class="btn-link" onclick="navigateTo('gamejams')">Detaylı İncele →</a>
+     </div>
+     <div class="event-card">
+      <svg class="event-icon" viewbox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="30" fill="#7648EE" opacity="0.2" /> <rect x="18" y="20" width="28" height="24" rx="2" fill="none" stroke="#7648EE" stroke-width="3" /> <path d="M 24 28 L 32 28 M 24 34 L 40 34 M 24 40 L 36 40" stroke="#5856D6" stroke-width="2" />
+      </svg>
+      <h3>Workshops</h3>
+      <p>Sektörden gelen profesyonellerle teknik ve yaratıcı beceri atölyeleri.</p><a class="btn-link" onclick="navigateTo('workshops')">Detaylı İncele →</a>
+     </div>
+     <div class="event-card">
+      <svg class="event-icon" viewbox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="30" fill="#3AAFFF" opacity="0.2" /> <circle cx="24" cy="28" r="8" fill="#3AAFFF" /> <circle cx="40" cy="28" r="8" fill="#5856D6" /> <circle cx="32" cy="42" r="8" fill="#7648EE" />
+      </svg>
+      <h3>Meet-ups</h3>
+      <p>Aynı tutkuyu paylaşan genç geliştiricilerin tanışıp bağlantı kurduğu sıcak buluşmalar.</p><a class="btn-link" onclick="navigateTo('meetups')">Detaylı İncele →</a>
+     </div>
+     <div class="event-card">
+      <svg class="event-icon" viewbox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="30" fill="#FF8A3D" opacity="0.2" /> <rect x="20" y="24" width="24" height="20" rx="2" fill="none" stroke="#FF8A3D" stroke-width="3" /> <circle cx="32" cy="18" r="6" fill="#5856D6" /> <path d="M 26 50 Q 32 46 38 50" stroke="#7648EE" stroke-width="2" fill="none" />
+      </svg>
+      <h3>Dev Talks</h3>
+      <p>Deneyimli ekipler ve sektör liderleriyle gerçekleştirilen ilham verici konuşmalar.</p><a class="btn-link" onclick="navigateTo('devtalks')">Detaylı İncele →</a>
+     </div>
+    </div>
+   </section>
+  </div><!-- ABOUT PAGE -->
+  <div id="about" class="page">
+   <div class="page-header">
+    <h1>Biz Kimiz?</h1>
+    <p>Türkiye'de liseli oyun geliştiriciler için en kapsayıcı, en üretken topluluğu kuruyoruz.</p>
+   </div>
+   <section class="content-section">
+    <div class="event-detail-content">
+     <h3>LOGD'nin Hikâyesi</h3>
+     <p>Liseler Oyun Geliştirme Derneği; oyun geliştirmeye ilgi duyan gençleri bir araya getirmek, öğrenme fırsatları sunmak ve oyun üretimini teşvik etmek amacıyla kurulmuştur. Kısa sürede yüzlerce öğrenciye ulaşarak etkinlikler, atölyeler ve üretim odaklı projeler gerçekleştirmiştir.</p>
+    </div>
+    <div class="vision-mission">
+     <div class="vm-card">
+      <h3>🎯 Vizyon</h3>
+      <p id="vision-text">Genç oyun geliştiriciler için Türkiye'nin en büyük destek ağı olmak.</p>
+     </div>
+     <div class="vm-card">
+      <h3>🚀 Misyon</h3>
+      <p id="mission-text">Öğrencilerin öğrenme, üretme ve paylaşma fırsatlarını artırmak. Oyun geliştirme kültürünü yaymak. Sektörle öğrenciler arasındaki köprüyü güçlendirmek.</p>
+     </div>
+    </div>
+    <h2 class="section-title">Yönetim ve Ekip</h2>
+    <div class="team-grid">
+     <div class="team-card">
+      <div class="team-avatar">
+      </div>
+      <h4>İsim Soyisim</h4>
+      <p>Kurucu &amp; Başkan</p>
+     </div>
+     <div class="team-card">
+      <div class="team-avatar">
+       👤
+      </div>
+      <h4>İsim Soyisim</h4>
+      <p>Görev</p>
+     </div>
+     <div class="team-card">
+      <div class="team-avatar">
+       👤
+      </div>
+      <h4>İsim Soyisim</h4>
+      <p>Görev</p>
+     </div>
+     <div class="team-card">
+      <div class="team-avatar">
+       👤
+      </div>
+      <h4>İsim Soyisim</h4>
+      <p>Görev</p>
+     </div>
+    </div>
+   </section>
+  </div><!-- EVENTS PAGE -->
+  <div id="events" class="page">
+   <div class="page-header">
+    <h1>Birlikte Üretiyoruz</h1>
+    <p>Oyun geliştirme dünyasının her alanını kapsayan etkinliklerle hem öğretiyor hem de birlikte geliştiriyoruz.</p>
+   </div>
+   <section class="content-section">
+    <div class="events-grid">
+     <div class="event-card">
+      <svg class="event-icon" viewbox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="30" fill="#5856D6" opacity="0.2" /> <path d="M 20 32 L 28 24 L 28 40 Z" fill="#5856D6" /> <rect x="32" y="24" width="12" height="16" fill="#7648EE" />
+      </svg>
+      <h3>Game Jams</h3>
+      <p>Tempo, yaratıcılık ve ekip ruhunun buluştuğu 48-72 saatlik maratonlar.</p><a class="btn-link" onclick="navigateTo('gamejams')">Bu etkinlik türünü incele →</a>
+     </div>
+     <div class="event-card">
+      <svg class="event-icon" viewbox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="30" fill="#7648EE" opacity="0.2" /> <rect x="18" y="20" width="28" height="24" rx="2" fill="none" stroke="#7648EE" stroke-width="3" /> <path d="M 24 28 L 32 28 M 24 34 L 40 34 M 24 40 L 36 40" stroke="#5856D6" stroke-width="2" />
+      </svg>
+      <h3>Workshops</h3>
+      <p>Profesyonellerden öğrenme fırsatı sunan interaktif eğitimler.</p><a class="btn-link" onclick="navigateTo('workshops')">Bu etkinlik türünü incele →</a>
+     </div>
+     <div class="event-card">
+      <svg class="event-icon" viewbox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="30" fill="#3AAFFF" opacity="0.2" /> <circle cx="24" cy="28" r="8" fill="#3AAFFF" /> <circle cx="40" cy="28" r="8" fill="#5856D6" /> <circle cx="32" cy="42" r="8" fill="#7648EE" />
+      </svg>
+      <h3>Meet-ups</h3>
+      <p>Yeni bağlantılar kurabileceğiniz sıcak buluşmalar.</p><a class="btn-link" onclick="navigateTo('meetups')">Bu etkinlik türünü incele →</a>
+     </div>
+     <div class="event-card">
+      <svg class="event-icon" viewbox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="30" fill="#FF8A3D" opacity="0.2" /> <rect x="20" y="24" width="24" height="20" rx="2" fill="none" stroke="#FF8A3D" stroke-width="3" /> <circle cx="32" cy="18" r="6" fill="#5856D6" /> <path d="M 26 50 Q 32 46 38 50" stroke="#7648EE" stroke-width="2" fill="none" />
+      </svg>
+      <h3>Dev Talks</h3>
+      <p>Sektörün deneyimli isimlerinin ilham veren konuşmaları.</p><a class="btn-link" onclick="navigateTo('devtalks')">Bu etkinlik türünü incele →</a>
+     </div>
+    </div>
+   </section>
+  </div><!-- GAME JAMS DETAIL PAGE -->
+  <div id="gamejams" class="page">
+   <div class="page-header">
+    <h1>Game Jams</h1>
+    <p>Oyun Maratonlarının Adresi</p>
+   </div>
+   <section class="content-section">
+    <div class="event-detail-content">
+     <h3>Nedir?</h3>
+     <p>48-72 saat süren yoğun oyun geliştirme süreçlerinde öğrenciler ekipler halinde sıfırdan oyun üretir. LOGD, ulusal ve uluslararası Game Jam organizasyonlarında aktif rol alır. Tempo, yaratıcılık ve ekip ruhunun buluştuğu bu maratonlarda öğrenciler gerçek bir üretim deneyimi yaşar.</p>
+     <h3>Öne Çıkan Game Jam'ler</h3>
+     <ul>
+      <li>Global Game Jam Next - Türkiye'nin en büyük game jam organizasyonu</li>
+      <li>LOGD Yaz Game Jam - Yaz döneminde düzenlenen özel etkinlik</li>
+      <li>48 Hour Challenge - Hızlı üretim odaklı maraton</li>
+      <li>Tema Bazlı Jam'ler - Farklı oyun türlerine özel etkinlikler</li>
+     </ul>
+     <h3>Yaklaşan Game Jam</h3>
+     <p><strong>LOGD Bahar Game Jam 2025</strong></p>
+     <p>📅 Tarih: 15-17 Mart 2025</p>
+     <p>📍 Lokasyon: İstanbul Teknik Üniversitesi</p>
+     <p>⏰ Süre: 48 saat</p><button class="btn-primary" onclick="navigateTo('membership')">Kayıt Ol</button>
+    </div>
+    <h2 class="section-title">Etkinlikten Kareler</h2>
+    <div class="photo-gallery">
+     <div class="gallery-item">
+      🎮
+     </div>
+     <div class="gallery-item">
+      💻
+     </div>
+     <div class="gallery-item">
+      🎨
+     </div>
+     <div class="gallery-item">
+      🏆
+     </div>
+    </div>
+   </section>
+  </div><!-- WORKSHOPS DETAIL PAGE -->
+  <div id="workshops" class="page">
+   <div class="page-header">
+    <h1>Workshops</h1>
+    <p>Sektör Profesyonelleriyle Öğrenme</p>
+   </div>
+   <section class="content-section">
+    <div class="event-detail-content">
+     <h3>Nedir?</h3>
+     <p>Sektör profesyonelleriyle atölyeler, teknik eğitimler, röportajlar ve uygulamalı seanslar. Profesyonellerden öğrenme fırsatı sunan interaktif eğitimler ile öğrenciler hem teorik bilgi edinir hem de pratik deneyim kazanır.</p>
+     <h3>Workshop Konuları</h3>
+     <ul>
+      <li>Unity ile 2D Oyun Geliştirme Temelleri</li>
+      <li>Unreal Engine 5 ile 3D Modelleme</li>
+      <li>Oyun Tasarımı ve Level Design</li>
+      <li>Character Design ve Animasyon</li>
+      <li>Oyun Müziği ve Ses Tasarımı</li>
+      <li>Oyun Ekonomisi ve Monetizasyon</li>
+     </ul>
+     <h3>Yaklaşan Workshops</h3>
+     <p><strong>Unity Temel Eğitimi</strong></p>
+     <p>📅 Tarih: 5 Mart 2025</p>
+     <p>⏰ Saat: 14:00 - 18:00</p>
+     <p>👨‍🏫 Eğitmen: Ahmet Yıldırım (Senior Unity Developer)</p><button class="btn-primary" onclick="navigateTo('membership')">Katılım Başvurusu</button>
+    </div>
+   </section>
+  </div><!-- MEETUPS DETAIL PAGE -->
+  <div id="meetups" class="page">
+   <div class="page-header">
+    <h1>Meet-ups</h1>
+    <p>Genç Geliştiricilerin Buluşma Noktası</p>
+   </div>
+   <section class="content-section">
+    <div class="event-detail-content">
+     <h3>Nedir?</h3>
+     <p>Şehrin dört bir yanındaki genç oyun geliştiricilerin sohbet ettiği, tanıştığı ve bağlantı kurduğu buluşmalar. Yeni bağlantılar kurabileceğiniz sıcak buluşmalarda hem networking yapabilir hem de ortak projeler için ekip arkadaşları bulabilirsiniz.</p>
+     <h3>Meet-up Formatları</h3>
+     <ul>
+      <li>Kahve &amp; Kod - Rahat sohbet ortamında kodlama</li>
+      <li>Proje Paylaşımı - Yaptığınız projeleri sunma fırsatı</li>
+      <li>Networking Gecesi - Sektör profesyonelleriyle tanışma</li>
+      <li>Oyun Test Günleri - Geliştirdiğiniz oyunları test ettirme</li>
+     </ul>
+     <h3>Geçmiş Meet-uplar</h3>
+     <ul>
+      <li>İstanbul Kadıköy Meet-up - 15 Ocak 2025 (42 katılımcı)</li>
+      <li>Ankara Kızılay Meet-up - 20 Aralık 2024 (38 katılımcı)</li>
+      <li>İzmir Alsancak Meet-up - 10 Aralık 2024 (25 katılımcı)</li>
+     </ul>
+     <h3>Yaklaşan Meet-up</h3>
+     <p><strong>İstanbul Beyoğlu Meet-up</strong></p>
+     <p>📅 Tarih: 8 Mart 2025</p>
+     <p>⏰ Saat: 15:00 - 19:00</p>
+     <p>📍 Lokasyon: Impact Hub Beyoğlu</p><button class="btn-primary" onclick="navigateTo('membership')">Katılım Başvurusu</button>
+    </div>
+   </section>
+  </div><!-- DEV TALKS DETAIL PAGE -->
+  <div id="devtalks" class="page">
+   <div class="page-header">
+    <h1>Dev Talks</h1>
+    <p>Sektör Liderlerinden İlham</p>
+   </div>
+   <section class="content-section">
+    <div class="event-detail-content">
+     <h3>Nedir?</h3>
+     <p>Başarılı geliştirici ekiplerin ve sektördeki liderlerin öğrencilerle buluştuğu konuşmalar. Sektörün deneyimli isimlerinin ilham veren konuşmalarında kariyer tavsiyeleri, proje geliştirme süreçleri ve sektör içi deneyimler paylaşılır.</p>
+     <h3>Önceki Konuşmacılar</h3>
+     <ul>
+      <li>Can Aksoy - Oyun Tasarım Direktörü @ Bigger Games</li>
+      <li>Elif Yılmaz - Lead Programmer @ Gram Games</li>
+      <li>Murat Demir - CEO @ Peak Games</li>
+      <li>Selin Kaya - Art Director @ Dream Games</li>
+     </ul>
+     <h3>Dev Talk Konuları</h3>
+     <ul>
+      <li>Oyun Geliştirmede Kariyer Yolları</li>
+      <li>Bağımsız Oyun Geliştirme Deneyimleri</li>
+      <li>Mobil Oyun Pazarında Başarı Stratejileri</li>
+      <li>Oyun Stüdyosu Kurma Hikâyeleri</li>
+      <li>Uluslararası Pazarda Rekabet</li>
+     </ul>
+     <h3>Yaklaşan Dev Talk</h3>
+     <p><strong>"Hyper-Casual Oyunların Sırları"</strong></p>
+     <p>📅 Tarih: 12 Mart 2025</p>
+     <p>⏰ Saat: 18:00 - 20:00</p>
+     <p>👨‍💼 Konuşmacı: Kerem Aydın (Senior Game Designer)</p>
+     <p>🎥 Online (Zoom) &amp; İstanbul Ofis</p><button class="btn-primary" onclick="navigateTo('membership')">Katılım Başvurusu</button>
+    </div>
+   </section>
+  </div><!-- STATISTICS PAGE -->
+  <div id="stats" class="page">
+   <div class="page-header">
+    <h1>İstatistikler</h1>
+    <p>Genç geliştirici topluluğunun büyümesini keşfet</p>
+   </div>
+   <section class="stats-full">
+    <div class="chart-grid">
+     <div class="chart-container">
+      <h3>Rol Dağılımı</h3>
+      <svg viewbox="0 0 300 300" class="chart-svg"><!-- Pie chart --> <circle cx="150" cy="150" r="100" fill="none" stroke="#5856D6" stroke-width="60" stroke-dasharray="188 628" transform="rotate(-90 150 150)" /> <circle cx="150" cy="150" r="100" fill="none" stroke="#7648EE" stroke-width="60" stroke-dasharray="157 628" stroke-dashoffset="-188" transform="rotate(-90 150 150)" /> <circle cx="150" cy="150" r="100" fill="none" stroke="#3AAFFF" stroke-width="60" stroke-dasharray="125 628" stroke-dashoffset="-345" transform="rotate(-90 150 150)" /> <text x="150" y="150" text-anchor="middle" fill="#1A1A1A" font-size="24" font-weight="700">
+        500+
+       </text> <text x="150" y="175" text-anchor="middle" fill="#555" font-size="14">
+        Toplam Üye
+       </text>
+      </svg>
+      <div class="chart-legend">
+       <div>
+        <span style="background: #5856D6;"></span> Programlama (30%)
+       </div>
+       <div>
+        <span style="background: #7648EE;"></span> Sanat (25%)
+       </div>
+       <div>
+        <span style="background: #3AAFFF;"></span> Tasarım (20%)
+       </div>
+      </div>
+     </div>
+     <div class="chart-container">
+      <h3>Cinsiyet Dağılımı</h3>
+      <svg viewbox="0 0 300 300" class="chart-svg"><!-- Bar chart --> <rect x="40" y="120" width="60" height="130" fill="#5856D6" rx="8" /> <rect x="120" y="150" width="60" height="100" fill="#7648EE" rx="8" /> <rect x="200" y="220" width="60" height="30" fill="#3AAFFF" rx="8" /> <text x="70" y="110" text-anchor="middle" fill="#5856D6" font-size="18" font-weight="700">
+        53.9%
+       </text> <text x="150" y="140" text-anchor="middle" fill="#7648EE" font-size="18" font-weight="700">
+        39.4%
+       </text> <text x="230" y="210" text-anchor="middle" fill="#3AAFFF" font-size="18" font-weight="700">
+        6.7%
+       </text> <text x="70" y="270" text-anchor="middle" fill="#555" font-size="12">
+        Erkek
+       </text> <text x="150" y="270" text-anchor="middle" fill="#555" font-size="12">
+        Kadın
+       </text> <text x="230" y="270" text-anchor="middle" fill="#555" font-size="12">
+        Diğer
+       </text>
+      </svg>
+     </div>
+     <div class="chart-container">
+      <h3>Üye Artışı</h3>
+      <svg viewbox="0 0 300 300" class="chart-svg"><!-- Line chart --> <polyline points="40,200 110,150 180,120 250,60" fill="none" stroke="#5856D6" stroke-width="4" /> <circle cx="40" cy="200" r="8" fill="#5856D6" /> <circle cx="110" cy="150" r="8" fill="#7648EE" /> <circle cx="180" cy="120" r="8" fill="#3AAFFF" /> <circle cx="250" cy="60" r="8" fill="#FF8A3D" /> <text x="40" y="230" text-anchor="middle" fill="#555" font-size="12">
+        2024.3
+       </text> <text x="110" y="230" text-anchor="middle" fill="#555" font-size="12">
+        2024.6
+       </text> <text x="180" y="230" text-anchor="middle" fill="#555" font-size="12">
+        2025.1
+       </text> <text x="250" y="230" text-anchor="middle" fill="#555" font-size="12">
+        2025.2
+       </text> <text x="150" y="270" text-anchor="middle" fill="#5856D6" font-size="16" font-weight="700">
+        %150 Büyüme
+       </text>
+      </svg>
+     </div>
+     <div class="chart-container">
+      <h3>Topluluk Sayısı</h3>
+      <svg viewbox="0 0 300 300" class="chart-svg"><!-- Column chart --> <rect x="30" y="150" width="50" height="80" fill="#5856D6" rx="8" /> <rect x="95" y="120" width="50" height="110" fill="#7648EE" rx="8" /> <rect x="160" y="90" width="50" height="140" fill="#3AAFFF" rx="8" /> <rect x="225" y="60" width="50" height="170" fill="#FF8A3D" rx="8" /> <text x="55" y="140" text-anchor="middle" fill="#5856D6" font-size="18" font-weight="700">
+        3
+       </text> <text x="120" y="110" text-anchor="middle" fill="#7648EE" font-size="18" font-weight="700">
+        5
+       </text> <text x="185" y="80" text-anchor="middle" fill="#3AAFFF" font-size="18" font-weight="700">
+        8
+       </text> <text x="250" y="50" text-anchor="middle" fill="#FF8A3D" font-size="18" font-weight="700">
+        10+
+       </text> <text x="55" y="255" text-anchor="middle" fill="#555" font-size="11">
+        2024.3
+       </text> <text x="120" y="255" text-anchor="middle" fill="#555" font-size="11">
+        2024.6
+       </text> <text x="185" y="255" text-anchor="middle" fill="#555" font-size="11">
+        2025.1
+       </text> <text x="250" y="255" text-anchor="middle" fill="#555" font-size="11">
+        2025.2
+       </text>
+      </svg>
+     </div>
+    </div>
+   </section>
+  </div><!-- MEMBERSHIP PAGE -->
+  <div id="membership" class="page">
+   <div class="page-header">
+    <h1 id="membership-title">Aramıza Katıl</h1>
+    <p>Geliştirici, tasarımcı veya sanatçı olman fark etmez. Oyun geliştirmeye heves duyman yeterli. LOGD topluluğu herkese açık ve tamamen ücretsizdir.</p>
+   </div>
+   <section class="content-section">
+    <h2 class="section-title">Üyelik Avantajları</h2>
+    <div class="benefits-grid">
+     <div class="benefit-card">
+      <h4>🎮 Game Jam Önceliği</h4>
+      <p>Tüm game jam etkinliklerine öncelikli katılım hakkı</p>
+     </div>
+     <div class="benefit-card">
+      <h4>🤝 Networking</h4>
+      <p>Yapım ekipleriyle tanışma ve bağlantı kurma fırsatı</p>
+     </div>
+     <div class="benefit-card">
+      <h4>Workshop Katılımı</h4>
+      <p>Ücretsiz eğitim ve atölye çalışmalarına erişim</p>
+     </div>
+     <div class="benefit-card">
+      <h4>💼 Kariyer Desteği</h4>
+      <p>Mentorluk ve kariyer rehberliği programları</p>
+     </div>
+     <div class="benefit-card">
+      <h4>🌟 Sektör Bağlantısı</h4>
+      <p>Oyun sektörü liderleriyle doğrudan iletişim</p>
+     </div>
+     <div class="benefit-card">
+      <h4>🏆 Yarışma Fırsatları</h4>
+      <p>Ulusal ve uluslararası yarışmalara katılım</p>
+     </div>
+    </div>
+    <h2 class="section-title">Üyelik Başvuru Formu</h2>
+    <div class="form-container">
+     <div id="membership-message"></div>
+     <form id="membership-form">
+      <div class="form-group"><label for="name">Ad Soyad *</label> <input type="text" id="name" required>
+      </div>
+      <div class="form-group"><label for="email">E-posta *</label> <input type="email" id="email" required>
+      </div>
+      <div class="form-group"><label for="school">Okul *</label> <input type="text" id="school" required>
+      </div>
+      <div class="form-group"><label for="grade">Sınıf *</label> <select id="grade" required> <option value="">Seçiniz</option> <option value="9">9. Sınıf</option> <option value="10">10. Sınıf</option> <option value="11">11. Sınıf</option> <option value="12">12. Sınıf</option> <option value="mezun">Mezun</option> </select>
+      </div>
+      <div class="form-group"><label for="role">Rol / İlgi Alanı *</label> <select id="role" required> <option value="">Seçiniz</option> <option value="programmer">Programlama / Developer</option> <option value="artist">Sanat / Artist</option> <option value="designer">Tasarım / Designer</option> <option value="sound">Ses / Sound Designer</option> <option value="other">Diğer</option> </select>
+      </div>
+      <div class="form-group"><label for="discord">Discord ID</label> <input type="text" id="discord" placeholder="username#1234">
+      </div>
+      <div class="form-group"><label for="description">Kendinizden Bahsedin</label> <textarea id="description" placeholder="Deneyimleriniz, ilgi alanlarınız, projeleriniz..."></textarea>
+      </div><button type="submit" class="btn-primary" id="submit-membership">Başvuruyu Gönder</button>
+     </form>
+    </div>
+   </section>
+  </div><!-- CONTACT PAGE -->
+  <div id="contact" class="page">
+   <div class="page-header">
+    <h1>Bize Ulaşın</h1>
+    <p>Sorularınız, önerileriniz veya işbirliği talepleriniz için bizimle iletişime geçin.</p>
+   </div>
+   <section class="content-section">
+    <div class="contact-info">
+     <h3>Genel İletişim</h3>
+     <p>📧 E-posta: <a href="mailto:info@logd.org.tr" id="contact-email">info@logd.org.tr</a></p>
+     <p>📍 Adres: -</p>
+     <p>📞 Telefon: +90 (212) XXX XX XX</p>
+    </div>
+    <div class="contact-info">
+     <h3>Yönetim İletişimi</h3>
+     <p><strong>İsim Soyisim</strong> - Kurucu &amp; Başkan</p>
+     <p>📧 <a href="#">isim@logd.org.tr</a></p>
+     <p>💼 <a href="#" target="_blank" rel="noopener noreferrer">LinkedIn Profili</a></p>
+    </div>
+    <h2 class="section-title">İletişim Formu</h2>
+    <div class="form-container">
+     <div id="contact-message"></div>
+     <form id="contact-form">
+      <div class="form-group"><label for="contact-name">Ad Soyad *</label> <input type="text" id="contact-name" required>
+      </div>
+      <div class="form-group"><label for="contact-email-input">E-posta *</label> <input type="email" id="contact-email-input" required>
+      </div>
+      <div class="form-group"><label for="contact-message-input">Mesajınız *</label> <textarea id="contact-message-input" required placeholder="Lütfen mesajınızı buraya yazın..."></textarea>
+      </div><button type="submit" class="btn-primary" id="submit-contact">Gönder</button>
+     </form>
+    </div>
+   </section>
+  </div>
+  <footer class="footer">
+   <div class="footer-container">
+    <div class="footer-section">
+     <h4>LOGD Hakkında</h4>
+     <p id="footer-text">Liseler Oyun Geliştirme Derneği - Türkiye'nin liseli oyun geliştiricileri için en kapsayıcı topluluk. Öğrenme, üretme ve paylaşma kültürünü birlikte büyütüyoruz.</p>
+     <div class="social-links">
+      <div class="social-icon">
+       <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+       </svg>
+      </div>
+      <div class="social-icon">
+       <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+       </svg>
+      </div>
+      <div class="social-icon">
+       <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm3 8h-1.35c-.538 0-.65.221-.65.778v1.222h2l-.209 2h-1.791v7h-3v-7h-2v-2h2v-2.308c0-1.769.931-2.692 3.029-2.692h1.971v3z" />
+       </svg>
+      </div>
+     </div>
+    </div>
+    <div class="footer-section">
+     <h4>Hızlı Menü</h4>
+     <ul class="footer-links">
+      <li><a onclick="navigateTo('home')">Ana Sayfa</a></li>
+      <li><a onclick="navigateTo('about')">Hakkımızda</a></li>
+      <li><a onclick="navigateTo('events')">Etkinlikler</a></li>
+      <li><a onclick="navigateTo('stats')">İstatistikler</a></li>
+      <li><a onclick="navigateTo('membership')">Üyelik</a></li>
+      <li><a onclick="navigateTo('contact')">İletişim</a></li>
+     </ul>
+    </div>
+    <div class="footer-section">
+     <h4>Yasal</h4>
+     <ul class="footer-links">
+      <li><a href="#">KVKK</a></li>
+      <li><a href="#">Gizlilik Politikası</a></li>
+      <li><a href="#">Çerez Politikası</a></li>
+      <li><a href="#">Kullanım Koşulları</a></li>
+     </ul>
+    </div>
+   </div>
+   <div class="footer-bottom">
+    <p>© 2025 LOGD - Liseler Oyun Geliştirme Derneği. Tüm hakları saklıdır.</p>
+   </div>
+  </footer>
+  <script src="main.js"></script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a651676c48b6852',t:'MTc2NDQ1MDU4NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
