@@ -78,16 +78,26 @@ const defaultConfig = {
         }
 
         function navigateTo(page) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            const currentPage = document.querySelector('.page.active');
+            
+            if (currentPage && currentPage.id !== page) {
+                currentPage.classList.add('fade-out');
+                setTimeout(() => {
+                    currentPage.classList.remove('active', 'fade-out');
+                    
+                    const pageEl = document.getElementById(page);
+                    if (pageEl) pageEl.classList.add('active');
+                    
+                    window.scrollTo({ top: 0, behavior: 'instant' });
+                }, 400);
+            } else {
+                const pageEl = document.getElementById(page);
+                if (pageEl) pageEl.classList.add('active');
+            }
+            
             document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-            
-            const pageEl = document.getElementById(page);
-            if (pageEl) pageEl.classList.add('active');
-            
             const navLink = document.querySelector(`.nav-links a[data-page="${page}"]`);
             if (navLink) navLink.classList.add('active');
-            
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function showMessage(containerId, message, isError = false) {
@@ -124,10 +134,10 @@ const defaultConfig = {
             const result = await window.dataSdk.create(formData);
 
             if (result.isOk) {
-                showMessage('membership-message', 'Başvurunuz başarıyla alındı! En kısa sürede sizinle iletişime geçeceğiz.');
+                showMessage('membership-message', '��� Başvurunuz başarıyla alındı! En kısa sürede sizinle iletişime geçeceğiz.');
                 document.getElementById('membership-form').reset();
             } else {
-                showMessage('membership-message', 'Bir hata oluştu. Lütfen tekrar deneyin.', true);
+                showMessage('membership-message', '❌ Bir hata oluştu. Lütfen tekrar deneyin.', true);
             }
 
             submitBtn.disabled = false;
