@@ -52,8 +52,8 @@ const defaultConfig = {
             const secondaryColor = config.secondary_color || defaultConfig.secondary_color;
             const textColor = config.text_color || defaultConfig.text_color;
 
-            document.body.style.background = backgroundColor;
-            document.body.style.color = textColor;
+            /*document.body.style.background = backgroundColor;
+            document.body.style.color = textColor;*/
 
             const gradientSelectors = '.logo, .hero-content h1, .stat-number, .section-title';
             document.querySelectorAll(gradientSelectors).forEach(el => {
@@ -286,3 +286,4 @@ const defaultConfig = {
         }
 
         initializeApp();
+
