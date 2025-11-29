@@ -2,11 +2,11 @@ const defaultConfig = {
             main_title: "Liseli geliştiricilerin oyun dünyasına açılan kapısı",
             subtitle: "Türkiye'nin dört bir yanındaki genç oyun geliştiricileri bir araya getiriyor, öğrenme ve üretme kültürünü büyütüyoruz.",
             cta_primary: "Etkinliklere Göz At",
-            cta_secondary: "Topluluğa Katıl",
+            cta_secondary: "Haberleri Gör",
             about_title: "LOGD Nedir?",
             vision_text: "Genç oyun geliştiriciler için Türkiye'nin en büyük destek ağı olmak.",
             mission_text: "Öğrencilerin öğrenme, üretme ve paylaşma fırsatlarını artırmak. Oyun geliştirme kültürünü yaymak. Sektörle öğrenciler arasındaki köprüyü güçlendirmek.",
-            membership_title: "Aramıza Katıl",
+            news_title: "Haberler",
             contact_email: "info@logd.org.tr",
             footer_text: "Liseler Oyun Geliştirme Derneği - Türkiye'nin liseli oyun geliştiricileri için en kapsayıcı topluluk. Öğrenme, üretme ve paylaşma kültürünü birlikte büyütüyoruz.",
             background_color: "#FAFAFA",
@@ -32,7 +32,7 @@ const defaultConfig = {
                 'about-title': config.about_title,
                 'vision-text': config.vision_text,
                 'mission-text': config.mission_text,
-                'membership-title': config.membership_title,
+                'news-title': config.news_title,
                 'footer-text': config.footer_text
             };
 
@@ -134,7 +134,7 @@ const defaultConfig = {
             const result = await window.dataSdk.create(formData);
 
             if (result.isOk) {
-                showMessage('membership-message', '��� Başvurunuz başarıyla alındı! En kısa sürede sizinle iletişime geçeceğiz.');
+                showMessage('membership-message', 'Başvurunuz başarıyla alındı! En kısa sürede sizinle iletişime geçeceğiz.');
                 document.getElementById('membership-form').reset();
             } else {
                 showMessage('membership-message', '❌ Bir hata oluştu. Lütfen tekrar deneyin.', true);
@@ -247,7 +247,7 @@ const defaultConfig = {
                 ["about_title", config.about_title || defaultConfig.about_title],
                 ["vision_text", config.vision_text || defaultConfig.vision_text],
                 ["mission_text", config.mission_text || defaultConfig.mission_text],
-                ["membership_title", config.membership_title || defaultConfig.membership_title],
+                ["news_title", config.news_title || defaultConfig.news_title],
                 ["contact_email", config.contact_email || defaultConfig.contact_email],
                 ["footer_text", config.footer_text || defaultConfig.footer_text]
             ]);
