@@ -52,8 +52,8 @@ const defaultConfig = {
             const secondaryColor = config.secondary_color || defaultConfig.secondary_color;
             const textColor = config.text_color || defaultConfig.text_color;
 
-            /*document.body.style.background = backgroundColor;
-            document.body.style.color = textColor;*/
+            document.body.style.background = backgroundColor;
+            document.body.style.color = textColor;
 
             const gradientSelectors = '.logo, .hero-content h1, .stat-number, .section-title';
             document.querySelectorAll(gradientSelectors).forEach(el => {
@@ -102,86 +102,54 @@ const defaultConfig = {
 
         function showMessage(containerId, message, isError = false) {
             const container = document.getElementById(containerId);
-            container.innerHTML = `<div class="${isError ? 'error-message' : 'success-message'}">${message}</div>`;
-            setTimeout(() => container.innerHTML = '', 5000);
+            if (container) {
+                container.innerHTML = `<div class="${isError ? 'error-message' : 'success-message'}">${message}</div>`;
+                setTimeout(() => container.innerHTML = '', 5000);
+            }
         }
 
-        document.getElementById('membership-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            if (currentRecordCount >= 999) {
-                showMessage('membership-message', 'Maksimum 999 başvuru limitine ulaşıldı. Lütfen daha sonra tekrar deneyiniz.', true);
-                return;
-            }
+        // Contact form handler
+        const contactForm = document.getElementById('contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                if (currentRecordCount >= 999) {
+                    showMessage('contact-message', 'Maksimum 999 mesaj limitine ulaşıldı. Lütfen e-posta ile iletişime geçiniz.', true);
+                    return;
+                }
 
-            const submitBtn = document.getElementById('submit-membership');
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Gönderiliyor...';
+                const submitBtn = document.getElementById('submit-contact');
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Gönderiliyor...';
 
-            const formData = {
-                id: Date.now().toString(),
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                school: document.getElementById('school').value,
-                grade: document.getElementById('grade').value,
-                role: document.getElementById('role').value,
-                discord_id: document.getElementById('discord').value || '',
-                description: document.getElementById('description').value || '',
-                type: 'membership',
-                created_at: new Date().toISOString()
-            };
+                const formData = {
+                    id: Date.now().toString(),
+                    name: document.getElementById('contact-name').value,
+                    email: document.getElementById('contact-email-input').value,
+                    message: document.getElementById('contact-message-input').value,
+                    type: 'contact',
+                    school: '',
+                    grade: '',
+                    role: '',
+                    discord_id: '',
+                    description: '',
+                    created_at: new Date().toISOString()
+                };
 
-            const result = await window.dataSdk.create(formData);
+                const result = await window.dataSdk.create(formData);
 
-            if (result.isOk) {
-                showMessage('membership-message', 'Başvurunuz başarıyla alındı! En kısa sürede sizinle iletişime geçeceğiz.');
-                document.getElementById('membership-form').reset();
-            } else {
-                showMessage('membership-message', '❌ Bir hata oluştu. Lütfen tekrar deneyin.', true);
-            }
+                if (result.isOk) {
+                    showMessage('contact-message', '✅ Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.');
+                    contactForm.reset();
+                } else {
+                    showMessage('contact-message', '❌ Bir hata oluştu. Lütfen tekrar deneyin.', true);
+                }
 
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Başvuruyu Gönder';
-        });
-
-        document.getElementById('contact-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            if (currentRecordCount >= 999) {
-                showMessage('contact-message', 'Maksimum 999 mesaj limitine ulaşıldı. Lütfen e-posta ile iletişime geçiniz.', true);
-                return;
-            }
-
-            const submitBtn = document.getElementById('submit-contact');
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Gönderiliyor...';
-
-            const formData = {
-                id: Date.now().toString(),
-                name: document.getElementById('contact-name').value,
-                email: document.getElementById('contact-email-input').value,
-                message: document.getElementById('contact-message-input').value,
-                type: 'contact',
-                school: '',
-                grade: '',
-                role: '',
-                discord_id: '',
-                description: '',
-                created_at: new Date().toISOString()
-            };
-
-            const result = await window.dataSdk.create(formData);
-
-            if (result.isOk) {
-                showMessage('contact-message', '✅ Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.');
-                document.getElementById('contact-form').reset();
-            } else {
-                showMessage('contact-message', '❌ Bir hata oluştu. Lütfen tekrar deneyin.', true);
-            }
-
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Gönder';
-        });
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Gönder';
+            });
+        }
 
         function mapToCapabilities(config) {
             return {
@@ -261,11 +229,13 @@ const defaultConfig = {
             document.body.classList.add('dark-mode');
         }
         
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            const isDark = document.body.classList.contains('dark-mode');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        });
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+                const isDark = document.body.classList.contains('dark-mode');
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            });
+        }
 
         async function initializeApp() {
             if (window.dataSdk) {
