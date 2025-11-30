@@ -3,7 +3,7 @@
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LOGD - Liseli Oyun Geliştiriciler Derneği</title>
+  <title>LOGD - Liseler Oyun Geliştirme Derneği</title>
   <script src="/_sdk/element_sdk.js"></script>
   <script src="/_sdk/data_sdk.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
@@ -258,9 +258,9 @@
         }
         
         .hero {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
-            padding: 6rem 2rem;
+            /*padding: 1rem 2rem;*/
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
@@ -271,32 +271,35 @@
             font-size: 3.5rem;
             font-weight: 700;
             line-height: 1.1;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #8B4513, #A0522D);
+            padding: 1rem;
+            margin-bottom: 0.7rem;
+            background: linear-gradient(135deg, #ffffff, #ffffff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
         
         .hero-content p {
-            font-size: 1.25rem;
-            color: #555;
-            margin-bottom: 2.5rem;
+            font-size: 1rem;
+            color: #ffffff;
+            margin-bottom: 2rem;
             line-height: 1.6;
         }
         
         body.dark-mode .hero-content p {
-            color: #AAA;
+            color: #ffffff;
         }
         
         .cta-buttons {
             display: flex;
             gap: 1rem;
+            margin-top: 3rem;
             flex-wrap: wrap;
         }
         
         .btn-primary, .btn-secondary {
             padding: 1rem 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
             border-radius: 12px;
             font-weight: 600;
             font-size: 1rem;
@@ -305,16 +308,69 @@
             border: none;
             text-decoration: none;
             display: inline-block;
+}
+
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 8.2rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            background-image: url('./images/arkaplan.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 16px;
+            position: relative;
+}
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.438);
+            border-radius: 16px;
+            z-index: 0;
+        }
+
+        body.dark-mode .hero::before {
+    background: rgba(0, 0, 0, 0.438); /* Aynı renk, dark mode'da da değişmez */
+}
+
+        
+
+        .hero-content,
+        .hero-visual {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content{
+            margin-top: -6rem;
+        }
+
+        .hero-content p{
+            margin-left: 1.1rem;
+        }
+
+        body.dark-mode .hero-visual {
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
         }
         
         .btn-primary {
             background: linear-gradient(135deg, #8B4513, #A0522D);
+            box-shadow: 0 8px 25px rgba(139, 69, 19, 0.3);
             color: white;
         }
         
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(139, 69, 19, 0.3);
+            box-shadow: 0 8px 25px rgba(139, 69, 19, 0.4);
         }
         
         .btn-primary:disabled {
@@ -324,18 +380,20 @@
         }
         
         .btn-secondary {
-            background: white;
+            background: rgb(255, 255, 255);
             color: #8B4513;
+            box-shadow: 0 8px 25px rgba(139, 69, 19, 0.3);
             border: 2px solid #8B4513;
         }
         
         .btn-secondary:hover {
             background: #8B4513;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
             color: white;
         }
         
         body.dark-mode .btn-secondary {
-            background: #252525;
+            background: #ffffff;
             border-color: #A0522D;
             color: #A0522D;
         }
@@ -1051,6 +1109,8 @@
             color: #5856D6;
             font-size: 3rem;
         }
+
+
         
         @media (max-width: 768px) {
             .hero {
@@ -1121,24 +1181,21 @@
      </svg></button>
    </div>
   </nav><!-- HOME PAGE -->
-  <div id="home" class="page active">
-   <section class="hero">
+<!-- HOME PAGE -->
+<div id="home" class="page active">
+  <section class="hero">
     <div class="hero-content">
-     <h1 id="main-title">Liseli geliştiricilerin oyun dünyasına açılan kapısı</h1>
-     <p id="subtitle">Türkiye'nin dört bir yanındaki genç oyun geliştiricileri bir araya getiriyor, öğrenme ve üretme kültürünü büyütüyoruz.</p>
-     <div class="cta-buttons"><button class="btn-primary" id="cta-primary" onclick="navigateTo('events')">Etkinliklere Göz At</button> <button class="btn-secondary" id="cta-secondary" onclick="navigateTo('news')">Haberleri Gör</button>
-     </div>
+      <h1 id="main-title">Liseli geliştiricilerin oyun dünyasına açılan kapısı</h1>
+      <p id="subtitle">Türkiye'nin dört bir yanındaki genç oyun geliştiricileri bir araya getiriyor, öğrenme ve üretme kültürünü büyütüyoruz.</p>
+      <div class="cta-buttons">
+        <button class="btn-primary" id="cta-primary" onclick="navigateTo('events')">Etkinliklere Göz At</button>
+        <button class="btn-secondary" id="cta-secondary" onclick="navigateTo('news')">Haberleri Gör</button>
+      </div>
     </div>
     <div class="hero-visual">
-     <svg class="hero-icon" viewbox="0 0 400 400" xmlns="http://www.w3.org/2000/svg"><defs>
-       <lineargradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
-        <stop offset="100%" style="stop-color:#A0522D;stop-opacity:1" />
-       </lineargradient>
-      </defs> <rect x="120" y="100" width="160" height="200" rx="15" fill="url(#grad1)" opacity="0.9" /> <circle cx="200" cy="180" r="25" fill="white" opacity="0.3" /> <rect x="160" y="240" width="30" height="30" rx="5" fill="white" opacity="0.4" /> <rect x="210" y="240" width="30" height="30" rx="5" fill="white" opacity="0.4" /> <rect x="160" y="280" width="80" height="8" rx="4" fill="white" opacity="0.5" /> <path d="M 80 320 Q 200 280 320 320" stroke="#CD853F" stroke-width="4" fill="none" opacity="0.6" /> <circle cx="80" cy="320" r="8" fill="#D2691E" /> <circle cx="200" cy="285" r="8" fill="#CD853F" /> <circle cx="320" cy="320" r="8" fill="#D2691E" />
-     </svg>
+      <!-- İkon kaldırıldı, arka plan resmi CSS'de ayarlanacak -->
     </div>
-   </section>
+  </section>
    <section class="about-mini">
     <div class="about-mini-container">
      <h2 class="section-title" id="about-title">LOGD Nedir?</h2>
