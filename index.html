@@ -38,7 +38,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #5856D6, #7648EE);
+            background: linear-gradient(135deg, #8B4513, #A0522D);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -122,6 +122,46 @@
             justify-content: space-between;
             align-items: center;
             gap: 2rem;
+            position: relative;
+        }
+        
+        .cat-container {
+            position: absolute;
+            right: 80px;
+            top: -15px;
+            width: 60px;
+            height: 80px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            z-index: 200;
+        }
+        
+        .cat-container:hover {
+            transform: translateY(-5px);
+        }
+        
+        .cat-awake {
+            opacity: 1;
+            transition: opacity 0.5s ease;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .cat-sleeping {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        
+        body.dark-mode .cat-awake {
+            opacity: 0;
+        }
+        
+        body.dark-mode .cat-sleeping {
+            opacity: 1;
         }
         
         .theme-toggle {
@@ -183,7 +223,7 @@
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #5856D6, #7648EE);
+            background: linear-gradient(135deg, #8B4513, #A0522D);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -206,7 +246,7 @@
         
         .nav-links a:hover,
         .nav-links a.active {
-            color: #5856D6;
+            color: #8B4513;
         }
         
         body.dark-mode .nav-links a {
@@ -215,7 +255,7 @@
         
         body.dark-mode .nav-links a:hover,
         body.dark-mode .nav-links a.active {
-            color: #7648EE;
+            color: #A0522D;
         }
         
         .page {
@@ -269,7 +309,7 @@
             font-weight: 700;
             line-height: 1.1;
             margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #5856D6, #7648EE);
+            background: linear-gradient(135deg, #8B4513, #A0522D);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -305,13 +345,13 @@
         }
         
         .btn-primary {
-            background: linear-gradient(135deg, #5856D6, #7648EE);
+            background: linear-gradient(135deg, #8B4513, #A0522D);
             color: white;
         }
         
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(88, 86, 214, 0.3);
+            box-shadow: 0 8px 20px rgba(139, 69, 19, 0.3);
         }
         
         .btn-primary:disabled {
@@ -322,23 +362,23 @@
         
         .btn-secondary {
             background: white;
-            color: #5856D6;
-            border: 2px solid #5856D6;
+            color: #8B4513;
+            border: 2px solid #8B4513;
         }
         
         .btn-secondary:hover {
-            background: #5856D6;
+            background: #8B4513;
             color: white;
         }
         
         body.dark-mode .btn-secondary {
             background: #252525;
-            border-color: #7648EE;
-            color: #7648EE;
+            border-color: #A0522D;
+            color: #A0522D;
         }
         
         body.dark-mode .btn-secondary:hover {
-            background: #7648EE;
+            background: #A0522D;
             color: white;
         }
         
@@ -399,7 +439,7 @@
         .stat-number {
             font-size: 3rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #5856D6, #7648EE);
+            background: linear-gradient(135deg, #8B4513, #A0522D);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -454,14 +494,14 @@
             font-weight: 700;
             text-align: center;
             margin-bottom: 3rem;
-            background: linear-gradient(135deg, #5856D6, #7648EE);
+            background: linear-gradient(135deg, #8B4513, #A0522D);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
         
         .page-header {
-            background: linear-gradient(135deg, #5856D6, #7648EE);
+            background: linear-gradient(135deg, #8B4513, #A0522D);
             color: white;
             padding: 4rem 2rem;
             text-align: center;
@@ -510,8 +550,8 @@
         
         .event-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 12px 35px rgba(88, 86, 214, 0.2);
-            border-color: #5856D6;
+            box-shadow: 0 12px 35px rgba(139, 69, 19, 0.2);
+            border-color: #8B4513;
         }
         
         .event-icon {
@@ -542,7 +582,7 @@
         }
         
         .event-card .btn-link {
-            color: #5856D6;
+            color: #8B4513;
             font-weight: 600;
             text-decoration: none;
             display: inline-flex;
@@ -734,7 +774,7 @@
         
         .benefit-card h4 {
             font-size: 1.25rem;
-            color: #5856D6;
+            color: #8B4513;
             margin-bottom: 0.5rem;
         }
         
@@ -783,7 +823,7 @@
         }
         
         .contact-info a {
-            color: #5856D6;
+            color: #8B4513;
             text-decoration: none;
             font-weight: 500;
         }
@@ -793,7 +833,7 @@
         }
         
         .footer {
-            background: linear-gradient(135deg, #5856D6, #7648EE);
+            background: linear-gradient(135deg, #8B4513, #A0522D);
             color: white;
             padding: 3rem 2rem;
             margin-top: 4rem;
@@ -864,7 +904,7 @@
         }
         
         .social-icon:hover svg {
-            fill: #5856D6;
+            fill: #8B4513;
         }
         
         .social-icon svg {
@@ -905,7 +945,7 @@
         .vm-card h3 {
             font-size: 1.75rem;
             font-weight: 600;
-            color: #5856D6;
+            color: #8B4513;
             margin-bottom: 1rem;
         }
         
@@ -942,7 +982,7 @@
         .team-avatar {
             width: 100px;
             height: 100px;
-            background: linear-gradient(135deg, #5856D6, #7648EE);
+            background: linear-gradient(135deg, #8B4513, #A0522D);
             border-radius: 50%;
             margin: 0 auto 1rem;
             display: flex;
@@ -965,12 +1005,12 @@
         }
         
         .team-card p {
-            color: #5856D6;
+            color: #8B4513;
             font-weight: 500;
         }
         
         body.dark-mode .team-card p {
-            color: #7648EE;
+            color: #A0522D;
         }
         
         .event-detail-content {
@@ -1064,6 +1104,12 @@
                 display: none;
             }
             
+            .cat-container {
+                right: 60px;
+                width: 40px;
+                height: 40px;
+            }
+            
             .stats-container,
             .events-grid,
             .benefits-grid,
@@ -1111,7 +1157,29 @@
      <li><a onclick="navigateTo('stats')" data-page="stats">İstatistikler</a></li>
      <li><a onclick="navigateTo('news')" data-page="news">Haberler</a></li>
      <li><a onclick="navigateTo('contact')" data-page="contact">İletişim</a></li>
-    </ul><button class="theme-toggle" id="theme-toggle" title="Dark mode">
+    </ul><!-- Cat Container -->
+    <div class="cat-container" title="Miyav! 🐱"><!-- Awake Cat -->
+     <svg class="cat-awake" viewbox="0 0 64 80" xmlns="http://www.w3.org/2000/svg"><defs>
+       <lineargradient id="catGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#FF8A3D;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#FF6B3D;stop-opacity:1" />
+       </lineargradient>
+      </defs> <!-- Front Paws --> <ellipse cx="24" cy="62" rx="4" ry="6" fill="url(#catGrad)" /> <ellipse cx="40" cy="62" rx="4" ry="6" fill="url(#catGrad)" /> <!-- Paw pads --> <ellipse cx="24" cy="64" rx="2.5" ry="3" fill="#FF6B3D" opacity="0.6" /> <ellipse cx="40" cy="64" rx="2.5" ry="3" fill="#FF6B3D" opacity="0.6" /> <!-- Body --> <ellipse cx="32" cy="42" rx="18" ry="22" fill="url(#catGrad)" /> <!-- Head --> <circle cx="32" cy="22" r="14" fill="url(#catGrad)" /> <!-- Ears --> <path d="M 20 16 L 18 6 L 26 14 Z" fill="url(#catGrad)" /> <path d="M 44 16 L 46 6 L 38 14 Z" fill="url(#catGrad)" /> <!-- Ear insides --> <path d="M 21 15 L 20 10 L 24 14 Z" fill="#FF6B3D" opacity="0.5" /> <path d="M 43 15 L 44 10 L 40 14 Z" fill="#FF6B3D" opacity="0.5" /> <!-- Eyes (awake) --> <circle cx="27" cy="20" r="2.5" fill="#1A1A1A" /> <circle cx="37" cy="20" r="2.5" fill="#1A1A1A" /> <circle cx="27.5" cy="19.5" r="1" fill="white" /> <circle cx="37.5" cy="19.5" r="1" fill="white" /> <!-- Nose --> <path d="M 32 24 L 30 26 L 34 26 Z" fill="#1A1A1A" /> <!-- Mouth --> <path d="M 32 26 Q 28 28 26 27 M 32 26 Q 36 28 38 27" stroke="#1A1A1A" stroke-width="1.5" fill="none" stroke-linecap="round" /> <!-- Whiskers --> <path d="M 18 22 L 10 20" stroke="#1A1A1A" stroke-width="0.8" opacity="0.6" /> <path d="M 18 24 L 10 24" stroke="#1A1A1A" stroke-width="0.8" opacity="0.6" /> <path d="M 46 22 L 54 20" stroke="#1A1A1A" stroke-width="0.8" opacity="0.6" /> <path d="M 46 24 L 54 24" stroke="#1A1A1A" stroke-width="0.8" opacity="0.6" />
+     </svg><!-- Sleeping Cat -->
+     <svg class="cat-sleeping" viewbox="0 0 64 80" xmlns="http://www.w3.org/2000/svg"><defs>
+       <lineargradient id="catGradSleep" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#7648EE;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#5856D6;stop-opacity:1" />
+       </lineargradient>
+      </defs> <!-- Front Paws (curled) --> <ellipse cx="28" cy="60" rx="4" ry="5" fill="url(#catGradSleep)" /> <ellipse cx="36" cy="60" rx="4" ry="5" fill="url(#catGradSleep)" /> <!-- Body (curled up) --> <ellipse cx="32" cy="42" rx="20" ry="20" fill="url(#catGradSleep)" /> <!-- Head --> <circle cx="32" cy="24" r="13" fill="url(#catGradSleep)" /> <!-- Ears --> <path d="M 22 18 L 20 8 L 28 16 Z" fill="url(#catGradSleep)" /> <path d="M 42 18 L 44 8 L 36 16 Z" fill="url(#catGradSleep)" /> <!-- Ear insides --> <path d="M 23 17 L 22 12 L 26 16 Z" fill="#5856D6" opacity="0.5" /> <path d="M 41 17 L 42 12 L 38 16 Z" fill="#5856D6" opacity="0.5" /> <!-- Eyes (sleeping) --> <path d="M 25 22 Q 28 23 31 22" stroke="#1A1A1A" stroke-width="2" fill="none" stroke-linecap="round" /> <path d="M 33 22 Q 36 23 39 22" stroke="#1A1A1A" stroke-width="2" fill="none" stroke-linecap="round" /> <!-- Nose --> <circle cx="32" cy="26" r="1.5" fill="#1A1A1A" /> <!-- Whiskers --> <path d="M 18 23 L 10 21" stroke="#1A1A1A" stroke-width="0.8" opacity="0.4" /> <path d="M 18 25 L 10 25" stroke="#1A1A1A" stroke-width="0.8" opacity="0.4" /> <path d="M 46 23 L 54 21" stroke="#1A1A1A" stroke-width="0.8" opacity="0.4" /> <path d="M 46 25 L 54 25" stroke="#1A1A1A" stroke-width="0.8" opacity="0.4" /> <!-- Zzz --> <text x="46" y="16" font-size="8" fill="#5856D6" opacity="0.7">
+       Z
+      </text> <text x="50" y="12" font-size="6" fill="#5856D6" opacity="0.5">
+       z
+      </text> <text x="53" y="9" font-size="4" fill="#5856D6" opacity="0.3">
+       z
+      </text>
+     </svg>
+    </div><button class="theme-toggle" id="theme-toggle" title="Dark mode">
      <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5" /> <line x1="12" y1="1" x2="12" y2="3"></line> <line x1="12" y1="21" x2="12" y2="23"></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line> <line x1="1" y1="12" x2="3" y2="12"></line> <line x1="21" y1="12" x2="23" y2="12"></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
      </svg>
      <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
@@ -1229,36 +1297,36 @@
       <div class="team-avatar">
        👤
       </div>
-      <h4>İsim Soyisim</h4>
+      <h4>Ahmet Yılmaz</h4>
       <p>Kurucu &amp; Başkan</p>
      </div>
      <div class="team-card">
       <div class="team-avatar">
        👤
       </div>
-      <h4>İsim Soyisim</h4>
-      <p>Görev</p>
+      <h4>Ayşe Demir</h4>
+      <p>Genel Koordinatör</p>
      </div>
      <div class="team-card">
       <div class="team-avatar">
        👤
       </div>
-      <h4>İsim Soyisim</h4>
-      <p>Görev</p>
+      <h4>Mehmet Kaya</h4>
+      <p>Etkinlik Sorumlusu</p>
      </div>
      <div class="team-card">
       <div class="team-avatar">
        👤
       </div>
-      <h4>İsim Soyisim</h4>
-      <p>Görev</p>
+      <h4>Zeynep Arslan</h4>
+      <p>İletişim Sorumlusu</p>
      </div>
     </div>
    </section>
   </div><!-- EVENTS PAGE -->
   <div id="events" class="page">
    <div class="page-header">
-    <h1>Birlikte Üretiyoruz</h1>
+    <h1>Birlikte ��retiyoruz</h1>
     <p>Oyun geliştirme dünyasının her alanını kapsayan etkinliklerle hem öğretiyor hem de birlikte geliştiriyoruz.</p>
    </div>
    <section class="content-section">
@@ -1298,7 +1366,7 @@
    <section class="content-section">
     <div class="event-detail-content">
      <h3>Nedir?</h3>
-     <p>48-72 saat süren yoğun oyun geliştirme süreçlerinde öğrenciler ekipler halinde sıfırdan oyun üretir. LOGD, ulusal ve uluslararası Game Jam organizasyonlarında aktif rol alır. Tempo, yaratıcılık ve ekip ruhunun buluştuğu bu maratonlarda öğrenciler gerçek bir üretim deneyimi yaşar.</p>
+     <p>48-72 saat süren yoğun oyun geliştirme süreçlerinde öğrenciler ekipler halinde sıfırdan oyun üretir. LOGD, ulusal ve uluslararas�� Game Jam organizasyonlarında aktif rol alır. Tempo, yaratıcılık ve ekip ruhunun buluştuğu bu maratonlarda öğrenciler gerçek bir üretim deneyimi yaşar.</p>
      <h3>Öne Çıkan Game Jam'ler</h3>
      <ul>
       <li>Global Game Jam Next - Türkiye'nin en büyük game jam organizasyonu</li>
@@ -1315,7 +1383,7 @@
     <h2 class="section-title">Etkinlikten Kareler</h2>
     <div class="photo-gallery">
      <div class="gallery-item">
-      🎮
+      ���
      </div>
      <div class="gallery-item">
       💻
@@ -1332,7 +1400,7 @@
   <div id="workshops" class="page">
    <div class="page-header">
     <h1>Workshops</h1>
-    <p>Sekt��r Profesyonelleriyle Öğrenme</p>
+    <p>Sektör Profesyonelleriyle Öğrenme</p>
    </div>
    <section class="content-section">
     <div class="event-detail-content">
@@ -1411,9 +1479,9 @@
      </ul>
      <h3>Yaklaşan Dev Talk</h3>
      <p><strong>"Hyper-Casual Oyunların Sırları"</strong></p>
-     <p>�� Tarih: 12 Mart 2025</p>
+     <p>📅 Tarih: 12 Mart 2025</p>
      <p>⏰ Saat: 18:00 - 20:00</p>
-     <p>👨‍💼 Konuşmacı: Kerem Aydın (Senior Game Designer)</p>
+     <p>��‍💼 Konuşmacı: Kerem Aydın (Senior Game Designer)</p>
      <p>🎥 Online (Zoom) &amp; İstanbul Ofis</p><button class="btn-primary" onclick="navigateTo('contact')">İletişime Geç</button>
     </div>
    </section>
@@ -1428,20 +1496,23 @@
      <div class="event-card" style="position: relative; overflow: hidden;">
       <div style="width: 100%; height: 180px; background: linear-gradient(135deg, #000000, #333333); border-radius: 12px; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: center; position: relative;">
        <div style="font-size: 4rem; color: white; position: absolute; left: 30%; transform: translateX(-50%);">
+        ⚫
        </div>
        <div style="font-size: 4rem; color: white; position: absolute; right: 30%; transform: translateX(50%);">
+        ⚪
        </div>
       </div>
       <h3>Black And White</h3>
-      <p style="color: #7648EE; font-weight: 600; margin-bottom: 1rem;">NUMTAL Game Dev</p>
-      <p>Nedim Uysal Game in geliştirdiği yeni oyunumuz olan Black and White, çok yakında Steam e çıkıyor.</p>
-      <div style="margin-top: 1.5rem; display: flex; gap: 0.5rem; flex-wrap: wrap;"><span style="background: #E8E8FF; color: #5856D6; padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">Kategori 3</span> <span style="background: #E8E8FF; color: #5856D6; padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">Kategori 2</span> <span style="background: #E8E8FF; color: #5856D6; padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">2D</span>
+      <p style="color: #7648EE; font-weight: 600; margin-bottom: 1rem;">🎮 NUMTAL Game Dev</p>
+      <p>Siyah ve beyaz dünyalar arasında geçiş yaparak engelleri aşın. Minimalist tasarım ve zorlu bulmacalarla dolu bir platform macerası.</p>
+      <div style="margin-top: 1.5rem; display: flex; gap: 0.5rem; flex-wrap: wrap;"><span style="background: #E8E8FF; color: #5856D6; padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">Puzzle</span> <span style="background: #E8E8FF; color: #5856D6; padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">Platformer</span> <span style="background: #E8E8FF; color: #5856D6; padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">2D</span>
       </div>
       <div style="margin-top: 1.5rem; display: flex; gap: 1rem;"><button class="btn-primary" style="flex: 1; padding: 0.75rem;">Oyunu Oyna</button> <button class="btn-secondary" style="flex: 1; padding: 0.75rem;">Detaylar</button>
       </div>
      </div>
      <div class="event-card" style="opacity: 0.6; position: relative;">
       <div style="width: 100%; height: 180px; background: linear-gradient(135deg, #E8E8FF, #F8F8FF); border-radius: 12px; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: #5856D6;">
+       🎮
       </div>
       <h3>Yakında</h3>
       <p>Yeni oyunlar çok yakında burada görünecek! Topluluğumuzun geliştirdiği projeleri takip edin.</p>
@@ -1565,6 +1636,32 @@
        🌙 Karanlık mod desteği</p><button class="btn-primary" onclick="navigateTo('about')" style="margin-top: 1rem;">LOGD Hakkında Daha Fazla Bilgi →</button>
     </div>
     <h2 class="section-title" style="margin-top: 4rem;">Son Haberler</h2>
+    <div class="benefits-grid">
+     <div class="benefit-card">
+      <h4>🎮 Game Jam Önceliği</h4>
+      <p>Tüm game jam etkinliklerine öncelikli katılım hakkı</p>
+     </div>
+     <div class="benefit-card">
+      <h4>🤝 Networking</h4>
+      <p>Yapım ekipleriyle tanışma ve bağlantı kurma fırsatı</p>
+     </div>
+     <div class="benefit-card">
+      <h4>📚 Workshop Katılımı</h4>
+      <p>Ücretsiz eğitim ve atölye çalışmalarına erişim</p>
+     </div>
+     <div class="benefit-card">
+      <h4>💼 Kariyer Desteği</h4>
+      <p>Mentorluk ve kariyer rehberliği programları</p>
+     </div>
+     <div class="benefit-card">
+      <h4>🌟 Sektör Bağlantısı</h4>
+      <p>Oyun sektörü liderleriyle doğrudan iletişim</p>
+     </div>
+     <div class="benefit-card">
+      <h4>🏆 Yarışma Fırsatları</h4>
+      <p>Ulusal ve uluslararası yarışmalara katılım</p>
+     </div>
+    </div>
     <div class="events-grid">
      <div class="event-card">
       <div style="color: #5856D6; font-weight: 600; font-size: 0.9rem; margin-bottom: 0.5rem;">
@@ -1575,38 +1672,38 @@
      </div>
      <div class="event-card">
       <div style="color: #7648EE; font-weight: 600; font-size: 0.9rem; margin-bottom: 0.5rem;">
-       📅 29 Kasım 2025
+       📅 20 Şubat 2025
       </div>
       <h3>Unity Workshop Serisi Başlıyor</h3>
-      <p>2026 Şubat ayı boyunca her hafta sonu Unity ile oyun geliştirme atölyeleri düzenlenecek. Temel seviyeden ileri seviyeye kadar tüm konular işlenecek.</p><a class="btn-link" onclick="navigateTo('workshops')">Workshop Programı →</a>
+      <p>Mart ayı boyunca her hafta sonu Unity ile oyun geliştirme atölyeleri düzenlenecek. Temel seviyeden ileri seviyeye kadar tüm konular işlenecek.</p><a class="btn-link" onclick="navigateTo('workshops')">Workshop Programı →</a>
      </div>
      <div class="event-card">
       <div style="color: #3AAFFF; font-weight: 600; font-size: 0.9rem; margin-bottom: 0.5rem;">
-       📅 30 Kasım 2025
+       📅 18 Şubat 2025
       </div>
-      <h3>İzmir Meet-up Duyurusu</h3>
-      <p>19 Aralık tarihinde İzmir de düzenlenecek meet-up'ta genç geliştiriciler bir araya gelecek. Networking ve proje paylaşımı için harika bir fırsat!</p><a class="btn-link" onclick="navigateTo('meetups')">Katılım Bilgileri →</a>
+      <h3>İstanbul Beyoğlu Meet-up Duyurusu</h3>
+      <p>8 Mart tarihinde Impact Hub Beyoğlu'nda düzenlenecek meet-up'ta genç geliştiriciler bir araya gelecek. Networking ve proje payla��ımı için harika bir fırsat!</p><a class="btn-link" onclick="navigateTo('meetups')">Katılım Bilgileri →</a>
      </div>
      <div class="event-card">
       <div style="color: #FF8A3D; font-weight: 600; font-size: 0.9rem; margin-bottom: 0.5rem;">
-       📅 29 Kasım 2025
+       📅 15 Şubat 2025
       </div>
-      <h3>Haber Başlığı</h3>
-      <p>İlgili haberin içeriği buraya eklenecek.</p><a class="btn-link" onclick="navigateTo('about')">Topluluklar Hakkında →</a>
+      <h3>Yeni Topluluk: Ankara Fen Lisesi</h3>
+      <p>LOGD ailesine yeni bir topluluk daha katıldı! Ankara Fen Lisesi Oyun Geliştirme Kulübü artık resmi olarak LOGD ağının bir parçası.</p><a class="btn-link" onclick="navigateTo('about')">Topluluklar Hakkında →</a>
      </div>
      <div class="event-card">
       <div style="color: #5856D6; font-weight: 600; font-size: 0.9rem; margin-bottom: 0.5rem;">
        📅 10 Şubat 2025
       </div>
-      <h3>Haber Başlığı</h3>
-      <p>İlgili haberin içeriği buraya gelecek.</p><a class="btn-link" onclick="navigateTo('devtalks')">Dev Talk Detayları →</a>
+      <h3>Dev Talk: Hyper-Casual Oyunlar</h3>
+      <p>12 Mart'ta Senior Game Designer Kerem Aydın ile hyper-casual oyun geliştirme süreçlerini konuşacağız. Online ve yüz yüze katılım seçenekleri mevcut.</p><a class="btn-link" onclick="navigateTo('devtalks')">Dev Talk Detayları →</a>
      </div>
      <div class="event-card">
       <div style="color: #7648EE; font-weight: 600; font-size: 0.9rem; margin-bottom: 0.5rem;">
        📅 5 Şubat 2025
       </div>
       <h3>500+ Üye Başarısı!</h3>
-      <p>LOGD topluluğu 500 üye sayısını aştı! İzmir'in dört bir yanından genç geliştiricileri bir araya getirmeye devam ediyoruz. Teşekkürler! 🎉</p><a class="btn-link" onclick="navigateTo('stats')">İstatistikleri İncele →</a>
+      <p>LOGD topluluğu 500 üye sayısını aştı! Türkiye'nin dört bir yanından genç geliştiricileri bir araya getirmeye devam ediyoruz. Teşekkürler! ���</p><a class="btn-link" onclick="navigateTo('stats')">İstatistikleri İncele →</a>
      </div>
     </div>
    </section>
@@ -1620,13 +1717,13 @@
     <div class="contact-info">
      <h3>Genel İletişim</h3>
      <p>📧 E-posta: <a href="mailto:info@logd.org.tr" id="contact-email">info@logd.org.tr</a></p>
-     <p>📍 Adres: Lokasyon buraya yazılacak</p>
-     <p>📞 Telefon: +90 (212) XXX XX XX</p>
+     <p>📍 Adres: İstanbul Teknik Üniversitesi Teknokent, Maslak/İstanbul</p>
+     <p>📞 Telefon: +90 (212) 123 45 67</p>
     </div>
     <div class="contact-info">
      <h3>Yönetim İletişimi</h3>
-     <p><strong>İsim Soyisim</strong> - Kurucu &amp; Başkan</p>
-     <p>📧 <a href="mailto:isim@logd.org.tr">isim@logd.org.tr</a></p>
+     <p><strong>Ahmet Yılmaz</strong> - Kurucu &amp; Başkan</p>
+     <p>📧 <a href="mailto:ahmet@logd.org.tr">ahmet@logd.org.tr</a></p>
      <p>💼 <a href="#" target="_blank" rel="noopener noreferrer">LinkedIn Profili</a></p>
     </div>
     <h2 class="section-title">İletişim Formu</h2>
@@ -1701,11 +1798,11 @@
             news_title: "Haberler",
             contact_email: "info@logd.org.tr",
             footer_text: "Liseler Oyun Geliştirme Derneği - Türkiye'nin liseli oyun geliştiricileri için en kapsayıcı topluluk. Öğrenme, üretme ve paylaşma kültürünü birlikte büyütüyoruz.",
-            background_color: "#FAFAFA",
-            primary_color: "#5856D6",
-            secondary_color: "#7648EE",
-            text_color: "#1A1A1A",
-            accent_color: "#3AAFFF"
+            background_color: "#F5F1E8",
+            primary_color: "#8B4513",
+            secondary_color: "#A0522D",
+            text_color: "#2C1810",
+            accent_color: "#CD853F"
         };
 
         let currentRecordCount = 0;
@@ -1949,5 +2046,5 @@
 
         initializeApp();
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a6a0af686d36852',t:'MTc2NDUwMjU0Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a6aaaf6f6806852',t:'MTc2NDUwOTA5NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
