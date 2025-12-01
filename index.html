@@ -3,7 +3,7 @@
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LOGD - Liseler Oyun Geliştirme Derneği</title>
+  <title>LOGD - Liseli Oyun Geliştiriciler Derneği</title>
   <script src="/_sdk/element_sdk.js"></script>
   <script src="/_sdk/data_sdk.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
@@ -1146,6 +1146,38 @@
                 grid-template-columns: 1fr;
             }
         }
+        /*Language Sections*/
+        .language-selector {
+            background: white;
+            border: 2px solid #E8E8FF;
+            padding: 0.5rem 1rem;
+            border-radius: 21px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: #5856D6;
+            font-size: 0.9rem;
+    }
+
+    .language-selector:hover {
+        background: #F8F8FF;
+        border-color: #5856D6;
+    }
+
+    body.dark-mode .language-selector {
+        background: #252525;
+        border-color: #3A3A3A;
+        color: #7648EE;
+    }
+
+    body.dark-mode .language-selector:hover {
+        background: #2F2F2F;
+        border-color: #7648EE;
+    }
+
     </style>
   <style>@view-transition { navigation: auto; }</style>
   <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
@@ -1162,25 +1194,43 @@
    </div>
   </div>
   <nav class="navbar">
-   <div class="navbar-container">
+  <div class="navbar-container">
     <div class="logo" onclick="navigateTo('home')">
-     LOGD
+      LOGD
     </div>
     <ul class="nav-links">
-     <li><a onclick="navigateTo('home')" data-page="home">Ana Sayfa</a></li>
-     <li><a onclick="navigateTo('about')" data-page="about">Hakkımızda</a></li>
-     <li><a onclick="navigateTo('events')" data-page="events">Etkinlikler</a></li>
-     <li><a onclick="navigateTo('showcase')" data-page="showcase">Showcase</a></li>
-     <li><a onclick="navigateTo('stats')" data-page="stats">İstatistikler</a></li>
-     <li><a onclick="navigateTo('news')" data-page="news">Haberler</a></li>
-     <li><a onclick="navigateTo('contact')" data-page="contact">İletişim</a></li>
-    </ul><button class="theme-toggle" id="theme-toggle" title="Dark mode">
-     <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5" /> <line x1="12" y1="1" x2="12" y2="3"></line> <line x1="12" y1="21" x2="12" y2="23"></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line> <line x1="1" y1="12" x2="3" y2="12"></line> <line x1="21" y1="12" x2="23" y2="12"></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-     </svg>
-     <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-     </svg></button>
-   </div>
-  </nav><!-- HOME PAGE -->
+      <li><a onclick="navigateTo('home')" data-page="home">Ana Sayfa</a></li>
+      <li><a onclick="navigateTo('about')" data-page="about">Hakkımızda</a></li>
+      <li><a onclick="navigateTo('events')" data-page="events">Etkinlikler</a></li>
+      <li><a onclick="navigateTo('showcase')" data-page="showcase">Showcase</a></li>
+      <li><a onclick="navigateTo('stats')" data-page="stats">İstatistikler</a></li>
+      <li><a onclick="navigateTo('news')" data-page="news">Haberler</a></li>
+      <li><a onclick="navigateTo('contact')" data-page="contact">İletişim</a></li>
+    </ul>
+    <div style="display: flex; gap: 1rem; align-items: center;">
+      <select class="language-selector" id="language-selector">
+        <option value="tr">🇹🇷 TR</option>
+        <option value="en">🇬🇧 EN</option>
+      </select>
+      <button class="theme-toggle" id="theme-toggle" title="Dark mode">
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="5" />
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
 <!-- HOME PAGE -->
 <div id="home" class="page active">
   <section class="hero">
@@ -1234,7 +1284,7 @@
     </div>
    </section>
    <section class="content-section">
-    <h2 class="section-title">Ne Yapıyoruz?</h2>
+    <h2 class="section-title" data-section="whatwedo">Ne Yapıyoruz?</h2>
     <div class="events-grid">
      <div class="event-card">
       <svg class="event-icon" viewbox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="30" fill="#5856D6" opacity="0.2" /> <path d="M 20 32 L 28 24 L 28 40 Z" fill="#5856D6" /> <rect x="32" y="24" width="12" height="16" fill="#7648EE" />
@@ -1318,8 +1368,8 @@
   </div><!-- EVENTS PAGE -->
   <div id="events" class="page">
    <div class="page-header">
-    <h1>Birlikte Üretiyoruz</h1>
-    <p>Oyun geliştirme dünyasının her alanı kapsayan etkinliklerle hem öğretiyor hem de birlikte geliştiriyoruz.</p>
+    <h1 id="events">Birlikte Üretiyoruz</h1>
+    <p id="events">Oyun geliştirme dünyasının her alanı kapsayan etkinliklerle hem öğretiyor hem de birlikte geliştiriyoruz.</p>
    </div>
    <section class="content-section">
     <div class="events-grid">
@@ -1473,7 +1523,7 @@
      <p><strong>"Hyper-Casual Oyunların Sırları"</strong></p>
      <p>📅 Tarih: 12 Mart 2025</p>
      <p>⏰ Saat: 18:00 - 20:00</p>
-     <p> Konuşmacı: Kerem Aydın (Senior Game Designer)</p>
+     <p>��‍💼 Konuşmacı: Kerem Aydın (Senior Game Designer)</p>
      <p>🎥 Online (Zoom) &amp; İstanbul Ofis</p><button class="btn-primary" onclick="navigateTo('contact')">İletişime Geç</button>
     </div>
    </section>
@@ -1531,27 +1581,27 @@
    <section class="stats-full">
     <div class="chart-grid">
      <div class="chart-container">
-      <h3>Rol Dağılımı</h3>
+      <h3 id="stats">Rol Dağılımı</h3>
       <svg viewbox="0 0 300 300" class="chart-svg"><!-- Pie chart --> <circle cx="150" cy="150" r="100" fill="none" stroke="#5856D6" stroke-width="60" stroke-dasharray="188 628" transform="rotate(-90 150 150)" /> <circle cx="150" cy="150" r="100" fill="none" stroke="#7648EE" stroke-width="60" stroke-dasharray="157 628" stroke-dashoffset="-188" transform="rotate(-90 150 150)" /> <circle cx="150" cy="150" r="100" fill="none" stroke="#3AAFFF" stroke-width="60" stroke-dasharray="125 628" stroke-dashoffset="-345" transform="rotate(-90 150 150)" /> <text x="150" y="150" text-anchor="middle" fill="#1A1A1A" font-size="24" font-weight="700">
         500+
-       </text> <text x="150" y="175" text-anchor="middle" fill="#555" font-size="14">
+       </text> <text x="150" y="175" text-anchor="middle" fill="#555" font-size="14" id="stats">
         Toplam Üye
        </text>
       </svg>
       <div class="chart-legend">
        <div>
-        <span style="background: #5856D6;"></span> Programlama (30%)
+        <span style="background: #5856D6;" id="events"></span> Programlama (30%)
        </div>
        <div>
-        <span style="background: #7648EE;"></span> Sanat (25%)
+        <span style="background: #7648EE;" id="events"></span> Sanat (25%)
        </div>
        <div>
-        <span style="background: #3AAFFF;"></span> Tasarım (20%)
+        <span style="background: #3AAFFF;" id="events"></span> Tasarım (20%)
        </div>
       </div>
      </div>
      <div class="chart-container">
-      <h3>Cinsiyet Dağılımı</h3>
+      <h3 id="events">Cinsiyet Dağılımı</h3>
       <svg viewbox="0 0 300 300" class="chart-svg"><!-- Bar chart --> <rect x="40" y="120" width="60" height="130" fill="#5856D6" rx="8" /> <rect x="120" y="150" width="60" height="100" fill="#7648EE" rx="8" /> <rect x="200" y="220" width="60" height="30" fill="#3AAFFF" rx="8" /> <text x="70" y="110" text-anchor="middle" fill="#5856D6" font-size="18" font-weight="700">
         53.9%
        </text> <text x="150" y="140" text-anchor="middle" fill="#7648EE" font-size="18" font-weight="700">
@@ -1562,13 +1612,13 @@
         Erkek
        </text> <text x="150" y="270" text-anchor="middle" fill="#555" font-size="12">
         Kadın
-       </text> <text x="230" y="270" text-anchor="middle" fill="#555" font-size="12">
+       </text id="events"> <text x="230" y="270" text-anchor="middle" fill="#555" font-size="12">
         Diğer
        </text>
       </svg>
      </div>
      <div class="chart-container">
-      <h3>Üye Artışı</h3>
+      <h3 id="events">Üye Artışı</h3>
       <svg viewbox="0 0 300 300" class="chart-svg"><!-- Line chart --> <polyline points="40,200 110,150 180,120 250,60" fill="none" stroke="#5856D6" stroke-width="4" /> <circle cx="40" cy="200" r="8" fill="#5856D6" /> <circle cx="110" cy="150" r="8" fill="#7648EE" /> <circle cx="180" cy="120" r="8" fill="#3AAFFF" /> <circle cx="250" cy="60" r="8" fill="#FF8A3D" /> <text x="40" y="230" text-anchor="middle" fill="#555" font-size="12">
         2024.3
        </text> <text x="110" y="230" text-anchor="middle" fill="#555" font-size="12">
@@ -1577,14 +1627,14 @@
         2025.1
        </text> <text x="250" y="230" text-anchor="middle" fill="#555" font-size="12">
         2025.2
-       </text> <text x="150" y="270" text-anchor="middle" fill="#5856D6" font-size="16" font-weight="700">
+       </text> <text x="150" y="270" text-anchor="middle" fill="#5856D6" font-size="16" font-weight="700" id="events">
         %150 Büyüme
        </text>
       </svg>
      </div>
      <div class="chart-container">
-      <h3>Topluluk Sayısı</h3>
-      <svg viewbox="0 0 300 300" class="chart-svg"><!-- Column chart --> <rect x="30" y="150" width="50" height="80" fill="#5856D6" rx="8" /> <rect x="95" y="120" width="50" height="110" fill="#7648EE" rx="8" /> <rect x="160" y="90" width="50" height="140" fill="#3AAFFF" rx="8" /> <rect x="225" y="60" width="50" height="170" fill="#FF8A3D" rx="8" /> <text x="55" y="140" text-anchor="middle" fill="#5856D6" font-size="18" font-weight="700">
+      <h3 id="events">Topluluk Sayısı</h3>
+      <svg viewbox="0 0 300 300" class="chart-svg"  ><!-- Column chart --> <rect x="30" y="150" width="50" height="80" fill="#5856D6" rx="8" /> <rect x="95" y="120" width="50" height="110" fill="#7648EE" rx="8" /> <rect x="160" y="90" width="50" height="140" fill="#3AAFFF" rx="8" /> <rect x="225" y="60" width="50" height="170" fill="#FF8A3D" rx="8" /> <text x="55" y="140" text-anchor="middle" fill="#5856D6" font-size="18" font-weight="700">
         3
        </text> <text x="120" y="110" text-anchor="middle" fill="#7648EE" font-size="18" font-weight="700">
         5
@@ -1779,6 +1829,298 @@
    </div>
   </footer>
   <script>
+        const translations = {
+    tr: {
+        // Navigation
+        nav_home: "Ana Sayfa",
+        nav_about: "Hakkımızda",
+        nav_events: "Etkinlikler",
+        nav_showcase: "Showcase",
+        nav_stats: "İstatistikler",
+        nav_news: "Haberler",
+        nav_contact: "İletişim",
+        
+        // Home Page
+        main_title: "Liseli geliştiricilerin oyun dünyasına açılan kapısı",
+        subtitle: "Türkiye'nin dört bir yanındaki genç oyun geliştiricileri bir araya getiriyor, öğrenme ve üretme kültürünü büyütüyoruz.",
+        cta_primary: "Etkinliklere Göz At",
+        cta_secondary: "Haberleri Gör",
+        about_title: "LOGD Nedir?",
+        about_description: "Liseler Oyun Geliştirme Derneği, öğrenci geliştiricilerin bir araya gelip birlikte üretmesini amaçlayan Türkiye çapında bir topluluktur. Oyun geliştirme alanındaki genç yetenekleri destekler, eğitim ve etkinlikler düzenler, geleceğin geliştirici ekosistemini inşa eder.",
+        stats_members: "Üye",
+        stats_members_desc: "Farklı okullardan, farklı yeteneklere sahip genç geliştiriciler aynı çatı altında.",
+        stats_communities: "Topluluk",
+        stats_communities_desc: "Türkiye'nin çeşitli liselerinden öğrenci grupları LOGD ağıyla bağlanıyor.",
+        stats_events: "Sürekli",
+        stats_events_label: "Etkinlikler",
+        stats_events_desc: "Game Jam'ler, buluşmalar, workshoplar ve daha fazlası.",
+        what_we_do: "Ne Yapıyoruz?",
+        
+        // Events
+        gamejam_title: "Game Jams",
+        gamejam_desc: "48-72 saatlik oyun geliştirme maratonlarıyla yaratıcılığı ateşleyen etkinlikler. Hem öğrenme hem de üretme ortamı.",
+        workshop_title: "Workshops",
+        workshop_desc: "Sektörden gelen profesyonellerle teknik ve yaratıcı beceri atölyeleri.",
+        meetup_title: "Meet-ups",
+        meetup_desc: "Aynı tutkuyu paylaşan genç geliştiricilerin tanışıp bağlantı kurduğu sıcak buluşmalar.",
+        devtalk_title: "Dev Talks",
+        devtalk_desc: "Deneyimli ekipler ve sektör liderleriyle gerçekleştirilen ilham verici konuşmalar.",
+        detail_link: "Detaylı İncele →",
+        
+        // About Page
+        page_about_title: "Biz Kimiz?",
+        page_about_subtitle: "Türkiye'de liseli oyun geliştiriciler için en kapsayıcı, en üretken topluluğu kuruyoruz.",
+        story_title: "LOGD'nin Hikâyesi",
+        story_text: "Liseler Oyun Geliştirme Derneği; oyun geliştirmeye ilgi duyan gençleri bir araya getirmek, öğrenme fırsatları sunmak ve oyun üretimini teşvik etmek amacıyla kurulmuştur. Kısa sürede yüzlerce öğrenciye ulaşarak etkinlikler, atölyeler ve üretim odaklı projeler gerçekleştirmiştir.",
+        vision_label: "🎯 Vizyon",
+        vision_text: "Genç oyun geliştiriciler için Türkiye'nin en büyük destek ağı olmak.",
+        mission_label: "🚀 Misyon",
+        mission_text: "Öğrencilerin öğrenme, üretme ve paylaşma fırsatlarını artırmak. Oyun geliştirme kültürünü yaymak. Sektörle öğrenciler arasındaki köprüyü güçlendirmek.",
+        team_title: "Yönetim ve Ekip",
+        
+        // Events Page
+        page_events_title: "Birlikte Üretiyoruz",
+        page_events_subtitle: "Oyun geliştirme dünyasının her alanını kapsayan etkinliklerle hem öğretiyor hem de birlikte geliştiriyoruz.",
+        events_gamejam_desc: "Tempo, yaratıcılık ve ekip ruhunun buluştuğu 48-72 saatlik maratonlar.",
+        events_workshop_desc: "Profesyonellerden öğrenme fırsatı sunan interaktif eğitimler.",
+        events_meetup_desc: "Yeni bağlantılar kurabileceğiniz sıcak buluşmalar.",
+        events_devtalk_desc: "Sektörün deneyimli isimlerinin ilham veren konuşmaları.",
+        explore_event: "Bu etkinlik türünü incele →",
+        
+        // GameJams Detail
+        gamejams_page_title: "Game Jams",
+        gamejams_page_subtitle: "Oyun Maratonlarının Adresi",
+        what_is_it: "Nedir?",
+        gamejams_what_text: "48-72 saat süren yoğun oyun geliştirme süreçlerinde öğrenciler ekipler halinde sıfırdan oyun üretir. LOGD, ulusal ve uluslararası Game Jam organizasyonlarında aktif rol alır. Tempo, yaratıcılık ve ekip ruhunun buluştuğu bu maratonlarda öğrenciler gerçek bir üretim deneyimi yaşar.",
+        featured_gamejams: "Öne Çıkan Game Jam'ler",
+        upcoming_gamejam: "Yaklaşan Game Jam",
+        contact_us: "İletişime Geç",
+        event_photos: "Etkinlikten Kareler",
+        
+        // Workshops Detail
+        workshops_page_title: "Workshops",
+        workshops_page_subtitle: "Sektör Profesyonelleriyle Öğrenme",
+        workshops_what_text: "Sektör profesyonelleriyle atölyeler, teknik eğitimler, röportajlar ve uygulamalı seanslar. Profesyonellerden öğrenme fırsatı sunan interaktif eğitimler ile öğrenciler hem teorik bilgi edinir hem de pratik deneyim kazanır.",
+        workshop_topics: "Workshop Konuları",
+        upcoming_workshops: "Yaklaşan Workshops",
+        
+        // Meetups Detail
+        meetups_page_title: "Meet-ups",
+        meetups_page_subtitle: "Genç Geliştiricilerin Buluşma Noktası",
+        meetups_what_text: "Şehrin dört bir yanındaki genç oyun geliştiricilerin sohbet ettiği, tanıştığı ve bağlantı kurduğu buluşmalar. Yeni bağlantılar kurabileceğiniz sıcak buluşmalarda hem networking yapabilir hem de ortak projeler için ekip arkadaşları bulabilirsiniz.",
+        meetup_formats: "Meet-up Formatları",
+        past_meetups: "Geçmiş Meet-uplar",
+        upcoming_meetup: "Yaklaşan Meet-up",
+        
+        // DevTalks Detail
+        devtalks_page_title: "Dev Talks",
+        devtalks_page_subtitle: "Sektör Liderlerinden İlham",
+        devtalks_what_text: "Başarılı geliştirici ekiplerin ve sektördeki liderlerin öğrencilerle buluştuğu konuşmalar. Sektörün deneyimli isimlerinin ilham veren konuşmalarında kariyer tavsiyeleri, proje geliştirme süreçleri ve sektör içi deneyimler paylaşılır.",
+        previous_speakers: "Önceki Konuşmacılar",
+        devtalk_topics: "Dev Talk Konuları",
+        upcoming_devtalk: "Yaklaşan Dev Talk",
+        
+        // Showcase Page
+        showcase_page_title: "Showcase",
+        showcase_page_subtitle: "LOGD topluluğu tarafından geliştirilen harika oyunlar",
+        coming_soon: "Yakında",
+        coming_soon_text: "Yeni oyunlar çok yakında burada görünecek! Topluluğumuzun geliştirdiği projeleri takip edin.",
+        add_your_game: "Oyununu Ekle",
+        your_project_here: "Projeniz Burada Olabilir",
+        your_project_text: "Geliştirdiğiniz oyunu LOGD showcase'inde sergilemek ister misiniz? Bizimle iletişime geçin!",
+        apply: "Başvur",
+        play_game: "Oyunu Oyna",
+        details: "Detaylar",
+        
+        // Stats Page
+        stats_page_title: "İstatistikler",
+        stats_page_subtitle: "Genç geliştirici topluluğunun büyümesini keşfet",
+        role_distribution: "Rol Dağılımı",
+        gender_distribution: "Cinsiyet Dağılımı",
+        member_growth: "Üye Artışı",
+        community_count: "Topluluk Sayısı",
+        total_members: "Toplam Üye",
+        programming: "Programlama",
+        art: "Sanat",
+        design: "Tasarım",
+        male: "Erkek",
+        female: "Kadın",
+        other: "Diğer",
+        growth: "Büyüme",
+        
+        // News Page
+        news_title: "Haberler",
+        news_subtitle: "LOGD topluluğundan son haberler, duyurular ve etkinlik güncellemeleri.",
+        important_announcement: "⭐ ÖNEMLİ DUYURU",
+        latest_news: "Son Haberler",
+        
+        // Contact Page
+        contact_title: "Bize Ulaşın",
+        contact_subtitle: "Sorularınız, önerileriniz veya işbirliği talepleriniz için bizimle iletişime geçin.",
+        general_contact: "Genel İletişim",
+        management_contact: "Yönetim İletişimi",
+        contact_form: "İletişim Formu",
+        full_name: "Ad Soyad *",
+        email: "E-posta *",
+        your_message: "Mesajınız *",
+        message_placeholder: "Lütfen mesajınızı buraya yazın...",
+        send: "Gönder",
+        sending: "Gönderiliyor...",
+        
+        // Footer
+        footer_about: "LOGD Hakkında",
+        footer_text: "Liseler Oyun Geliştirme Derneği - Türkiye'nin liseli oyun geliştiricileri için en kapsayıcı topluluk. Öğrenme, üretme ve paylaşma kültürünü birlikte büyütüyoruz.",
+        footer_quick_menu: "Hızlı Menü",
+        footer_legal: "Yasal",
+        footer_copyright: "© 2025 LOGD - Liseler Oyun Geliştirme Derneği. Tüm hakları saklıdır.",
+    },
+    en: {
+        // Navigation
+        nav_home: "Home",
+        nav_about: "About",
+        nav_events: "Events",
+        nav_showcase: "Showcase",
+        nav_stats: "Statistics",
+        nav_news: "News",
+        nav_contact: "Contact",
+        
+        // Home Page
+        main_title: "Gateway for high school developers to the gaming world",
+        subtitle: "Bringing together young game developers from all over Turkey, growing the culture of learning and creating.",
+        cta_primary: "Browse Events",
+        cta_secondary: "View News",
+        about_title: "What is LOGD?",
+        about_description: "High School Game Development Association is a Turkey-wide community that aims to bring student developers together to create together. It supports young talents in game development, organizes education and events, and builds the developer ecosystem of the future.",
+        stats_members: "Members",
+        stats_members_desc: "Young developers from different schools with different talents under one roof.",
+        stats_communities: "Communities",
+        stats_communities_desc: "Student groups from various high schools in Turkey connect through the LOGD network.",
+        stats_events: "Continuous",
+        stats_events_label: "Events",
+        stats_events_desc: "Game Jams, meetups, workshops and more.",
+        what_we_do: "What We Do?",
+        
+        // Events
+        gamejam_title: "Game Jams",
+        gamejam_desc: "Events that ignite creativity with 48-72 hour game development marathons. Both learning and production environment.",
+        workshop_title: "Workshops",
+        workshop_desc: "Technical and creative skill workshops with professionals from the industry.",
+        meetup_title: "Meet-ups",
+        meetup_desc: "Warm gatherings where young developers who share the same passion meet and connect.",
+        devtalk_title: "Dev Talks",
+        devtalk_desc: "Inspiring conversations with experienced teams and industry leaders.",
+        detail_link: "Learn More →",
+        
+        // About Page
+        page_about_title: "Who Are We?",
+        page_about_subtitle: "We are building the most comprehensive and productive community for high school game developers in Turkey.",
+        story_title: "LOGD's Story",
+        story_text: "High School Game Development Association was founded to bring together young people interested in game development, provide learning opportunities and encourage game production. In a short time, it reached hundreds of students and organized events, workshops and production-oriented projects.",
+        vision_label: "🎯 Vision",
+        vision_text: "To be Turkey's largest support network for young game developers.",
+        mission_label: "🚀 Mission",
+        mission_text: "To increase students' opportunities to learn, create and share. To spread game development culture. To strengthen the bridge between the industry and students.",
+        team_title: "Management and Team",
+        
+        // Events Page
+        page_events_title: "Creating Together",
+        page_events_subtitle: "We both teach and develop together with events covering all areas of the game development world.",
+        events_gamejam_desc: "48-72 hour marathons where tempo, creativity and team spirit meet.",
+        events_workshop_desc: "Interactive trainings offering learning opportunities from professionals.",
+        events_meetup_desc: "Warm gatherings where you can make new connections.",
+        events_devtalk_desc: "Inspiring talks from experienced names in the industry.",
+        explore_event: "Explore this event type →",
+        
+        // GameJams Detail
+        gamejams_page_title: "Game Jams",
+        gamejams_page_subtitle: "Home of Game Marathons",
+        what_is_it: "What is it?",
+        gamejams_what_text: "In intense 48-72 hour game development processes, students produce games from scratch in teams. LOGD plays an active role in national and international Game Jam organizations. Students experience real production in these marathons where tempo, creativity and team spirit meet.",
+        featured_gamejams: "Featured Game Jams",
+        upcoming_gamejam: "Upcoming Game Jam",
+        contact_us: "Contact Us",
+        event_photos: "Event Photos",
+        
+        // Workshops Detail
+        workshops_page_title: "Workshops",
+        workshops_page_subtitle: "Learning with Industry Professionals",
+        workshops_what_text: "Workshops, technical trainings, interviews and practical sessions with industry professionals. Through interactive trainings offering learning opportunities from professionals, students gain both theoretical knowledge and practical experience.",
+        workshop_topics: "Workshop Topics",
+        upcoming_workshops: "Upcoming Workshops",
+        
+        // Meetups Detail
+        meetups_page_title: "Meet-ups",
+        meetups_page_subtitle: "Meeting Point for Young Developers",
+        meetups_what_text: "Gatherings where young game developers from all over the city chat, meet and connect. In warm meetups where you can make new connections, you can both network and find teammates for joint projects.",
+        meetup_formats: "Meet-up Formats",
+        past_meetups: "Past Meet-ups",
+        upcoming_meetup: "Upcoming Meet-up",
+        
+        // DevTalks Detail
+        devtalks_page_title: "Dev Talks",
+        devtalks_page_subtitle: "Inspiration from Industry Leaders",
+        devtalks_what_text: "Talks where successful developer teams and industry leaders meet with students. Career advice, project development processes and industry experiences are shared in inspiring talks by experienced names in the industry.",
+        previous_speakers: "Previous Speakers",
+        devtalk_topics: "Dev Talk Topics",
+        upcoming_devtalk: "Upcoming Dev Talk",
+        
+        // Showcase Page
+        showcase_page_title: "Showcase",
+        showcase_page_subtitle: "Amazing games developed by the LOGD community",
+        coming_soon: "Coming Soon",
+        coming_soon_text: "New games will appear here very soon! Follow the projects developed by our community.",
+        add_your_game: "Add Your Game",
+        your_project_here: "Your Project Could Be Here",
+        your_project_text: "Would you like to showcase your game in the LOGD showcase? Contact us!",
+        apply: "Apply",
+        play_game: "Play Game",
+        details: "Details",
+        
+        // Stats Page
+        stats_page_title: "Statistics",
+        stats_page_subtitle: "Discover the growth of the young developer community",
+        role_distribution: "Role Distribution",
+        gender_distribution: "Gender Distribution",
+        member_growth: "Member Growth",
+        community_count: "Community Count",
+        total_members: "Total Members",
+        programming: "Programming",
+        art: "Art",
+        design: "Design",
+        male: "Male",
+        female: "Female",
+        other: "Other",
+        growth: "Growth",
+        
+        // News Page
+        news_title: "News",
+        news_subtitle: "Latest news, announcements and event updates from the LOGD community.",
+        important_announcement: "⭐ IMPORTANT ANNOUNCEMENT",
+        latest_news: "Latest News",
+        
+        // Contact Page
+        contact_title: "Contact Us",
+        contact_subtitle: "Contact us for your questions, suggestions or collaboration requests.",
+        general_contact: "General Contact",
+        management_contact: "Management Contact",
+        contact_form: "Contact Form",
+        full_name: "Full Name *",
+        email: "Email *",
+        your_message: "Your Message *",
+        message_placeholder: "Please write your message here...",
+        send: "Send",
+        sending: "Sending...",
+        
+        // Footer
+        footer_about: "About LOGD",
+        footer_text: "High School Game Development Association - Turkey's most comprehensive community for high school game developers. Growing the culture of learning, creating and sharing together.",
+        footer_quick_menu: "Quick Menu",
+        footer_legal: "Legal",
+        footer_copyright: "© 2025 LOGD - High School Game Development Association. All rights reserved.",
+    }
+};
+
+
         const defaultConfig = {
             main_title: "Liseli geliştiricilerin oyun dünyasına açılan kapısı",
             subtitle: "Türkiye'nin dört bir yanındaki genç oyun geliştiricileri bir araya getiriyor, öğrenme ve üretme kültürünü büyütüyoruz.",
@@ -2017,7 +2359,225 @@
                 localStorage.setItem('theme', isDark ? 'dark' : 'light');
             });
         }
+        
+        function changeLanguage(lang) {
+    localStorage.setItem('language', lang);
+    const t = translations[lang];
+    
+    // Navbar
+    document.querySelectorAll('.nav-links a').forEach((link, index) => {
+        const keys = ['nav_home', 'nav_about', 'nav_events', 'nav_showcase', 'nav_stats', 'nav_news', 'nav_contact'];
+        if (keys[index]) link.textContent = t[keys[index]];
+    });
+    
+    // HOME PAGE
+    const mainTitle = document.getElementById('main-title');
+    const subtitle = document.getElementById('subtitle');
+    const ctaPrimary = document.getElementById('cta-primary');
+    const ctaSecondary = document.getElementById('cta-secondary');
+    
+    if (mainTitle) mainTitle.textContent = t.main_title;
+    if (subtitle) subtitle.textContent = t.subtitle;
+    if (ctaPrimary) ctaPrimary.textContent = t.cta_primary;
+    if (ctaSecondary) ctaSecondary.textContent = t.cta_secondary;
+    
+    // About section
+    const aboutTitle = document.getElementById('about-title');
+    const aboutText = document.querySelector('.about-text');
+    if (aboutTitle) aboutTitle.textContent = t.about_title;
+    if (aboutText) aboutText.textContent = t.about_description;
+    
+    // Stats
+    const statLabels = document.querySelectorAll('.stat-label');
+    if (statLabels[0]) statLabels[0].textContent = t.stats_members;
+    if (statLabels[1]) statLabels[1].textContent = t.stats_communities;
+    if (statLabels[2]) statLabels[2].textContent = t.stats_events_label;
+    
+    const statDescs = document.querySelectorAll('.stat-description');
+    if (statDescs[0]) statDescs[0].textContent = t.stats_members_desc;
+    if (statDescs[1]) statDescs[1].textContent = t.stats_communities_desc;
+    if (statDescs[2]) statDescs[2].textContent = t.stats_events_desc;
+    
+    // What We Do section
+    const sectionTitles = document.querySelectorAll('.section-title');
+    if (sectionTitles[0]) sectionTitles[0].textContent = t.what_we_do;
+    
+    // Home Event cards
+    const homeEventCards = document.querySelectorAll('#home .event-card');
+    if (homeEventCards[0]) {
+        homeEventCards[0].querySelector('h3').textContent = t.gamejam_title;
+        homeEventCards[0].querySelector('p').textContent = t.gamejam_desc;
+        homeEventCards[0].querySelector('.btn-link').textContent = t.detail_link;
+    }
+    if (homeEventCards[1]) {
+        homeEventCards[1].querySelector('h3').textContent = t.workshop_title;
+        homeEventCards[1].querySelector('p').textContent = t.workshop_desc;
+        homeEventCards[1].querySelector('.btn-link').textContent = t.detail_link;
+    }
+    if (homeEventCards[2]) {
+        homeEventCards[2].querySelector('h3').textContent = t.meetup_title;
+        homeEventCards[2].querySelector('p').textContent = t.meetup_desc;
+        homeEventCards[2].querySelector('.btn-link').textContent = t.detail_link;
+    }
+    if (homeEventCards[3]) {
+        homeEventCards[3].querySelector('h3').textContent = t.devtalk_title;
+        homeEventCards[3].querySelector('p').textContent = t.devtalk_desc;
+        homeEventCards[3].querySelector('.btn-link').textContent = t.detail_link;
+    }
+    
+    // ABOUT PAGE
+    const aboutPageHeader = document.querySelector('#about .page-header h1');
+    const aboutPageSubtitle = document.querySelector('#about .page-header p');
+    if (aboutPageHeader) aboutPageHeader.textContent = t.page_about_title;
+    if (aboutPageSubtitle) aboutPageSubtitle.textContent = t.page_about_subtitle;
+    
+    const storyTitle = document.querySelector('#about .event-detail-content h3');
+    const storyText = document.querySelector('#about .event-detail-content p');
+    if (storyTitle) storyTitle.textContent = t.story_title;
+    if (storyText) storyText.textContent = t.story_text;
+    
+    const visionLabel = document.querySelectorAll('.vm-card h3')[0];
+    const visionText = document.getElementById('vision-text');
+    const missionLabel = document.querySelectorAll('.vm-card h3')[1];
+    const missionText = document.getElementById('mission-text');
+    
+    if (visionLabel) visionLabel.textContent = t.vision_label;
+    if (visionText) visionText.textContent = t.vision_text;
+    if (missionLabel) missionLabel.textContent = t.mission_label;
+    if (missionText) missionText.textContent = t.mission_text;
+    sectionTitles.forEach(title => {
+    if (title.getAttribute('data-section') === 'whatwedo') {
+        title.textContent = t.what_we_do;
+    }
+});
+    
+    const teamTitle = document.querySelectorAll('#about .section-title')[0];
+    if (teamTitle) teamTitle.textContent = t.team_title;
+    
+    // EVENTS PAGE
+    const eventsPageHeader = document.querySelector('#events .page-header h1');
+    const eventsPageSubtitle = document.querySelector('#events .page-header p');
+    if (eventsPageHeader) eventsPageHeader.textContent = t.page_events_title;
+    if (eventsPageSubtitle) eventsPageSubtitle.textContent = t.page_events_subtitle;
+    
+    const eventsCards = document.querySelectorAll('#events .event-card');
+    if (eventsCards[0]) {
+        eventsCards[0].querySelector('h3').textContent = t.gamejam_title;
+        eventsCards[0].querySelector('p').textContent = t.events_gamejam_desc;
+        eventsCards[0].querySelector('.btn-link').textContent = t.explore_event;
+    }
+    if (eventsCards[1]) {
+        eventsCards[1].querySelector('h3').textContent = t.workshop_title;
+        eventsCards[1].querySelector('p').textContent = t.events_workshop_desc;
+        eventsCards[1].querySelector('.btn-link').textContent = t.explore_event;
+    }
+    if (eventsCards[2]) {
+        eventsCards[2].querySelector('h3').textContent = t.meetup_title;
+        eventsCards[2].querySelector('p').textContent = t.events_meetup_desc;
+        eventsCards[2].querySelector('.btn-link').textContent = t.explore_event;
+    }
+    if (eventsCards[3]) {
+        eventsCards[3].querySelector('h3').textContent = t.devtalk_title;
+        eventsCards[3].querySelector('p').textContent = t.events_devtalk_desc;
+        eventsCards[3].querySelector('.btn-link').textContent = t.explore_event;
+    }
+    
+    // GAMEJAMS PAGE
+    const gamejamsHeader = document.querySelector('#gamejams .page-header h1');
+    const gamejamsSubtitle = document.querySelector('#gamejams .page-header p');
+    if (gamejamsHeader) gamejamsHeader.textContent = t.gamejams_page_title;
+    if (gamejamsSubtitle) gamejamsSubtitle.textContent = t.gamejams_page_subtitle;
+    
+    // WORKSHOPS PAGE
+    const workshopsHeader = document.querySelector('#workshops .page-header h1');
+    const workshopsSubtitle = document.querySelector('#workshops .page-header p');
+    if (workshopsHeader) workshopsHeader.textContent = t.workshops_page_title;
+    if (workshopsSubtitle) workshopsSubtitle.textContent = t.workshops_page_subtitle;
+    
+    // MEETUPS PAGE
+    const meetupsHeader = document.querySelector('#meetups .page-header h1');
+    const meetupsSubtitle = document.querySelector('#meetups .page-header p');
+    if (meetupsHeader) meetupsHeader.textContent = t.meetups_page_title;
+    if (meetupsSubtitle) meetupsSubtitle.textContent = t.meetups_page_subtitle;
+    
+    // DEVTALKS PAGE
+    const devtalksHeader = document.querySelector('#devtalks .page-header h1');
+    const devtalksSubtitle = document.querySelector('#devtalks .page-header p');
+    if (devtalksHeader) devtalksHeader.textContent = t.devtalks_page_title;
+    if (devtalksSubtitle) devtalksSubtitle.textContent = t.devtalks_page_subtitle;
+    
+    // SHOWCASE PAGE
+    const showcaseHeader = document.querySelector('#showcase .page-header h1');
+    const showcaseSubtitle = document.querySelector('#showcase .page-header p');
+    if (showcaseHeader) showcaseHeader.textContent = t.showcase_page_title;
+    if (showcaseSubtitle) showcaseSubtitle.textContent = t.showcase_page_subtitle;
+    
+    // STATS PAGE
+    const statsHeader = document.querySelector('#stats .page-header h1');
+    const statsSubtitle = document.querySelector('#stats .page-header p');
+    if (statsHeader) statsHeader.textContent = t.stats_page_title;
+    if (statsSubtitle) statsSubtitle.textContent = t.stats_page_subtitle;
+    
+    // NEWS PAGE
+    const newsTitle = document.getElementById('news-title');
+    const newsSubtitle = document.querySelector('#news .page-header p');
+    if (newsTitle) newsTitle.textContent = t.news_title;
+    if (newsSubtitle) newsSubtitle.textContent = t.news_subtitle;
+    
+    // CONTACT PAGE
+    const contactHeader = document.querySelector('#contact .page-header h1');
+    const contactSubtitle = document.querySelector('#contact .page-header p');
+    if (contactHeader) contactHeader.textContent = t.contact_title;
+    if (contactSubtitle) contactSubtitle.textContent = t.contact_subtitle;
+    
+    const contactEmail = document.getElementById('contact-email');
+    if (contactEmail) {
+        contactEmail.textContent = 'info@logd.org.tr';
+        contactEmail.href = 'mailto:info@logd.org.tr';
+    }
+    
+    // Contact form labels
+    const formLabels = document.querySelectorAll('.form-group label');
+    if (formLabels[0]) formLabels[0].textContent = t.full_name;
+    if (formLabels[1]) formLabels[1].textContent = t.email;
+    if (formLabels[2]) formLabels[2].textContent = t.your_message;
+    
+    const messagePlaceholder = document.getElementById('contact-message-input');
+    if (messagePlaceholder) messagePlaceholder.placeholder = t.message_placeholder;
+    
+    const submitBtn = document.getElementById('submit-contact');
+    if (submitBtn && !submitBtn.disabled) submitBtn.textContent = t.send;
+    
+    // Footer
+    const footerText = document.getElementById('footer-text');
+    if (footerText) footerText.textContent = t.footer_text;
+    
+    const footerSections = document.querySelectorAll('.footer-section h4');
+    if (footerSections[0]) footerSections[0].textContent = t.footer_about;
+    if (footerSections[1]) footerSections[1].textContent = t.footer_links;
+    if (footerSections[2]) footerSections[2].textContent = t.footer_social;
 
+    const footerLinks = document.querySelectorAll('.footer-links li a');
+    if (footerLinks[0]) footerLinks[0].textContent = t.nav_home;
+    if (footerLinks[1]) footerLinks[1].textContent = t.nav_about;
+    if (footerLinks[2]) footerLinks[2].textContent = t.nav_events;
+    if (footerLinks[3]) footerLinks[3].textContent = t.nav_showcase;
+    if (footerLinks[4]) footerLinks[4].textContent = t.nav_stats;
+    if (footerLinks[5]) footerLinks[5].textContent = t.nav_news;
+    if (footerLinks[6]) footerLinks[6].textContent = t.nav_contact;
+
+    const socialIcons = document.querySelectorAll('.social-icon');
+    if (socialIcons[0]) socialIcons[0].title = t.social_instagram;
+    if (socialIcons[1]) socialIcons[1].title = t.social_twitter;
+    if (socialIcons[2]) socialIcons[2].title = t.social_discord;
+}
+    
+    
+    // Update config with new language
+    if (window.elementSdk && window.elementSdk.config) {
+        const newConfig = { ...translations[lang] };
+        window.elementSdk.setConfig(newConfig);
+    }
         async function initializeApp() {
             if (window.dataSdk) {
                 const initResult = await window.dataSdk.init(dataHandler);
@@ -2034,14 +2594,23 @@
                     mapToEditPanelValues
                 });
             }
+
+            // Language selector initialization
+            const languageSelector = document.getElementById('language-selector');
+            const savedLanguage = localStorage.getItem('language') || 'tr';
+
+            if (languageSelector) {
+                languageSelector.value = savedLanguage;
+                changeLanguage(savedLanguage);
+                
+                languageSelector.addEventListener('change', (e) => {
+                    changeLanguage(e.target.value);
+                });
+            }
         }
+
 
         initializeApp();
     </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a6aba2f54046852',t:'MTc2NDUwOTcxOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
-
-
-
-
-
