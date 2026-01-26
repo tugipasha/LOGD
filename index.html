@@ -1,0 +1,2885 @@
+<!doctype html>
+<html lang="tr">
+ <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8T9H5EBMMT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-8T9H5EBMMT');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LOGD - Liseli Oyun Geliştiriciler Derneği</title>
+  <link rel="icon" type="image/jpeg" href="images/logdLogo.png">
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="/_sdk/data_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+            box-sizing: border-box;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #FAFAFA;
+            color: #1A1A1A;
+            overflow-x: hidden;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        
+        body.dark-mode {
+            background: #0F0F0F;
+            color: #E8E8E8;
+        }
+        
+        /* Intro Screen */
+        #intro-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #2C1810; /* Koyu Kahverengi Arka Plan */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            animation: fadeOut 1s ease 4.0s forwards; /* Süre 1.5sn artırıldı (2.5s -> 4.0s) */
+        }
+        
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+        
+        .intro-content {
+            text-align: center;
+            position: relative;
+        }
+        
+        .intro-logo {
+            font-size: 6.5rem; /* Biraz büyütüldü */
+            font-weight: 900;
+            color: white;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.2em;
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(135deg, #FFFFFF, #F5F5F5); /* Beyaz/Krem Gradyan */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: 
+                logoReveal 1.5s cubic-bezier(0.77, 0, 0.175, 1),
+                logoPulse 3s ease-in-out 1.5s infinite; /* Yeni Nabız Animasyonu */
+        }
+
+        @keyframes logoReveal {
+            0% {
+                transform: translateY(40px) scale(0.9);
+                opacity: 0;
+                letter-spacing: 0em;
+            }
+            100% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+                letter-spacing: 0.2em;
+            }
+        }
+
+        @keyframes logoPulse {
+            0%, 100% { transform: scale(1); filter: brightness(1); }
+            50% { transform: scale(1.05); filter: brightness(1.2); }
+        }
+        
+        .intro-subtitle {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.85); /* Daha belirgin beyaz */
+            font-weight: 400;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 2px solid white; /* Beyaz imleç */
+            width: 0;
+            margin: 0 auto;
+            animation: 
+                typing 2.0s steps(35, end) 1.5s forwards, /* Yazım hızı ayarlandı */
+                blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: white }
+        }
+
+        .intro-line {
+            height: 2px;
+            width: 0;
+            background: linear-gradient(90deg, transparent, white, transparent); /* Beyaz Çizgi */
+            margin: 1.5rem auto 0;
+            animation: lineExpand 1.2s ease 1.0s forwards;
+        }
+
+        @keyframes lineExpand {
+            to { width: 180px }
+        }
+        
+        .navbar {
+            background: white;
+            padding: 1.25rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        body.dark-mode .navbar {
+            background: #1A1A1A;
+            box-shadow: 0 1px 3px rgba(255,255,255,0.1);
+        }
+        
+        body.dark-mode .theme-toggle {
+            border-color: #3A3A3A;
+        }
+        
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+            position: relative;
+        }
+        
+
+        
+        .theme-toggle {
+            background: white;
+            border: 2px solid #E8E8FF;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .theme-toggle:hover {
+            background: #F8F8FF;
+            border-color: #5856D6;
+        }
+        
+        body.dark-mode .theme-toggle {
+            background: #252525 !important;
+            border-color: #3A3A3A !important;
+        }
+        
+        body.dark-mode .theme-toggle:hover {
+            background: #2F2F2F !important;
+            border-color: #7648EE !important;
+        }
+        
+        .theme-toggle svg {
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            transition: all 0.3s ease;
+        }
+        
+        .theme-toggle .sun-icon {
+            opacity: 1;
+            transform: rotate(0deg);
+        }
+        
+        .theme-toggle .moon-icon {
+            opacity: 0;
+            transform: rotate(180deg);
+        }
+        
+        body.dark-mode .theme-toggle .sun-icon {
+            opacity: 0;
+            transform: rotate(180deg);
+        }
+        
+        body.dark-mode .theme-toggle .moon-icon {
+            opacity: 1;
+            transform: rotate(0deg);
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #8B4513, #A0522D);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            height: 35px;
+            width: auto;
+            border-radius: 4px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+        
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #8B4513;
+        }
+        
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 25px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 101;
+        }
+
+        .hamburger span {
+            width: 30px;
+            height: 3px;
+            background: #8B4513;
+            border-radius: 10px;
+            transition: all 0.3s linear;
+            position: relative;
+            transform-origin: 1px;
+        }
+
+        body.dark-mode .hamburger span {
+            background: #A0522D;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+            transform: translateX(20px);
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg);
+        }
+        
+        body.dark-mode .nav-links a {
+            color: #AAA;
+        }
+        
+        body.dark-mode .nav-links a:hover,
+        body.dark-mode .nav-links a.active {
+            color: #A0522D;
+        }
+        
+        .page {
+            display: none;
+            opacity: 0;
+        }
+        
+        .page.active {
+            display: block;
+            animation: fadeInSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        
+        .page.fade-out {
+            animation: fadeOutSlideDown 0.4s cubic-bezier(0.7, 0, 0.84, 0) forwards;
+        }
+        
+        @keyframes fadeInSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        @keyframes fadeOutSlideDown {
+            from {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            to {
+                opacity: 0;
+                transform: translateY(-30px) scale(0.98);
+            }
+        }
+        
+        .hero {
+            max-width: 1300px;
+            margin: 0 auto;
+            /*padding: 1rem 2rem;*/
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            padding: 1rem;
+            margin-bottom: 0.7rem;
+            background: linear-gradient(135deg, #ffffff, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-content p {
+            font-size: 1rem;
+            color: #ffffff;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        body.dark-mode .hero-content p {
+            color: #ffffff;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary, .btn-secondary {
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+}
+
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 8.2rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            background-image: url('./images/arkaplan.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 16px;
+            position: relative;
+}
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.438);
+            border-radius: 16px;
+            z-index: 0;
+        }
+
+        body.dark-mode .hero::before {
+    background: rgba(0, 0, 0, 0.438); /* Aynı renk, dark mode'da da değişmez */
+}
+
+        
+
+        .hero-content,
+        .hero-visual {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content{
+            margin-top: -6rem;
+        }
+
+        .hero-content p{
+            margin-left: 1.1rem;
+        }
+
+        body.dark-mode .hero-visual {
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #8B4513, #A0522D);
+            box-shadow: 0 8px 25px rgba(139, 69, 19, 0.3);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(139, 69, 19, 0.4);
+        }
+        
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .btn-secondary {
+            background: rgb(255, 255, 255);
+            color: #8B4513;
+            box-shadow: 0 8px 25px rgba(139, 69, 19, 0.3);
+            border: 2px solid #8B4513;
+        }
+        
+        .btn-secondary:hover {
+            background: #8B4513;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            color: white;
+        }
+        
+        body.dark-mode .btn-secondary {
+            background: #ffffff;
+            border-color: #A0522D;
+            color: #A0522D;
+        }
+        
+        body.dark-mode .btn-secondary:hover {
+            background: #A0522D;
+            color: white;
+        }
+        
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .hero-icon {
+            width: 100%;
+            height: 100%;
+            max-width: 500px;
+            max-height: 500px;
+        }
+        
+        body.dark-mode .about-mini {
+            background: #1A1A1A;
+        }
+        
+        .about-mini {
+            background: white;
+            padding: 5rem 2rem;
+        }
+        
+        .about-mini-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .about-text {
+            font-size: 1.15rem;
+            color: #555;
+            line-height: 1.8;
+            margin-top: 1.5rem;
+        }
+        
+        body.dark-mode .about-text {
+            color: #AAA;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, #8B4513, #A0522D);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .communities-section {
+            padding: 5rem 2rem;
+            background: #FDFDFD;
+        }
+        
+        body.dark-mode .communities-section {
+            background: #1A1A1A;
+        }
+        
+        .communities-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 3rem;
+            align-items: flex-start;
+            margin-top: 2rem;
+        }
+
+        .community-item {
+            flex: 0 1 200px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            text-align: center;
+        }
+        
+        .community-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .community-logo-container {
+             width: 120px;
+             height: 120px;
+             background: white;
+             border-radius: 50%;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+             border: 1px solid #eee;
+             overflow: hidden;
+             transition: all 0.3s ease;
+         }
+        
+        body.dark-mode .community-logo-container {
+            background: #252525;
+            border-color: #333;
+        }
+        
+        .community-item:hover .community-logo-container {
+            border-color: #8B4513;
+            box-shadow: 0 12px 25px rgba(139, 69, 19, 0.15);
+        }
+        
+        .community-logo {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+          }
+        
+        .community-name {
+            font-weight: 600;
+            color: #333;
+            font-size: 1rem;
+            white-space: nowrap;
+        }
+        
+        body.dark-mode .community-name {
+            color: #EEE;
+        }
+        
+        .page-header {
+            background: linear-gradient(135deg, #8B4513, #A0522D);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .page-header p {
+            font-size: 1.25rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .content-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        .events-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+            margin-top: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .event-card {
+            background: white;
+            padding: 0;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid #eee;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        body.dark-mode .event-card {
+            background: #1F1F1F;
+            border-color: #333;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+        
+        .event-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(139, 69, 19, 0.12);
+            border-color: #8B4513;
+        }
+
+        .event-image-container {
+            width: 100%;
+            height: 320px;
+            background: #f5f5f5;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        body.dark-mode .event-image-container {
+            background: #252525;
+        }
+
+        .event-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .event-card:hover .event-image-container img {
+            transform: scale(1.05);
+        }
+
+        .event-image-placeholder {
+            font-size: 4rem;
+            opacity: 0.3;
+        }
+
+        .event-content {
+            padding: 2rem;
+        }
+        
+        .event-card h3 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #1A1A1A;
+            margin-bottom: 1.2rem;
+            background: linear-gradient(135deg, #8B4513, #A0522D);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        body.dark-mode .event-card h3 {
+            color: #E8E8E8;
+        }
+        
+        .event-card p {
+            color: #444;
+            line-height: 1.7;
+            font-size: 1.05rem;
+            margin-bottom: 0;
+        }
+        
+        body.dark-mode .event-card p {
+            color: #BBB;
+        }
+
+        /* Home Page Compact Events */
+        .home-events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .home-event-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            text-align: center;
+        }
+
+        body.dark-mode .home-event-card {
+            background: #1F1F1F;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .home-event-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 35px rgba(139, 69, 19, 0.2);
+            border-color: #8B4513;
+        }
+
+        .home-event-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .home-event-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .home-event-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        body.dark-mode .home-event-card p {
+            color: #AAA;
+        }
+
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        .showcase-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+            transition: all 0.4s ease;
+            border: 1px solid #eee;
+            text-align: center;
+        }
+
+        body.dark-mode .showcase-card {
+            background: #1F1F1F;
+            border-color: #333;
+        }
+
+        .showcase-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(88, 86, 214, 0.12);
+            border-color: #5856D6;
+        }
+
+        .showcase-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1A1A1A;
+        }
+
+        body.dark-mode .showcase-card h3 {
+            color: #E8E8E8;
+        }
+
+        .showcase-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        body.dark-mode .showcase-card p {
+            color: #BBB;
+        }
+        
+        .event-card .btn-link {
+            color: #8B4513;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s;
+            cursor: pointer;
+        }
+        
+        .event-card .btn-link:hover {
+            gap: 0.8rem;
+        }
+        
+        /* Sponsors Section */
+        .sponsors-section {
+            padding: 4rem 2rem;
+            background: #f9f9f9;
+            text-align: center;
+            transition: background 0.3s ease;
+        }
+
+        body.dark-mode .sponsors-section {
+            background: #151515;
+        }
+
+        .sponsors-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            margin-top: 2rem;
+        }
+
+        .sponsor-item {
+            flex: 0 1 200px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .sponsor-item:hover {
+            transform: scale(1.05);
+        }
+
+        .sponsor-item img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .sponsor-placeholder {
+            width: 100%;
+            height: 100%;
+            background: #eee;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: #888;
+            border: 2px dashed #ccc;
+        }
+
+        body.dark-mode .sponsor-placeholder {
+            background: #252525;
+            border-color: #444;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .sponsors-grid {
+                gap: 2rem;
+            }
+            .sponsor-item {
+                flex: 0 1 140px;
+                height: 70px;
+            }
+        }
+
+        .form-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+        
+        body.dark-mode .form-container {
+            background: #1F1F1F;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #1A1A1A;
+            margin-bottom: 0.5rem;
+        }
+        
+        body.dark-mode .form-group label {
+            color: #E8E8E8;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.875rem;
+            border: 2px solid #E8E8FF;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.3s, background 0.3s, color 0.3s;
+            background: white;
+            color: #1A1A1A;
+        }
+        
+        body.dark-mode .form-group input,
+        body.dark-mode .form-group select,
+        body.dark-mode .form-group textarea {
+            background: #252525;
+            border-color: #3A3A3A;
+            color: #E8E8E8;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #5856D6;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .success-message,
+        .error-message {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .success-message {
+            background: #E8F5E9;
+            color: #2E7D32;
+            border: 1px solid #66BB6A;
+        }
+        
+        .error-message {
+            background: #FFEBEE;
+            color: #C62828;
+            border: 1px solid #EF5350;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .benefit-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        body.dark-mode .benefit-card {
+            background: #1F1F1F;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        
+        .benefit-card h4 {
+            font-size: 1.25rem;
+            color: #8B4513;
+            margin-bottom: 0.5rem;
+        }
+        
+        .benefit-card p {
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        body.dark-mode .benefit-card p {
+            color: #AAA;
+        }
+        
+        .contact-info {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 3rem;
+            transition: all 0.3s ease;
+        }
+        
+        body.dark-mode .contact-info {
+            background: #1F1F1F;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        
+        .contact-info h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1A1A1A;
+            margin-bottom: 1.5rem;
+        }
+        
+        body.dark-mode .contact-info h3 {
+            color: #E8E8E8;
+        }
+        
+        .contact-info p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 0.75rem;
+        }
+        
+        body.dark-mode .contact-info p {
+            color: #AAA;
+        }
+        
+        .contact-info a {
+            color: #8B4513;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, #8B4513, #A0522D);
+            color: white;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+        }
+        
+        .footer-section h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-section p {
+            opacity: 0.9;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.9;
+            transition: opacity 0.3s;
+            cursor: pointer;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .social-icon:hover {
+            background: white;
+            transform: translateY(-3px);
+        }
+        
+        .social-icon:hover svg {
+            fill: #8B4513;
+        }
+        
+        .social-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+            transition: fill 0.3s;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            opacity: 0.8;
+        }
+        
+        .vision-mission {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+        
+        .vm-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+        
+        body.dark-mode .vm-card {
+            background: #1F1F1F;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        
+        .vm-card h3 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: #8B4513;
+            margin-bottom: 1rem;
+        }
+        
+        .vm-card p {
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        body.dark-mode .vm-card p {
+            color: #AAA;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .team-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        body.dark-mode .team-card {
+            background: #1F1F1F;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        
+        .team-avatar {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #8B4513, #A0522D);
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            font-weight: 700;
+        }
+        
+        .team-card h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1A1A1A;
+            margin-bottom: 0.5rem;
+        }
+        
+        body.dark-mode .team-card h4 {
+            color: #E8E8E8;
+        }
+        
+        .team-card p {
+            color: #8B4513;
+            font-weight: 500;
+        }
+        
+        body.dark-mode .team-card p {
+            color: #A0522D;
+        }
+        
+        .event-detail-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 3rem;
+            transition: all 0.3s ease;
+        }
+        
+        body.dark-mode .event-detail-content {
+            background: #1F1F1F;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        
+        .event-detail-content h3 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: #1A1A1A;
+            margin-bottom: 1.5rem;
+        }
+        
+        body.dark-mode .event-detail-content h3 {
+            color: #E8E8E8;
+        }
+        
+        .event-detail-content p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        
+        body.dark-mode .event-detail-content p {
+            color: #AAA;
+        }
+        
+        .event-detail-content ul {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+        
+        .event-detail-content ul li {
+            padding: 0.75rem 0;
+            color: #555;
+            border-bottom: 1px solid #F0F0F0;
+        }
+        
+        body.dark-mode .event-detail-content ul li {
+            color: #AAA;
+            border-bottom: 1px solid #2A2A2A;
+        }
+        
+        .event-detail-content ul li:before {
+            content: "→";
+            color: #5856D6;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+        
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+        
+        .gallery-item {
+            height: 200px;
+            background: linear-gradient(135deg, #E8E8FF, #F8F8FF);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #5856D6;
+            font-size: 3rem;
+        }
+
+
+        
+        /* News Section */
+        .news-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #5856D6, #7648EE);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .news-featured-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .news-meta {
+            color: #888;
+            margin-bottom: 1.5rem;
+        }
+
+        .news-text p {
+            margin-bottom: 1rem;
+        }
+
+        .news-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .news-list li {
+            margin-bottom: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .navbar-container {
+                padding: 0 1rem;
+                gap: 0.25rem;
+            }
+
+            .logo {
+                font-size: 1.1rem;
+            }
+
+            .language-selector {
+                padding: 0.4rem 0.6rem;
+                font-size: 0.8rem;
+            }
+
+            .theme-toggle {
+                width: 36px;
+                height: 36px;
+            }
+
+            .hamburger {
+                width: 28px;
+                height: 22px;
+            }
+
+            .hamburger span {
+                width: 28px;
+            }
+
+            .intro-logo {
+                font-size: 3.5rem;
+                letter-spacing: 0.1em;
+            }
+            
+            .intro-subtitle {
+                font-size: 0.7rem;
+                letter-spacing: 0.1em;
+                width: 0;
+                max-width: 90vw;
+            }
+
+            .news-featured-title {
+                font-size: 1.5rem;
+            }
+
+            .footer-section {
+                text-align: center;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 80%;
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: right 0.4s ease;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+                z-index: 100;
+                display: flex; /* Override display: none */
+            }
+
+            body.dark-mode .nav-links {
+                background: #1A1A1A;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                margin: 1.5rem 0;
+            }
+
+            .nav-links a {
+                font-size: 1.25rem;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 3rem 1.5rem;
+                gap: 2rem;
+                margin-top: 1rem;
+            }
+            
+            .hero-content {
+                margin-top: 0;
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 2.2rem;
+                padding: 0;
+            }
+
+            .hero-content p {
+                margin-left: 0;
+                font-size: 1rem;
+            }
+
+            .cta-buttons {
+                justify-content: center;
+            }
+            
+            .events-grid,
+            .benefits-grid,
+            .team-grid,
+            .vision-mission,
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .form-container {
+                 padding: 1.5rem;
+             }
+
+             .event-detail-content {
+                 padding: 1.5rem;
+             }
+         }
+        /*Language Sections*/
+        .language-selector {
+            background: white;
+            border: 2px solid #E8E8FF;
+            padding: 0.5rem 1rem;
+            border-radius: 21px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: #5856D6;
+            font-size: 0.9rem;
+    }
+
+    .language-selector:hover {
+        background: #F8F8FF;
+        border-color: #5856D6;
+    }
+
+    body.dark-mode .language-selector {
+        background: #252525;
+        border-color: #3A3A3A;
+        color: #7648EE;
+    }
+
+    body.dark-mode .language-selector:hover {
+        background: #2F2F2F;
+        border-color: #7648EE;
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body><!-- Intro Screen -->
+  <div id="intro-screen">
+   <div class="intro-content">
+    <div class="intro-logo">
+     LOGD
+    </div>
+    <div class="intro-line"></div>
+    <div id="intro-subtitle" class="intro-subtitle">
+     Liseli Oyun Geliştiriciler Derneği
+    </div>
+   </div>
+  </div>
+  <nav class="navbar">
+  <div class="navbar-container">
+    <div class="logo" onclick="navigateTo('home')">
+      <img src="images/solyukarilogo.jpeg" alt="LOGD Logo">
+      <span>LOGD</span>
+    </div>
+    <ul class="nav-links">
+      <li><a onclick="navigateTo('home')" data-page="home">Ana Sayfa</a></li>
+      <li><a onclick="navigateTo('about')" data-page="about">Hakkımızda</a></li>
+      <li><a onclick="navigateTo('events')" data-page="events">Etkinlikler</a></li>
+      <li><a onclick="navigateTo('showcase')" data-page="showcase">Showcase</a></li>
+      <li><a onclick="navigateTo('news')" data-page="news">Haberler</a></li>
+      <li><a onclick="navigateTo('contact')" data-page="contact">İletişim</a></li>
+    </ul>
+    <div style="display: flex; gap: 1rem; align-items: center;">
+      <select class="language-selector" id="language-selector">
+        <option value="tr">🇹🇷 TR</option>
+        <option value="en">🇬🇧 EN</option>
+      </select>
+      <button class="theme-toggle" id="theme-toggle" title="Dark mode">
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="5" />
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </svg>
+      </button>
+      <button class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+<!-- HOME PAGE -->
+<div id="home" class="page active">
+  <section class="hero">
+    <div class="hero-content">
+      <h1 id="main-title">Liseli oyun geliştiricilerin oyun dünyasına açılan kapısı</h1>
+      <p id="subtitle">LOGD, Türkiye’nin dört bir yanındaki liseli oyun geliştiricileri bir araya getirerek öğrenme, üretme ve paylaşma kültürünü güçlendirir.</p>
+      <div class="cta-buttons">
+        <button class="btn-primary" id="cta-primary" onclick="navigateTo('events')">Etkinliklere Göz At</button>
+        <button class="btn-secondary" id="cta-secondary" onclick="navigateTo('news')">Haberleri Gör</button>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <!-- İkon kaldırıldı, arka plan resmi CSS'de ayarlanacak -->
+    </div>
+  </section>
+   <section class="about-mini">
+    <div class="about-mini-container">
+     <h2 class="section-title" id="about-title">LOGD Nedir?</h2>
+     <p class="about-text">Liseli Oyun Geliştiriciler Derneği (LOGD), oyun geliştirmeye ilgi duyan lise öğrencilerini bir araya getiren, kâr amacı gütmeyen bir topluluktur. LOGD; öğrenci topluluklarını destekler, yeni toplulukların kurulmasına yardımcı olur ve genç geliştiricilere oyun sektörüne dair gerçek üretim deneyimleri sunar.</p>
+    </div>
+   </section>
+
+   <section class="communities-section">
+     <h2 class="section-title" id="communities-title">Öğrenci Topluluklarımız</h2>
+     <div class="communities-grid">
+      <a href="https://www.instagram.com/bufalogamedev/" target="_blank" class="community-item">
+        <div class="community-logo-container">
+         <img src="images/BUFALO Game Dev.jpeg" alt="BUFALO Game Dev" class="community-logo">
+        </div>
+        <span class="community-name">BUFALO Game Dev</span>
+       </a>
+       <a href="https://www.instagram.com/balgamedevelopment/" target="_blank" class="community-item">
+        <div class="community-logo-container">
+         <img src="images/balgamedev.jpg" alt="BAL Game Dev" class="community-logo">
+        </div>
+        <span class="community-name">BAL Game Dev</span>
+       </a>
+       <a href="https://www.instagram.com/ckalgamedev/" target="_blank" class="community-item">
+       <div class="community-logo-container">
+        <img src="images/CKAL Game Dev.jpeg" alt="CKAL Game Dev" class="community-logo">
+       </div>
+       <span class="community-name">CKAL Game Dev</span>
+      </a>
+      <a href="https://www.instagram.com/nedimuysalgamedevelopment/" target="_blank" class="community-item">
+       <div class="community-logo-container">
+        <img src="images/Mahzar Game Development.jpeg" alt="Mahzar Game Dev" class="community-logo">
+       </div>
+       <span class="community-name">Mahzar Game Dev</span>
+      </a>
+      <a href="https://www.instagram.com/numtalgamedev/" target="_blank" class="community-item">
+       <div class="community-logo-container">
+        <img src="images/NUMTAL Game Development.jpeg" alt="NUMTAL Game Development" class="community-logo">
+       </div>
+       <span class="community-name">NUMTAL Game Dev</span>
+      </a>
+      <a href="https://www.instagram.com/yealpog/" target="_blank" class="community-item">
+       <div class="community-logo-container">
+        <img src="images/YEAL POG.jpeg" alt="YEAL POG" class="community-logo">
+       </div>
+       <span class="community-name">YEAL POG</span>
+      </a>
+      <a href="https://www.instagram.com/cicekli_gamedev/" target="_blank" class="community-item">
+       <div class="community-logo-container">
+        <img src="images/Çiçekli Game Dev.jpeg" alt="Çiçekli Game Dev" class="community-logo">
+       </div>
+       <span class="community-name">Çiçekli Game Dev</span>
+      </a>
+      <a href="https://www.instagram.com/ialgamedevelopment/" target="_blank" class="community-item">
+       <div class="community-logo-container">
+        <img src="images/İAL Game Dev.jpeg" alt="İAL Game Dev" class="community-logo">
+       </div>
+       <span class="community-name">İAL Game Dev</span>
+      </a>
+      <a href="https://www.instagram.com/iflgamedev/" target="_blank" class="community-item">
+       <div class="community-logo-container">
+        <img src="images/İFL Game Dev.jpeg" alt="İFL Game Dev" class="community-logo">
+       </div>
+       <span class="community-name">İFL Game Dev</span>
+      </a>
+     </div>
+    </section>
+  </div><!-- ABOUT PAGE -->
+  <div id="about" class="page">
+   <div class="page-header">
+    <h1>Biz Kimiz?</h1>
+    <p>LOGD, liseli oyun geliştiriciler için kapsayıcı, üretken ve sürdürülebilir bir ekosistem oluşturmayı hedefler.</p>
+   </div>
+   <section class="content-section">
+    <div class="event-detail-content">
+     <h3>LOGD'nin Hikâyesi</h3>
+     <p>Liseler Oyun Geliştiriciler Derneği (LOGD), oyun geliştirmeye ilgi duyan lise öğrencilerini bir araya getiren, kâr amacı gütmeyen bir topluluktur. LOGD; öğrenci topluluklarını destekler, yeni toplulukların kurulmasına yardımcı olur ve genç geliştiricilere oyun sektörüne dair gerçek üretim deneyimleri sunar.</p>
+    </div>
+    <div class="vision-mission">
+     <div class="vm-card">
+      <h3>🎯 Vizyon</h3>
+      <p id="vision-text">Genç oyun geliştiriciler için Türkiye’nin en güçlü destek ağı olmak.</p>
+     </div>
+     <div class="vm-card">
+      <h3>🚀 Misyon</h3>
+      <p id="mission-text">Öğrencilerin öğrenme, üretme ve paylaşma fırsatlarını artırmak; oyun geliştirme kültürünü yaymak ve sektör ile öğrenciler arasında köprü kurmak.</p>
+     </div>
+    </div>
+    <div class="event-detail-content" style="margin-top: 3rem;">
+     <h3 id="sponsorship-title">Sponsorluk & İş Birlikleri</h3>
+     <p id="sponsorship-text">LOGD, Global Game Jam NEXT LOGD-IN gibi büyük ölçekli etkinliklerle genç geliştiricilere doğrudan ulaşır ve markalar için sürdürülebilir iş birliği fırsatları sunar.</p>
+    </div>
+   </section>
+   <section class="sponsors-section">
+    <h2 class="section-title" id="sponsors-title">Sponsorlarımız</h2>
+    <div class="sponsors-grid">
+     <div class="sponsor-item">
+      <img src="images/godot-logo.jpg" alt="Godot Logo">
+     </div>
+     <div class="sponsor-item">
+      <img src="images/ggj-logo.jpg" alt="Global Game Jam Logo">
+     </div>
+     <div class="sponsor-item">
+      <img src="images/igda-logo.png" alt="IGDA Logo">
+     </div>
+     <div class="sponsor-item">
+      <img src="images/ose-logo.png" alt="OSE Logo">
+     </div>
+    </div>
+   </section>
+  </div><!-- EVENTS PAGE -->
+  <div id="events" class="page">
+   <div class="page-header">
+    <h1 id="events-title">Birlikte Üretiyoruz</h1>
+    <p id="events-subtitle">LOGD olarak oyun geliştirmenin her alanını kapsayan etkinlikler düzenliyoruz.</p>
+   </div>
+   <section class="content-section">
+     <div class="events-grid">
+      <div class="event-card">
+       <div class="event-image-container">
+        <img src="images/logd.jpeg" alt="Snowy Jam" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="event-image-placeholder" style="display: none;">❄️</div>
+       </div>
+       <div class="event-content">
+        <h3 id="page-event-snowyjam-title">Snowy Jam</h3>
+        <p id="page-event-snowyjam-desc">Numtal Game Dev önderliğinde topluluğumuzdaki 10 okulda 10-14 Ocak tarihleri arasında eş zamanlı olarak düzenlenen Gamejam etkinliğimiz.</p>
+       </div>
+      </div>
+      <div class="event-card">
+       <div class="event-image-container">
+        <img src="images/ggjnext-2025.jpeg" alt="GGJ Next 2025" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="event-image-placeholder" style="display: none;">🎮</div>
+       </div>
+       <div class="event-content">
+        <h3 id="page-event-ggjnext-title">GGJ Next 2025</h3>
+        <p id="page-event-ggjnext-desc">Genç geliştiriciler için dünyanın en büyük game jam organizasyonunun 2025 ayağı. Türkiye'deki ilk fiziksel GGJ Next etkinliği!</p>
+       </div>
+      </div>
+      <div class="event-card">
+       <div class="event-image-container">
+        <img src="images/godotetkinlik.jpg" alt="Godot Eğitimi" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="event-image-placeholder" style="display: none;">🤖</div>
+       </div>
+       <div class="event-content">
+        <h3 id="page-event-godot-title">Godot Sponsorluğunda Godot Eğitimi</h3>
+        <p id="page-event-godot-desc">Godot engine ile oyun geliştirme dünyasına adım atmak isteyenler için online dersler, ödevlendirmelerle desteklenen bir eğitim süreci.</p>
+       </div>
+      </div>
+     </div>
+   </section>
+  </div><!-- GAME JAMS DETAIL PAGE -->
+  <div id="gamejams" class="page">
+   <div class="page-header">
+    <h1 id="gamejams-header-title">Game Jams</h1>
+    <p id="gamejams-header-subtitle">Oyun Maratonlarının Adresi</p>
+   </div>
+   <section class="content-section">
+    <div class="event-detail-content">
+     <h3 id="gamejams-what-title">Nedir?</h3>
+     <p id="gamejams-what-text">48-72 saat süren yoğun oyun geliştirme süreçlerinde öğrenciler ekipler halinde sıfırdan oyun üretir. LOGD, ulusal ve uluslararası Game Jam organizasyonlarında aktif rol alır. Tempo, yaratıcılık ve ekip ruhunun buluştuğu bu maratonlarda öğrenciler gerçek bir üretim deneyimi yaşar.</p>
+     <h3 id="gamejams-featured-title">Öne Çıkan Game Jam'ler</h3>
+     <ul>
+      <li id="gamejams-list-item1">Global Game Jam Next - Türkiye'nin en büyük game jam organizasyonu</li>
+      <li id="gamejams-list-item2">LOGD Yaz Game Jam - Yaz döneminde düzenlenen özel etkinlik</li>
+      <li id="gamejams-list-item3">48 Hour Challenge - Hızlı üretim odaklı maraton</li>
+      <li id="gamejams-list-item4">Tema Bazlı Jam'ler - Farklı oyun türlerine özel etkinlikler</li>
+     </ul>
+     <button id="gamejams-contact-btn" class="btn-primary" onclick="navigateTo('contact')">İletişime Geç</button>
+    </div>
+    </section>
+  </div><!-- WORKSHOPS DETAIL PAGE -->
+  <div id="workshops" class="page">
+   <div class="page-header">
+    <h1 id="workshops-header-title">Workshops</h1>
+    <p id="workshops-header-subtitle">Sektör Profesyonelleriyle Öğrenme</p>
+   </div>
+   <section class="content-section">
+    <div class="event-detail-content">
+     <h3 id="workshops-what-title">Nedir?</h3>
+     <p id="workshops-what-text">Sektör profesyonelleriyle atölyeler, teknik eğitimler, röportajlar ve uygulamalı seanslar. Profesyonellerden öğrenme fırsatı sunan interaktif eğitimler ile öğrenciler hem teorik bilgi edinir hem de pratik deneyim kazanır.</p>
+     <h3 id="workshops-topics-title">Workshop Konuları</h3>
+     <ul>
+      <li id="workshops-list-item1">Unity ile 2D Oyun Geliştirme Temelleri</li>
+      <li id="workshops-list-item2">Unreal Engine 5 ile 3D Modelleme</li>
+      <li id="workshops-list-item3">Oyun Tasarımı ve Level Design</li>
+      <li id="workshops-list-item4">Character Design ve Animasyon</li>
+      <li id="workshops-list-item5">Oyun Müziği ve Ses Tasarımı</li>
+      <li id="workshops-list-item6">Oyun Ekonomisi ve Monetizasyon</li>
+     </ul>
+     <button id="workshops-contact-btn" class="btn-primary" onclick="navigateTo('contact')">İletişime Geç</button>
+    </div>
+   </section>
+  </div><!-- MEETUPS DETAIL PAGE -->
+  <div id="meetups" class="page">
+   <div class="page-header">
+    <h1 id="meetups-header-title">Meet-ups</h1>
+    <p id="meetups-header-subtitle">Genç Geliştiricilerin Buluşma Noktası</p>
+   </div>
+   <section class="content-section">
+    <div class="event-detail-content">
+     <h3 id="meetups-what-title">Nedir?</h3>
+     <p id="meetups-what-text">Şehrin dört bir yanındaki genç oyun geliştiricilerin sohbet ettiği, tanıştığı ve bağlantı kurduğu buluşmalar. Yeni bağlantılar kurabileceğiniz sıcak buluşmalarda hem networking yapabilir hem de ortak projeler için ekip arkadaşları bulabilirsiniz.</p>
+     <h3 id="meetups-formats-title">Meet-up Formatları</h3>
+     <ul>
+      <li id="meetups-format-item1">Kahve &amp; Kod - Rahat sohbet ortamında kodlama</li>
+      <li id="meetups-format-item2">Proje Paylaşımı - Yaptığınız projeleri sunma fırsatı</li>
+      <li id="meetups-format-item3">Networking Gecesi - Sektör profesyonelleriyle tanışma</li>
+      <li id="meetups-format-item4">Oyun Test Günleri - Geliştirdiğiniz oyunları test ettirme</li>
+     </ul>
+     <button id="meetups-contact-btn" class="btn-primary" onclick="navigateTo('contact')">İletişime Geç</button>
+    </div>
+   </section>
+  </div><!-- DEV TALKS DETAIL PAGE -->
+  <div id="devtalks" class="page">
+   <div class="page-header">
+    <h1 id="devtalks-header-title">Dev Talks</h1>
+    <p id="devtalks-header-subtitle">Sektör Liderlerinden İlham</p>
+   </div>
+   <section class="content-section">
+    <div class="event-detail-content">
+     <h3 id="devtalks-what-title">Nedir?</h3>
+     <p id="devtalks-what-text">Başarılı geliştirici ekiplerin ve sektördeki liderlerin öğrencilerle buluştuğu konuşmalar. Sektörün deneyimli isimlerinin ilham veren konuşmalarında kariyer tavsiyeleri, proje geliştirme süreçleri ve sektör içi deneyimler paylaşılır.</p>
+     <h3 id="devtalks-speakers-title">Önceki Konuşmacılar</h3>
+     <ul>
+      <li id="devtalks-speaker-item1">Can Aksoy - Oyun Tasarım Direktörü @ Bigger Games</li>
+      <li id="devtalks-speaker-item2">Elif Yılmaz - Lead Programmer @ Gram Games</li>
+      <li id="devtalks-speaker-item3">Murat Demir - CEO @ Peak Games</li>
+      <li id="devtalks-speaker-item4">Selin Kaya - Art Director @ Dream Games</li>
+     </ul>
+     <h3 id="devtalks-topics-title">Dev Talk Konuları</h3>
+     <ul>
+      <li id="devtalks-topic-item1">Oyun Geliştirmede Kariyer Yolları</li>
+      <li id="devtalks-topic-item2">Bağımsız Oyun Geliştirme Deneyimleri</li>
+      <li id="devtalks-topic-item3">Mobil Oyun Pazarında Başarı Stratejileri</li>
+      <li id="devtalks-topic-item4">Oyun Stüdyosu Kurma Hikâyeleri</li>
+      <li id="devtalks-topic-item5">Uluslararası Pazarda Rekabet</li>
+      <li id="devtalks-topic-item6">Hyper-Casual Oyunların Sırları</li>
+     </ul>
+     <button id="devtalks-contact-btn" class="btn-primary" onclick="navigateTo('contact')">İletişime Geç</button>
+    </div>
+   </section>
+  </div><!-- SHOWCASE PAGE -->
+  <div id="showcase" class="page">
+   <div class="page-header">
+    <h1 id="showcase-title">Showcase</h1>
+    <p id="showcase-subtitle">LOGD topluluğu tarafından geliştirilen harika oyunlar</p>
+   </div>
+   <section class="content-section">
+    <div class="showcase-grid">
+     <div class="showcase-card" style="opacity: 0.8;">
+      <div style="width: 100%; height: 180px; background: linear-gradient(135deg, #E8E8FF, #F8F8FF); border-radius: 12px; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: #5856D6;">
+       🎮
+      </div>
+      <h3 id="showcase-coming-soon-title">Yakında</h3>
+      <p id="showcase-coming-soon-text">Yeni oyunlar çok yakında burada görünecek! Topluluğumuzun geliştirdiği projeleri takip edin.</p>
+      <div><button class="btn-secondary" style="width: 100%; padding: 0.75rem;" onclick="navigateTo('contact')" id="showcase-add-game-btn">Oyununu Ekle</button>
+      </div>
+     </div>
+     <div class="showcase-card" style="opacity: 0.8;">
+      <div style="width: 100%; height: 180px; background: linear-gradient(135deg, #E8E8FF, #F8F8FF); border-radius: 12px; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: #5856D6;">
+       🚀
+      </div>
+      <h3 id="showcase-your-project-title">Projeniz Burada Olabilir</h3>
+      <p id="showcase-your-project-text">Geliştirdiğiniz oyunu LOGD showcase'inde sergilemek ister misiniz? Bizimle iletişime geçin!</p>
+      <div><button class="btn-secondary" style="width: 100%; padding: 0.75rem;" onclick="navigateTo('contact')" id="showcase-apply-btn">Başvur</button>
+      </div>
+     </div>
+    </div>
+   </section>
+  </div><!-- SHOWCASE PAGE -->
+  <!-- NEWS PAGE -->
+  <div id="news" class="page">
+   <div class="page-header">
+    <h1 id="news-title">Haberler</h1>
+    <p id="news-subtitle">LOGD topluluğundan son haberler, duyurular ve etkinlik güncellemeleri.</p>
+   </div>
+   <section class="content-section"><!-- Featured News -->
+    <div class="event-detail-content" style="border-left: 4px solid #5856D6;">
+     <div id="news-featured-tag" class="news-badge">
+      ⭐ ÖNEMLİ DUYURU
+     </div>
+     <h3 id="news-featured-title" class="news-featured-title">🎉 LOGD Web Sitesi Yayında!</h3>
+     <p id="news-featured-date" class="news-meta">📅 28 Şubat 2025 • ✍️ LOGD Yönetim Ekibi</p>
+     <div class="news-text">
+       <p id="news-featured-text1">Liseler Oyun Geliştirme Derneği'nin resmi web sitesi artık yayında! Türkiye'nin dört bir yanındaki genç oyun geliştiricilerini bir araya getiren platformumuz, şimdi daha profesyonel ve kullanıcı dostu bir arayüzle karşınızda.</p>
+       <p id="news-featured-text2">Yeni web sitemizde neler var? Tüm etkinliklerimizi detaylıca inceleyebilir, haberlerimizi takip edebilir ve hemen üyelik başvurusunda bulunabilirsiniz. Ayrıca karanlık mod desteği ile göz yorulmadan gezinme imkanı sunuyoruz!</p>
+       <p><strong id="news-featured-features-title">Yeni özellikler:</strong><br>
+         <span id="news-featured-feature1">✨ Etkinlik detay sayfaları ve katılım formları</span><br>
+         <span id="news-featured-feature2">📰 Haber ve duyuru sistemi</span><br>
+         <span id="news-featured-feature3">💬 Gelişmiş iletişim formları</span><br>
+         <span id="news-featured-feature4">🌙 Karanlık mod desteği</span></p>
+     </div>
+     <button class="btn-primary" onclick="navigateTo('about')" style="margin-top: 1rem;" id="news-featured-btn">LOGD Hakkında Daha Fazla Bilgi →</button>
+    </div>
+   </section>
+  </div><!-- NEWS PAGE -->
+  <div id="contact" class="page">
+   <div class="page-header">
+    <h1 id="contact-title">İletişim</h1>
+    <p id="contact-subtitle">Sorularınız, önerileriniz veya işbirliği talepleriniz için bizimle iletişime geçin.</p>
+   </div>
+   <section class="content-section">
+    <div class="contact-info">
+     <h3 id="general-contact">Genel İletişim</h3>
+     <p>📧 E-posta: <a href="mailto:business@izmirlogt.com" id="contact-email">business@izmirlogt.com</a></p>
+    </div>
+    <h2 class="section-title">İletişim Formu</h2>
+    <div class="form-container">
+     <div id="contact-message"></div>
+     <form id="contact-form" action="https://formsubmit.co/aydintolga008@gmail.com" method="POST">
+      <div class="form-group"><label for="contact-name">Ad Soyad *</label> <input type="text" id="contact-name" name="name" required>
+      </div>
+      <div class="form-group"><label for="contact-email-input">E-posta *</label> <input type="email" id="contact-email-input" name="email" required>
+      </div>
+      <div class="form-group"><label for="contact-message-input">Mesajınız *</label> <textarea id="contact-message-input" name="message" required placeholder="Lütfen mesajınızı buraya yazın..."></textarea>
+      </div><button type="submit" class="btn-primary" id="submit-contact">Gönder</button>
+     </form>
+    </div>
+   </section>
+  </div>
+  <footer class="footer">
+   <div class="footer-container">
+    <div class="footer-section">
+     <h4>LOGD Hakkında</h4>
+     <p id="footer-text">Liseler Oyun Geliştirme Derneği - Türkiye'nin liseli oyun geliştiricileri için en kapsayıcı topluluk. Öğrenme, üretme ve paylaşma kültürünü birlikte büyütüyoruz.</p>
+     <div class="social-links">
+      <a href="https://www.instagram.com/izmirlogt?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener" class="social-icon">
+       <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" /></svg>
+      </a>
+      <a href="https://www.linkedin.com/company/liseler-oyun-geli%C5%9Ftiriciler-derne%C4%9Fi/?trk=public_post_feed-actor-name" target="_blank" rel="noopener" class="social-icon">
+       <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" /></svg>
+      </a>
+     </div>
+    </div>
+    <div class="footer-section">
+     <h4>Hızlı Menü</h4>
+     <ul class="footer-links">
+      <li><a onclick="navigateTo('home')">Ana Sayfa</a></li>
+      <li><a onclick="navigateTo('about')">Hakkımızda</a></li>
+      <li><a onclick="navigateTo('events')">Etkinlikler</a></li>
+      <li><a onclick="navigateTo('showcase')">Showcase</a></li>
+      <li><a onclick="navigateTo('news')">Haberler</a></li>
+      <li><a onclick="navigateTo('contact')">İletişim</a></li>
+     </ul>
+    </div>
+    <div class="footer-section">
+     <h4>Yasal</h4>
+     <ul class="footer-links">
+      <li><a href="#">KVKK</a></li>
+      <li><a href="#">Gizlilik Politikası</a></li>
+      <li><a href="#">Çerez Politikası</a></li>
+      <li><a href="#">Kullanım Koşulları</a></li>
+     </ul>
+    </div>
+   </div>
+   <div class="footer-bottom">
+    <p>© 2025 LOGD - Liseler Oyun Geliştirme Derneği. Tüm hakları saklıdır.</p>
+   </div>
+  </footer>
+  <script>
+        const translations = {
+    tr: {
+        // Navigation
+        nav_home: "Ana Sayfa",
+        nav_about: "Hakkımızda",
+        nav_events: "Etkinlikler",
+        nav_showcase: "Showcase",
+        nav_news: "Haberler",
+        nav_contact: "İletişim",
+        
+        // Home Page
+        intro_subtitle: "Liseler Oyun Geliştiriciler Derneği",
+        main_title: "Liseli oyun geliştiricilerin oyun dünyasına açılan kapısı",
+        subtitle: "LOGD, Türkiye’nin dört bir yanındaki liseli oyun geliştiricileri bir araya getirerek öğrenme, üretme ve paylaşma kültürünü güçlendirir.",
+        cta_primary: "Etkinliklere Göz At",
+        cta_secondary: "Haberleri Gör",
+        about_title: "LOGD Nedir?",
+        about_description: "Liseli Oyun Geliştiriciler Derneği (LOGD), oyun geliştirmeye ilgi duyan lise öğrencilerini bir araya getiren, kâr amacı gütmeyen bir topluluktur. LOGD; öğrenci topluluklarını destekler, yeni toplulukların kurulmasına yardımcı olur ve genç geliştiricilere oyun sektörüne dair gerçek üretim deneyimleri sunar.",
+        communities_title: "Öğrenci Topluluklarımız",
+        
+        // Events
+        gamejam_title: "Game Jams",
+        gamejam_desc: "48–72 saat süren oyun geliştirme maratonlarıyla katılımcıların ekip çalışması, yaratıcılık ve problem çözme becerilerini geliştiriyoruz.",
+        workshop_title: "Workshops",
+        workshop_desc: "Sektör profesyonelleriyle teknik ve yaratıcı atölye çalışmaları düzenliyoruz.",
+        meetup_title: "Meet-ups",
+        meetup_desc: "Topluluk üyelerinin bir araya gelerek tanıştığı ve bağlantılar kurduğu sosyal buluşmalar.",
+        devtalk_title: "Dev Talks",
+        devtalk_desc: "Sektör liderleri ve deneyimli geliştiricilerle ilham verici konuşmalar.",
+        detail_link: "Detaylı İncele →",
+        
+        // About Page
+        page_about_title: "Biz Kimiz?",
+        page_about_subtitle: "LOGD, liseli oyun geliştiriciler için kapsayıcı, üretken ve sürdürülebilir bir ekosistem oluşturmayı hedefler.",
+        story_title: "LOGD'nin Hikâyesi",
+        story_text: "Liseli Oyun Geliştiriciler Derneği (LOGD), oyun geliştirmeye ilgi duyan lise öğrencilerini bir araya getiren, kâr amacı gütmeyen bir topluluktur. LOGD; öğrenci topluluklarını destekler, yeni toplulukların kurulmasına yardımcı olur ve genç geliştiricilere oyun sektörüne dair gerçek üretim deneyimleri sunar.",
+        vision_label: "🎯 Vizyon",
+        vision_text: "Genç oyun geliştiriciler için Türkiye’nin en güçlü destek ağı olmak.",
+        mission_label: "🚀 Misyon",
+        mission_text: "Öğrencilerin öğrenme, üretme ve paylaşma fırsatlarını artırmak; oyun geliştirme kültürünü yaymak ve sektör ile öğrenciler arasında köprü kurmak.",
+        team_title: "Yönetim ve Ekip",
+        
+        // Events Page
+        page_events_title: "Birlikte Üretiyoruz",
+        page_events_subtitle: "LOGD olarak oyun geliştirmenin her alanını kapsayan etkinlikler düzenliyoruz.",
+        events_gamejam_desc: "Katılımcıların kısa sürede sıfırdan oyun geliştirdiği yoğun üretim süreçleri.",
+        event_snowyjam_title: "Snowy Jam",
+        event_snowyjam_desc: "Numtal Game Dev önderliğinde topluluğumuzdaki 10 okulda 10-14 Ocak tarihleri arasında eş zamanlı olarak düzenlenen Gamejam etkinliğimiz.",
+        event_ggjnext_title: "GGJ Next 2025",
+        event_ggjnext_desc: "Genç geliştiriciler için dünyanın en büyük game jam organizasyonunun 2025 ayağı. Türkiye'deki ilk fiziksel GGJ Next etkinliği!",
+        event_godot_title: "Godot Sponsorluğunda Godot Eğitimi",
+        event_godot_desc: "Godot engine ile oyun geliştirme dünyasına adım atmak isteyenler için online dersler, ödevlendirmelerle desteklenen bir eğitim süreci.",
+        explore_event: "Bu etkinlik türünü incele →",
+        
+        // Sponsorship
+        sponsorship_title: "Partnerlik & İş Birlikleri",
+        sponsorship_text: "LOGD, Global Game Jam NEXT LOGD-IN gibi büyük ölçekli etkinliklerle genç geliştiricilere doğrudan ulaşır ve markalar için sürdürülebilir iş birliği fırsatları sunar.",
+        
+        // GameJams Detail
+        gamejams_page_title: "Game Jams",
+        gamejams_page_subtitle: "Oyun Maratonlarının Adresi",
+        gamejams_header_title: "Game Jams",
+        gamejams_header_subtitle: "Oyun Maratonlarının Adresi",
+        what_is_it: "Nedir?",
+        gamejams_what_title: "Nedir?",
+        gamejams_what_text: "48-72 saat süren yoğun oyun geliştirme süreçlerinde öğrenciler ekipler halinde sıfırdan oyun üretir. LOGD, ulusal ve uluslararası Game Jam organizasyonlarında aktif rol alır. Tempo, yaratıcılık ve ekip ruhunun buluştuğu bu maratonlarda öğrenciler gerçek bir üretim deneyimi yaşar.",
+        gamejams_featured_title: "Öne Çıkan Game Jam'ler",
+        gamejams_list_item1: "Global Game Jam Next - Türkiye'nin en büyük game jam organizasyonu",
+        gamejams_list_item2: "LOGD Yaz Game Jam - Yaz döneminde düzenlenen özel etkinlik",
+        gamejams_list_item3: "48 Hour Challenge - Hızlı üretim odaklı maraton",
+        gamejams_list_item4: "Tema Bazlı Jam'ler - Farklı oyun türlerine özel etkinlikler",
+        gamejams_contact_btn: "İletişime Geç",
+        featured_gamejams: "Öne Çıkan Game Jam'ler",
+        contact_us: "İletişime Geç",
+        
+        // Workshops Detail
+        workshops_page_title: "Workshops",
+        workshops_page_subtitle: "Sektör Profesyonelleriyle Öğrenme",
+        workshops_header_title: "Workshops",
+        workshops_header_subtitle: "Sektör Profesyonelleriyle Öğrenme",
+        workshops_what_title: "Nedir?",
+        workshops_what_text: "Sektör profesyonelleriyle atölyeler, teknik eğitimler, röportajlar ve uygulamalı seanslar. Profesyonellerden öğrenme fırsatı sunan interaktif eğitimler ile öğrenciler hem teorik bilgi edinir hem de pratik deneyim kazanır.",
+        workshops_topics_title: "Workshop Konuları",
+        workshops_list_item1: "Unity ile 2D Oyun Geliştirme Temelleri",
+        workshops_list_item2: "Unreal Engine 5 ile 3D Modelleme",
+        workshops_list_item3: "Oyun Tasarımı ve Level Design",
+        workshops_list_item4: "Character Design ve Animasyon",
+        workshops_list_item5: "Oyun Müziği ve Ses Tasarımı",
+        workshops_list_item6: "Oyun Ekonomisi ve Monetizasyon",
+        workshops_contact_btn: "İletişime Geç",
+        workshop_topics: "Workshop Konuları",
+        
+        // Meetups Detail
+        meetups_page_title: "Meet-ups",
+        meetups_page_subtitle: "Genç Geliştiricilerin Buluşma Noktası",
+        meetups_header_title: "Meet-ups",
+        meetups_header_subtitle: "Genç Geliştiricilerin Buluşma Noktası",
+        meetups_what_title: "Nedir?",
+        meetups_what_text: "Şehrin dört bir yanındaki genç oyun geliştiricilerin sohbet ettiği, tanıştığı ve bağlantı kurduğu buluşmalar. Yeni bağlantılar kurabileceğiniz sıcak buluşmalarda hem networking yapabilir hem de ortak projeler için ekip arkadaşları bulabilirsiniz.",
+        meetups_formats_title: "Meet-up Formatları",
+        meetups_format_item1: "Kahve & Kod - Rahat sohbet ortamında kodlama",
+        meetups_format_item2: "Proje Paylaşımı - Yaptığınız projeleri sunma fırsatı",
+        meetups_format_item3: "Networking Gecesi - Sektör profesyonelleriyle tanışma",
+        meetups_format_item4: "Oyun Test Günleri - Geliştirdiğiniz oyunları test ettirme",
+        meetups_contact_btn: "İletişime Geç",
+        meetup_formats: "Meet-up Formats",
+        
+        // DevTalks Detail
+        devtalks_page_title: "Dev Talks",
+        devtalks_page_subtitle: "Sektör Liderlerinden İlham",
+        devtalks_header_title: "Dev Talks",
+        devtalks_header_subtitle: "Sektör Liderlerinden İlham",
+        devtalks_what_title: "Nedir?",
+        devtalks_what_text: "Başarılı geliştirici ekiplerin ve sektördeki liderlerin öğrencilerle buluştuğu konuşmalar. Sektörün deneyimli isimlerinin ilham veren konuşmalarında kariyer tavsiyeleri, proje geliştirme süreçleri ve sektör içi deneyimler paylaşılır.",
+        devtalks_speakers_title: "Önceki Konuşmacılar",
+        devtalks_speaker_item1: "Can Aksoy - Oyun Tasarım Direktörü @ Bigger Games",
+        devtalks_speaker_item2: "Elif Yılmaz - Lead Programmer @ Gram Games",
+        devtalks_speaker_item3: "Murat Demir - CEO @ Peak Games",
+        devtalks_speaker_item4: "Selin Kaya - Art Director @ Dream Games",
+        devtalks_topics_title: "Dev Talk Konuları",
+        devtalks_topic_item1: "Oyun Geliştirmede Kariyer Yolları",
+        devtalks_topic_item2: "Bağımsız Oyun Geliştirme Deneyimleri",
+        devtalks_topic_item3: "Mobil Oyun Pazarında Başarı Stratejileri",
+        devtalks_topic_item4: "Oyun Stüdyosu Kurma Hikâyeleri",
+        devtalks_topic_item5: "Uluslararası Pazarda Rekabet",
+        devtalks_topic_item6: "Hyper-Casual Oyunların Sırları",
+        devtalks_contact_btn: "İletişime Geç",
+        previous_speakers: "Önceki Konuşmacılar",
+        devtalk_topics: "Dev Talk Konuları",
+        
+        // Showcase Page
+        showcase_page_title: "Showcase",
+        showcase_page_subtitle: "LOGD topluluğu tarafından geliştirilen harika oyunlar",
+        coming_soon: "Yakında",
+        coming_soon_text: "Yeni oyunlar çok yakında burada görünecek! Topluluğumuzun geliştirdiği projeleri takip edin.",
+        add_your_game: "Oyununu Ekle",
+        your_project_here: "Projeniz Burada Olabilir",
+        your_project_text: "Geliştirdiğiniz oyunu LOGD showcase'inde sergilemek ister misiniz? Bizimle iletişime geçin!",
+        apply: "Başvur",
+        showcase_coming_soon_title: "Yakında",
+        showcase_coming_soon_text: "Yeni oyunlar çok yakında burada görünecek! Topluluğumuzun geliştirdiği projeleri takip edin.",
+        showcase_add_game_btn: "Oyununu Ekle",
+        showcase_your_project_title: "Projeniz Burada Olabilir",
+        showcase_your_project_text: "Geliştirdiğiniz oyunu LOGD showcase'inde sergilemek ister misiniz? Bizimle iletişime geçin!",
+        showcase_apply_btn: "Başvur",
+        play_game: "Oyunu Oyna",
+        details: "Detaylar",
+        
+        // News Page
+        news_title: "Haberler",
+        news_subtitle: "LOGD topluluğundan son haberler, duyurular ve etkinlik güncellemeleri.",
+        news_featured_tag: "⭐ ÖNEMLİ DUYURU",
+        news_featured_title: "🎉 LOGD Web Sitesi Yayında!",
+        news_featured_date: "📅 28 Şubat 2025 • ✍️ LOGD Yönetim Ekibi",
+        news_featured_text1: "Liseler Oyun Geliştirme Derneği'nin resmi web sitesi artık yayında! Türkiye'nin dört bir yanındaki genç oyun geliştiricilerini bir araya getiren platformumuz, şimdi daha profesyonel ve kullanıcı dostu bir arayüzle karşınızda.",
+        news_featured_text2: "Yeni web sitemizde neler var? Tüm etkinliklerimizi detaylıca inceleyebilir, haberlerimizi takip edebilir ve hemen üyelik başvurusunda bulunabilirsiniz. Ayrıca karanlık mod desteği ile göz yorulmadan gezinme imkanı sunuyoruz!",
+        news_featured_features_title: "Yeni özellikler:",
+        news_featured_feature1: "✨ Etkinlik detay sayfaları ve katılım formları",
+        news_featured_feature2: "📰 Haber ve duyuru sistemi",
+        news_featured_feature3: "💬 Gelişmiş iletişim formları",
+        news_featured_feature4: "🌙 Karanlık mod desteği",
+        news_featured_btn: "LOGD Hakkında Daha Fazla Bilgi →",
+        important_announcement: "⭐ ÖNEMLİ DUYURU",
+        latest_news: "Son Haberler",
+        
+        // Contact Page
+        contact_title: "İletişim",
+        contact_subtitle: "Sorularınız, önerileriniz veya işbirliği talepleriniz için bizimle iletişime geçin.",
+        general_contact: "Genel İletişim",
+        contact_form: "İletişim Formu",
+        full_name: "Ad Soyad *",
+        email: "E-posta *",
+        your_message: "Mesajınız *",
+        message_placeholder: "Lütfen mesajınızı buraya yazın...",
+        send: "Gönder",
+        sending: "Gönderiliyor...",
+        
+        // Footer
+        footer_about: "LOGD Hakkında",
+        footer_text: "Liseler Oyun Geliştirme Derneği - Türkiye'nin liseli oyun geliştiricileri için en kapsayıcı topluluk. Öğrenme, üretme ve paylaşma kültürünü birlikte büyütüyoruz.",
+        footer_quick_menu: "Hızlı Menü",
+        footer_legal: "Yasal",
+        sponsors_title: "Partnerlerimiz",
+        footer_copyright: "© 2026 LOGD - Liseler Oyun Geliştirme Derneği. Tüm hakları saklıdır.",
+        social_instagram: "Instagram",
+        social_twitter: "Twitter",
+        social_discord: "Discord",
+    },
+    en: {
+        // Navigation
+        nav_home: "Home",
+        nav_about: "About",
+        nav_events: "Events",
+        nav_showcase: "Showcase",
+        nav_news: "News",
+        nav_contact: "Contact",
+        
+        // Home Page
+        intro_subtitle: "High Schools Game Developers Association",
+        main_title: "The gateway to the world of game development for high school students",
+        subtitle: "LOGD brings together high school game developers from all across Türkiye, fostering a culture of learning, creating, and sharing.",
+        cta_primary: "Explore Events",
+        cta_secondary: "View News",
+        about_title: "What is LOGD?",
+        about_description: "Liseli Oyun Geliştiriciler Derneği (LOGD) is a non-profit organization that brings together high school students interested in game development. LOGD supports student communities, helps establish new ones, and provides young developers with real-world game development experience.",
+        communities_title: "Our Student Communities",
+        
+        // Events
+        gamejam_title: "Game Jams",
+        gamejam_desc: "We organize 48–72 hour game development marathons that enhance teamwork, creativity, and problem-solving skills.",
+        workshop_title: "Workshops",
+        workshop_desc: "We host technical and creative workshops led by industry professionals.",
+        meetup_title: "Meet-ups",
+        meetup_desc: "Social gatherings where community members meet and build connections.",
+        devtalk_title: "Dev Talks",
+        devtalk_desc: "Inspirational talks with industry leaders and experienced developers.",
+        detail_link: "Learn More →",
+        
+        // About Page
+        page_about_title: "Who Are We?",
+        page_about_subtitle: "LOGD aims to create an inclusive, productive, and sustainable ecosystem for high school game developers.",
+        story_title: "LOGD's Story",
+        story_text: "Liseli Oyun Geliştiriciler Derneği (LOGD) is a non-profit organization that brings together high school students interested in game development. LOGD supports student communities, helps establish new ones, and provides young developers with real-world game development experience.",
+        vision_label: "🎯 Vision",
+        vision_text: "To become the strongest support network for young game developers in Türkiye.",
+        mission_label: "🚀 Mission",
+        mission_text: "To increase learning, creation, and sharing opportunities for students while strengthening the bridge between the industry and young developers.",
+        team_title: "Management and Team",
+        
+        // Events Page
+        page_events_title: "Creating Together",
+        page_events_subtitle: "At LOGD, we organize events covering every aspect of game development.",
+        events_gamejam_desc: "Intensive production processes where participants build games from scratch.",
+        event_snowyjam_title: "Snowy Jam",
+        event_snowyjam_desc: "A thematic game jam held simultaneously in 10 schools in our community between January 10-14, led by Numtal Game Dev.",
+        event_ggjnext_title: "GGJ Next 2025",
+        event_ggjnext_desc: "The 2025 leg of the world's largest game jam organization for young developers. The first physical GGJ Next event in Turkey!",
+        event_godot_title: "Godot Training Sponsored by Godot",
+        event_godot_desc: "An educational process supported by online lessons and assignments for those who want to step into the world of game development with Godot engine.",
+        explore_event: "Explore this event type →",
+        
+        // Sponsorship
+        sponsorship_title: "Sponsorship & Partnerships",
+        sponsorship_text: "LOGD reaches young developers directly through large-scale events such as Global Game Jam NEXT LOGD-IN and offers sustainable partnership opportunities for brands.",
+        
+        // GameJams Detail
+        gamejams_page_title: "Game Jams",
+        gamejams_page_subtitle: "Home of Game Marathons",
+        gamejams_header_title: "Game Jams",
+        gamejams_header_subtitle: "Home of Game Marathons",
+        what_is_it: "What is it?",
+        gamejams_what_title: "What is it?",
+        gamejams_what_text: "In intense 48-72 hour game development processes, students produce games from scratch in teams. LOGD plays an active role in national and international Game Jam organizations. Students experience real production in these marathons where tempo, creativity and team spirit meet.",
+        gamejams_featured_title: "Featured Game Jams",
+        gamejams_list_item1: "Global Game Jam Next - Turkey's largest game jam organization",
+        gamejams_list_item2: "LOGD Summer Game Jam - Special event held during summer",
+        gamejams_list_item3: "48 Hour Challenge - Fast-paced production marathon",
+        gamejams_list_item4: "Theme-Based Jams - Special events for different game genres",
+        gamejams_contact_btn: "Contact Us",
+        featured_gamejams: "Featured Game Jams",
+        contact_us: "Contact Us",
+        
+        // Workshops Detail
+        workshops_page_title: "Workshops",
+        workshops_page_subtitle: "Learning with Industry Professionals",
+        workshops_header_title: "Workshops",
+        workshops_header_subtitle: "Learning with Industry Professionals",
+        workshops_what_title: "What is it?",
+        workshops_what_text: "Workshops, technical trainings, interviews and practical sessions with industry professionals. Through interactive trainings offering learning opportunities from professionals, students gain both theoretical knowledge and practical experience.",
+        workshops_topics_title: "Workshop Topics",
+        workshops_list_item1: "Basics of 2D Game Development with Unity",
+        workshops_list_item2: "3D Modeling with Unreal Engine 5",
+        workshops_list_item3: "Game Design and Level Design",
+        workshops_list_item4: "Character Design and Animation",
+        workshops_list_item5: "Game Music and Sound Design",
+        workshops_list_item6: "Game Economy and Monetization",
+        workshops_contact_btn: "Contact Us",
+        workshop_topics: "Workshop Topics",
+        
+        // Meetups Detail
+        meetups_page_title: "Meet-ups",
+        meetups_page_subtitle: "Meeting Point for Young Developers",
+        meetups_header_title: "Meet-ups",
+        meetups_header_subtitle: "Meeting Point for Young Developers",
+        meetups_what_title: "What is it?",
+        meetups_what_text: "Gatherings where young game developers from all over the city chat, meet and connect. In warm meetups where you can make new connections, you can both network and find teammates for joint projects.",
+        meetups_formats_title: "Meet-up Formats",
+        meetups_format_item1: "Coffee & Code - Coding in a relaxed atmosphere",
+        meetups_format_item2: "Project Sharing - Opportunity to present your projects",
+        meetups_format_item3: "Networking Night - Meeting industry professionals",
+        meetups_format_item4: "Game Test Days - Get your games tested",
+        meetups_contact_btn: "Contact Us",
+        meetup_formats: "Meet-up Formats",
+        
+        // DevTalks Detail
+        devtalks_page_title: "Dev Talks",
+        devtalks_page_subtitle: "Inspiration from Industry Leaders",
+        devtalks_header_title: "Dev Talks",
+        devtalks_header_subtitle: "Inspiration from Industry Leaders",
+        devtalks_what_title: "What is it?",
+        devtalks_what_text: "Talks where successful developer teams and industry leaders meet with students. Career advice, project development processes and industry experiences are shared in inspiring talks by experienced names in the industry.",
+        devtalks_speakers_title: "Previous Speakers",
+        devtalks_speaker_item1: "Can Aksoy - Game Design Director @ Bigger Games",
+        devtalks_speaker_item2: "Elif Yılmaz - Lead Programmer @ Gram Games",
+        devtalks_speaker_item3: "Murat Demir - CEO @ Peak Games",
+        devtalks_speaker_item4: "Selin Kaya - Art Director @ Dream Games",
+        devtalks_topics_title: "Dev Talk Topics",
+        devtalks_topic_item1: "Career Paths in Game Development",
+        devtalks_topic_item2: "Indie Game Development Experiences",
+        devtalks_topic_item3: "Success Strategies in Mobile Game Market",
+        devtalks_topic_item4: "Stories of Founding a Game Studio",
+        devtalks_topic_item5: "Competition in the International Market",
+        devtalks_topic_item6: "Secrets of Hyper-Casual Games",
+        devtalks_contact_btn: "Contact Us",
+        previous_speakers: "Previous Speakers",
+        devtalk_topics: "Dev Talk Topics",
+        
+        // Showcase Page
+        showcase_page_title: "Showcase",
+        showcase_page_subtitle: "Amazing games developed by the LOGD community",
+        coming_soon: "Coming Soon",
+        coming_soon_text: "New games will appear here very soon! Follow the projects developed by our community.",
+        add_your_game: "Add Your Game",
+        your_project_here: "Your Project Could Be Here",
+        your_project_text: "Would you like to showcase your game in the LOGD showcase? Contact us!",
+        apply: "Apply",
+        showcase_coming_soon_title: "Coming Soon",
+        showcase_coming_soon_text: "New games will appear here very soon! Follow the projects developed by our community.",
+        showcase_add_game_btn: "Add Your Game",
+        showcase_your_project_title: "Your Project Could Be Here",
+        showcase_your_project_text: "Would you like to showcase your game in the LOGD showcase? Contact us!",
+        showcase_apply_btn: "Apply",
+        play_game: "Play Game",
+        details: "Details",
+        
+        // News Page
+        news_title: "News",
+        news_subtitle: "Latest news, announcements and event updates from the LOGD community.",
+        news_featured_tag: "⭐ IMPORTANT ANNOUNCEMENT",
+        news_featured_title: "🎉 LOGD Website is Live!",
+        news_featured_date: "📅 February 28, 2025 • ✍️ LOGD Management Team",
+        news_featured_text1: "The official website of the High School Game Development Association is now live! Our platform, which brings together young game developers from all across Turkey, is now at your service with a more professional and user-friendly interface.",
+        news_featured_text2: "What's on our new website? You can examine all our events in detail, follow our news, and apply for membership immediately. We also offer dark mode support for eye-friendly browsing!",
+        news_featured_features_title: "New features:",
+        news_featured_feature1: "✨ Event detail pages and participation forms",
+        news_featured_feature2: "📰 News and announcement system",
+        news_featured_feature3: "💬 Advanced contact forms",
+        news_featured_feature4: "🌙 Dark mode support",
+        news_featured_btn: "Learn More About LOGD →",
+        important_announcement: "⭐ IMPORTANT ANNOUNCEMENT",
+        latest_news: "Latest News",
+        
+        // Contact Page
+        contact_title: "Contact",
+        contact_subtitle: "Contact us for your questions, suggestions or collaboration requests.",
+        general_contact: "General Contact",
+        contact_form: "Contact Form",
+        full_name: "Full Name *",
+        email: "Email *",
+        your_message: "Your Message *",
+        message_placeholder: "Please write your message here...",
+        send: "Send",
+        sending: "Sending...",
+        
+        // Footer
+        footer_about: "About LOGD",
+        footer_text: "High School Game Development Association - Turkey's most comprehensive community for high school game developers. Growing the culture of learning, creating and sharing together.",
+        footer_quick_menu: "Quick Menu",
+        footer_legal: "Legal",
+        sponsors_title: "Our Partners",
+        footer_copyright: "© 2026 LOGD - High School Game Development Association. All rights reserved.",
+        social_instagram: "Instagram",
+        social_twitter: "Twitter",
+        social_discord: "Discord",
+    }
+};
+
+
+        const defaultConfig = {
+            main_title: "Liseli oyun geliştiricilerin oyun dünyasına açılan kapısı",
+            subtitle: "LOGD, Türkiye’nin dört bir yanındaki liseli oyun geliştiricileri bir araya getirerek öğrenme, üretme ve paylaşma kültürünü güçlendirir.",
+            cta_primary: "Etkinliklere Göz At",
+            cta_secondary: "Haberleri Gör",
+            about_title: "LOGD Nedir?",
+            vision_text: "Genç oyun geliştiriciler için Türkiye’nin en güçlü destek ağı olmak.",
+            mission_text: "Öğrencilerin öğrenme, üretme ve paylaşma fırsatlarını artırmak; oyun geliştirme kültürünü yaymak ve sektör ile öğrenciler arasında köprü kurmak.",
+            news_title: "Haberler",
+            contact_email: "business@izmirlogt.com",
+            footer_text: "LOGD, Türkiye’nin dört bir yanındaki liseli oyun geliştiricileri bir araya getirerek öğrenme, üretme ve paylaşma kültürünü güçlendirir.",
+            background_color: "#F5F1E8",
+            primary_color: "#8B4513",
+            secondary_color: "#A0522D",
+            text_color: "#2C1810",
+            accent_color: "#CD853F"
+        };
+
+        let currentRecordCount = 0;
+        const dataHandler = {
+            onDataChanged(data) {
+                currentRecordCount = data.length;
+            }
+        };
+
+        async function onConfigChange(config) {
+            const elements = {
+                'main-title': config.main_title,
+                'subtitle': config.subtitle,
+                'cta-primary': config.cta_primary,
+                'cta-secondary': config.cta_secondary,
+                'about-title': config.about_title,
+                'vision-text': config.vision_text,
+                'mission-text': config.mission_text,
+                'news-title': config.news_title,
+                'footer-text': config.footer_text
+            };
+
+            Object.entries(elements).forEach(([id, value]) => {
+                const el = document.getElementById(id);
+                if (el) el.textContent = value || defaultConfig[id.replace(/-/g, '_')];
+            });
+
+            const contactEmailEl = document.getElementById('contact-email');
+            if (contactEmailEl) {
+                contactEmailEl.textContent = config.contact_email || defaultConfig.contact_email;
+                contactEmailEl.href = `mailto:${config.contact_email || defaultConfig.contact_email}`;
+            }
+
+            const backgroundColor = config.background_color || defaultConfig.background_color;
+            const primaryColor = config.primary_color || defaultConfig.primary_color;
+            const secondaryColor = config.secondary_color || defaultConfig.secondary_color;
+            const textColor = config.text_color || defaultConfig.text_color;
+
+            document.body.style.background = backgroundColor;
+            document.body.style.color = textColor;
+
+            const gradientSelectors = '.logo, .hero-content h1, .stat-number, .section-title';
+            document.querySelectorAll(gradientSelectors).forEach(el => {
+                el.style.background = `linear-gradient(135deg, ${primaryColor}, ${secondaryColor})`;
+                el.style.webkitBackgroundClip = 'text';
+                el.style.webkitTextFillColor = 'transparent';
+                el.style.backgroundClip = 'text';
+            });
+
+            document.querySelectorAll('.btn-primary').forEach(btn => {
+                btn.style.background = `linear-gradient(135deg, ${primaryColor}, ${secondaryColor})`;
+            });
+
+            document.querySelectorAll('.btn-secondary').forEach(btn => {
+                btn.style.color = primaryColor;
+                btn.style.borderColor = primaryColor;
+            });
+
+            document.querySelectorAll('.footer, .page-header').forEach(el => {
+                el.style.background = `linear-gradient(135deg, ${primaryColor}, ${secondaryColor})`;
+            });
+        }
+
+        function navigateTo(page) {
+            const currentPage = document.querySelector('.page.active');
+            const pageEl = document.getElementById(page);
+
+            if (!pageEl) {
+                console.warn(`Page not found: ${page}`);
+                return;
+            }
+            
+            // Close mobile menu if open
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            if (hamburger && hamburger.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            }
+
+            if (currentPage && currentPage.id !== page) {
+                currentPage.classList.add('fade-out');
+                setTimeout(() => {
+                    currentPage.classList.remove('active', 'fade-out');
+                    pageEl.classList.add('active');
+                    window.scrollTo({ top: 0, behavior: 'instant' });
+                }, 400);
+            } else if (!currentPage || currentPage.id !== page) {
+                pageEl.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'instant' });
+            }
+            
+            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+            const navLink = document.querySelector(`.nav-links a[data-page="${page}"]`);
+            if (navLink) navLink.classList.add('active');
+        }
+
+        function showMessage(containerId, message, isError = false) {
+            const container = document.getElementById(containerId);
+            if (container) {
+                container.innerHTML = `<div class="${isError ? 'error-message' : 'success-message'}">${message}</div>`;
+                setTimeout(() => container.innerHTML = '', 5000);
+            }
+        }
+
+        // Contact form handler
+        const contactForm = document.getElementById('contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const submitBtn = document.getElementById('submit-contact');
+                submitBtn.disabled = true;
+                const currentLang = localStorage.getItem('language') || 'tr';
+                submitBtn.textContent = translations[currentLang].sending;
+
+                const formData = new FormData(contactForm);
+
+                try {
+                    const response = await fetch('https://formsubmit.co/ajax/aydintolga008@gmail.com', {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    if (response.ok) {
+                        const successMsg = currentLang === 'tr' ? '✅ Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.' : '✅ Your message has been sent successfully! We will get back to you as soon as possible.';
+                        showMessage('contact-message', successMsg);
+                        contactForm.reset();
+                    } else {
+                        const errorMsg = currentLang === 'tr' ? '❌ Bir hata oluştu. Lütfen tekrar deneyin.' : '❌ An error occurred. Please try again.';
+                        showMessage('contact-message', errorMsg, true);
+                    }
+                } catch (error) {
+                    const errorMsg = currentLang === 'tr' ? '❌ Bir hata oluştu. Lütfen tekrar deneyin.' : '❌ An error occurred. Please try again.';
+                    showMessage('contact-message', errorMsg, true);
+                }
+
+                submitBtn.disabled = false;
+                submitBtn.textContent = translations[currentLang].send;
+            });
+        }
+
+        function mapToCapabilities(config) {
+            return {
+                recolorables: [
+                    {
+                        get: () => config.background_color || defaultConfig.background_color,
+                        set: (value) => {
+                            config.background_color = value;
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ background_color: value });
+                            }
+                        }
+                    },
+                    {
+                        get: () => config.primary_color || defaultConfig.primary_color,
+                        set: (value) => {
+                            config.primary_color = value;
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ primary_color: value });
+                            }
+                        }
+                    },
+                    {
+                        get: () => config.secondary_color || defaultConfig.secondary_color,
+                        set: (value) => {
+                            config.secondary_color = value;
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ secondary_color: value });
+                            }
+                        }
+                    },
+                    {
+                        get: () => config.text_color || defaultConfig.text_color,
+                        set: (value) => {
+                            config.text_color = value;
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ text_color: value });
+                            }
+                        }
+                    },
+                    {
+                        get: () => config.accent_color || defaultConfig.accent_color,
+                        set: (value) => {
+                            config.accent_color = value;
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ accent_color: value });
+                            }
+                        }
+                    }
+                ],
+                borderables: [],
+                fontEditable: undefined,
+                fontSizeable: undefined
+            };
+        }
+
+        function mapToEditPanelValues(config) {
+            return new Map([
+                ["main_title", config.main_title || defaultConfig.main_title],
+                ["subtitle", config.subtitle || defaultConfig.subtitle],
+                ["cta_primary", config.cta_primary || defaultConfig.cta_primary],
+                ["cta_secondary", config.cta_secondary || defaultConfig.cta_secondary],
+                ["about_title", config.about_title || defaultConfig.about_title],
+                ["vision_text", config.vision_text || defaultConfig.vision_text],
+                ["mission_text", config.mission_text || defaultConfig.mission_text],
+                ["news_title", config.news_title || defaultConfig.news_title],
+                ["contact_email", config.contact_email || defaultConfig.contact_email],
+                ["footer_text", config.footer_text || defaultConfig.footer_text]
+            ]);
+        }
+
+        // Dark mode toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const savedTheme = localStorage.getItem('theme');
+        
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+        }
+        
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+                const isDark = document.body.classList.contains('dark-mode');
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            });
+        }
+
+        // Hamburger Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        if (hamburger) {
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+        }
+        
+        function changeLanguage(lang) {
+    localStorage.setItem('language', lang);
+    const t = translations[lang];
+    
+    // Navbar
+    document.querySelectorAll('.nav-links a').forEach((link, index) => {
+        const keys = ['nav_home', 'nav_about', 'nav_events', 'nav_showcase', 'nav_news', 'nav_contact'];
+        if (keys[index]) link.textContent = t[keys[index]];
+    });
+    
+    // HOME PAGE
+    const introSubtitle = document.getElementById('intro-subtitle');
+    const mainTitle = document.getElementById('main-title');
+    const subtitle = document.getElementById('subtitle');
+    const ctaPrimary = document.getElementById('cta-primary');
+    const ctaSecondary = document.getElementById('cta-secondary');
+    
+    if (introSubtitle) introSubtitle.textContent = t.intro_subtitle;
+    if (mainTitle) mainTitle.textContent = t.main_title;
+    if (subtitle) subtitle.textContent = t.subtitle;
+    if (ctaPrimary) ctaPrimary.textContent = t.cta_primary;
+    if (ctaSecondary) ctaSecondary.textContent = t.cta_secondary;
+    
+    // About section
+    const aboutTitle = document.getElementById('about-title');
+    const aboutText = document.querySelector('.about-text');
+    if (aboutTitle) aboutTitle.textContent = t.about_title;
+    if (aboutText) aboutText.textContent = t.about_description;
+    
+    const communitiesTitle = document.getElementById('communities-title');
+    if (communitiesTitle) communitiesTitle.textContent = t.communities_title;
+    
+    // Events Page cards
+    const pageEventSnowyJamTitle = document.getElementById('page-event-snowyjam-title');
+    const pageEventSnowyJamDesc = document.getElementById('page-event-snowyjam-desc');
+    const pageEventGGJNextTitle = document.getElementById('page-event-ggjnext-title');
+    const pageEventGGJNextDesc = document.getElementById('page-event-ggjnext-desc');
+    const pageEventGodotTitle = document.getElementById('page-event-godot-title');
+    const pageEventGodotDesc = document.getElementById('page-event-godot-desc');
+
+    if (pageEventSnowyJamTitle) pageEventSnowyJamTitle.textContent = t.event_snowyjam_title;
+    if (pageEventSnowyJamDesc) pageEventSnowyJamDesc.textContent = t.event_snowyjam_desc;
+    if (pageEventGGJNextTitle) pageEventGGJNextTitle.textContent = t.event_ggjnext_title;
+    if (pageEventGGJNextDesc) pageEventGGJNextDesc.textContent = t.event_ggjnext_desc;
+    if (pageEventGodotTitle) pageEventGodotTitle.textContent = t.event_godot_title;
+    if (pageEventGodotDesc) pageEventGodotDesc.textContent = t.event_godot_desc;
+
+    // ABOUT PAGE
+    const aboutPageHeader = document.querySelector('#about .page-header h1');
+    const aboutPageSubtitle = document.querySelector('#about .page-header p');
+    if (aboutPageHeader) aboutPageHeader.textContent = t.page_about_title;
+    if (aboutPageSubtitle) aboutPageSubtitle.textContent = t.page_about_subtitle;
+    
+    const storyTitle = document.querySelector('#about .event-detail-content h3');
+    const storyText = document.querySelector('#about .event-detail-content p');
+    if (storyTitle) storyTitle.textContent = t.story_title;
+    if (storyText) storyText.textContent = t.story_text;
+    
+    const visionLabel = document.querySelectorAll('.vm-card h3')[0];
+    const visionText = document.getElementById('vision-text');
+    const missionLabel = document.querySelectorAll('.vm-card h3')[1];
+    const missionText = document.getElementById('mission-text');
+    
+    if (visionLabel) visionLabel.textContent = t.vision_label;
+    if (visionText) visionText.textContent = t.vision_text;
+    if (missionLabel) missionLabel.textContent = t.mission_label;
+    if (missionText) missionText.textContent = t.mission_text;
+    
+    // Sponsorship section
+    const sponsorshipTitle = document.getElementById('sponsorship-title');
+    const sponsorshipText = document.getElementById('sponsorship-text');
+    if (sponsorshipTitle) sponsorshipTitle.textContent = t.sponsorship_title;
+    if (sponsorshipText) sponsorshipText.textContent = t.sponsorship_text;
+
+    // EVENTS PAGE
+    const eventsPageHeader = document.getElementById('events-title');
+    const eventsPageSubtitle = document.getElementById('events-subtitle');
+    if (eventsPageHeader) eventsPageHeader.textContent = t.page_events_title;
+    if (eventsPageSubtitle) eventsPageSubtitle.textContent = t.page_events_subtitle;
+    
+    // GAMEJAMS PAGE
+    const gamejamsIDs = [
+        'gamejams-header-title', 'gamejams-header-subtitle', 'gamejams-what-title', 'gamejams-what-text',
+        'gamejams-featured-title', 'gamejams-list-item1', 'gamejams-list-item2', 'gamejams-list-item3',
+        'gamejams-list-item4', 'gamejams-contact-btn'
+    ];
+    gamejamsIDs.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = t[id.replace(/-/g, '_')];
+    });
+    
+    // WORKSHOPS PAGE
+    const workshopsIDs = [
+        'workshops-header-title', 'workshops-header-subtitle', 'workshops-what-title', 'workshops-what-text',
+        'workshops-topics-title', 'workshops-list-item1', 'workshops-list-item2', 'workshops-list-item3',
+        'workshops-list-item4', 'workshops-list-item5', 'workshops-list-item6', 'workshops-contact-btn'
+    ];
+    workshopsIDs.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = t[id.replace(/-/g, '_')];
+    });
+    
+    // MEETUPS PAGE
+    const meetupsIDs = [
+        'meetups-header-title', 'meetups-header-subtitle', 'meetups-what-title', 'meetups-what-text',
+        'meetups-formats-title', 'meetups-format-item1', 'meetups-format-item2', 'meetups-format-item3',
+        'meetups-format-item4', 'meetups-contact-btn'
+    ];
+    meetupsIDs.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = t[id.replace(/-/g, '_')];
+    });
+    
+    // DEVTALKS PAGE
+    const devtalksIDs = [
+        'devtalks-header-title', 'devtalks-header-subtitle', 'devtalks-what-title', 'devtalks-what-text',
+        'devtalks-speakers-title', 'devtalks-speaker-item1', 'devtalks-speaker-item2', 'devtalks-speaker-item3',
+        'devtalks-speaker-item4', 'devtalks-topics-title', 'devtalks-topic-item1', 'devtalks-topic-item2',
+        'devtalks-topic-item3', 'devtalks-topic-item4', 'devtalks-topic-item5', 'devtalks-topic-item6',
+        'devtalks-contact-btn'
+    ];
+    devtalksIDs.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = t[id.replace(/-/g, '_')];
+    });
+    
+    // SHOWCASE PAGE
+    const showcaseHeader = document.getElementById('showcase-title');
+    const showcaseSubtitle = document.getElementById('showcase-subtitle');
+    if (showcaseHeader) showcaseHeader.textContent = t.showcase_page_title;
+    if (showcaseSubtitle) showcaseSubtitle.textContent = t.showcase_page_subtitle;
+    
+    // Showcase items
+    const showcaseIDs = [
+        'showcase-coming-soon-title', 'showcase-coming-soon-text', 'showcase-add-game-btn',
+        'showcase-your-project-title', 'showcase-your-project-text', 'showcase-apply-btn'
+    ];
+    showcaseIDs.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = t[id.replace(/-/g, '_')];
+    });
+    
+    // NEWS PAGE
+    const newsTitle = document.getElementById('news-title');
+    const newsSubtitle = document.getElementById('news-subtitle');
+    if (newsTitle) newsTitle.textContent = t.news_title;
+    if (newsSubtitle) newsSubtitle.textContent = t.news_subtitle;
+
+    const newsIDs = [
+        'news-featured-tag', 'news-featured-title', 'news-featured-date',
+        'news-featured-text1', 'news-featured-text2', 'news-featured-features-title',
+        'news-featured-feature1', 'news-featured-feature2', 'news-featured-feature3',
+        'news-featured-feature4', 'news-featured-btn'
+    ];
+    newsIDs.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && t[id.replace(/-/g, '_')]) {
+            el.textContent = t[id.replace(/-/g, '_')];
+        }
+    });
+    
+    // CONTACT PAGE
+    const contactHeader = document.getElementById('contact-title');
+    const contactSubtitle = document.getElementById('contact-subtitle');
+    if (contactHeader) contactHeader.textContent = t.contact_title;
+    if (contactSubtitle) contactSubtitle.textContent = t.contact_subtitle;
+    
+    const generalContact = document.getElementById('general-contact');
+    if (generalContact) generalContact.textContent = t.general_contact;
+
+    const contactEmail = document.getElementById('contact-email');
+    if (contactEmail) {
+        contactEmail.textContent = 'business@izmirlogt.com';
+        contactEmail.href = 'mailto:business@izmirlogt.com';
+    }
+    
+    // Contact form labels
+    const formLabels = document.querySelectorAll('.form-group label');
+    if (formLabels[0]) formLabels[0].textContent = t.full_name;
+    if (formLabels[1]) formLabels[1].textContent = t.email;
+    if (formLabels[2]) formLabels[2].textContent = t.your_message;
+    
+    const messagePlaceholder = document.getElementById('contact-message-input');
+    if (messagePlaceholder) messagePlaceholder.placeholder = t.message_placeholder;
+    
+    const submitBtn = document.getElementById('submit-contact');
+    if (submitBtn && !submitBtn.disabled) submitBtn.textContent = t.send;
+    
+    // Footer
+    const footerText = document.getElementById('footer-text');
+    if (footerText) footerText.textContent = t.footer_text;
+    
+    const footerSections = document.querySelectorAll('.footer-section h4');
+    if (footerSections[0]) footerSections[0].textContent = t.footer_about;
+    if (footerSections[1]) footerSections[1].textContent = t.footer_quick_menu;
+    if (footerSections[2]) footerSections[2].textContent = t.footer_legal;
+
+    const sponsorsTitle = document.getElementById('sponsors-title');
+    if (sponsorsTitle) sponsorsTitle.textContent = t.sponsors_title;
+
+    const footerLinks = document.querySelectorAll('.footer-links li a');
+    if (footerLinks[0]) footerLinks[0].textContent = t.nav_home;
+    if (footerLinks[1]) footerLinks[1].textContent = t.nav_about;
+    if (footerLinks[2]) footerLinks[2].textContent = t.nav_events;
+    if (footerLinks[3]) footerLinks[3].textContent = t.nav_showcase;
+    if (footerLinks[4]) footerLinks[4].textContent = t.nav_news;
+    if (footerLinks[5]) footerLinks[5].textContent = t.nav_contact;
+
+    const socialIcons = document.querySelectorAll('.social-icon');
+    if (socialIcons[0]) socialIcons[0].title = t.social_instagram;
+    if (socialIcons[1]) socialIcons[1].title = t.social_twitter;
+    if (socialIcons[2]) socialIcons[2].title = t.social_discord;
+
+    // Update config with new language
+    if (window.elementSdk && window.elementSdk.config) {
+        const newConfig = { ...translations[lang] };
+        window.elementSdk.setConfig(newConfig);
+    }
+}
+        async function initializeApp() {
+            if (window.dataSdk) {
+                const initResult = await window.dataSdk.init(dataHandler);
+                if (!initResult.isOk) {
+                    console.error("Data SDK initialization failed");
+                }
+            }
+
+            if (window.elementSdk) {
+                window.elementSdk.init({
+                    defaultConfig,
+                    onConfigChange,
+                    mapToCapabilities,
+                    mapToEditPanelValues
+                });
+            }
+
+            // Language selector initialization
+            const languageSelector = document.getElementById('language-selector');
+            const savedLanguage = localStorage.getItem('language') || 'en';
+
+            if (languageSelector) {
+                languageSelector.value = savedLanguage;
+                changeLanguage(savedLanguage);
+                
+                languageSelector.addEventListener('change', (e) => {
+                    changeLanguage(e.target.value);
+                });
+            }
+        }
+
+
+        initializeApp();
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a6aba2f54046852',t:'MTc2NDUwOTcxOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
