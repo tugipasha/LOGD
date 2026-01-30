@@ -8,10 +8,16 @@ const translations = {
         nav_news: "Haberler",
         nav_contact: "İletişim",
         
+        // Countdown
+        countdown_title: "GGJ Next",
+        label_days: "Gün",
+        label_hours: "Saat",
+        label_mins: "Dak",
+        
         // Home Page
-        intro_subtitle: "LİSELER OYUN GELİŞTİRİCİLER DERNEĞİ",
-        main_title: "LOGD",
-        subtitle: "LİSELER OYUN GELİŞTİRİCİLER DERNEĞİ",
+        intro_subtitle: "Liseler Oyun Geliştiriciler Derneği",
+        main_title: "Liseli oyun geliştiricilerin oyun dünyasına açılan kapısı",
+        subtitle: "LOGD, Türkiye’nin dört bir yanındaki liseli oyun geliştiricileri bir araya getirerek öğrenme, üretme ve paylaşma kültürünü güçlendirir.",
         cta_primary: "Etkinliklere Göz At",
         cta_secondary: "Haberleri Gör",
         about_title: "LOGD Nedir?",
@@ -131,20 +137,12 @@ const translations = {
         // Showcase Page
         showcase_page_title: "Showcase",
         showcase_page_subtitle: "LOGD topluluğu tarafından geliştirilen harika oyunlar",
-        coming_soon: "Yakında",
-        coming_soon_text: "Yeni oyunlar çok yakında burada görünecek! Topluluğumuzun geliştirdiği projeleri takip edin.",
-        add_your_game: "Oyununu Ekle",
-        your_project_here: "Projeniz Burada Olabilir",
-        your_project_text: "Geliştirdiğiniz oyunu LOGD showcase'inde sergilemek ister misiniz? Bizimle iletişime geçin!",
-        apply: "Başvur",
         showcase_coming_soon_title: "Yakında",
         showcase_coming_soon_text: "Yeni oyunlar çok yakında burada görünecek! Topluluğumuzun geliştirdiği projeleri takip edin.",
         showcase_add_game_btn: "Oyununu Ekle",
         showcase_your_project_title: "Projeniz Burada Olabilir",
         showcase_your_project_text: "Geliştirdiğiniz oyunu LOGD showcase'inde sergilemek ister misiniz? Bizimle iletişime geçin!",
         showcase_apply_btn: "Başvur",
-        play_game: "Oyunu Oyna",
-        details: "Detaylar",
         
         // News Page
         news_title: "Haberler",
@@ -184,6 +182,8 @@ const translations = {
         footer_copyright: "© 2026 LOGD - Liseler Oyun Geliştirme Derneği. Tüm hakları saklıdır.",
         social_instagram: "Instagram",
         social_linkedin: "LinkedIn",
+        social_twitter: "Twitter",
+        social_discord: "Discord",
     },
     en: {
         // Navigation
@@ -193,11 +193,17 @@ const translations = {
         nav_showcase: "Showcase",
         nav_news: "News",
         nav_contact: "Contact",
+
+        // Countdown
+        countdown_title: "GGJ Next",
+        label_days: "Days",
+        label_hours: "Hrs",
+        label_mins: "Mins",
         
         // Home Page
-        intro_subtitle: "HIGH SCHOOLS GAME DEVELOPERS ASSOCIATION",
-        main_title: "LOGD",
-        subtitle: "HIGH SCHOOLS GAME DEVELOPERS ASSOCIATION",
+        intro_subtitle: "High Schools Game Developers Association",
+        main_title: "The gateway to the world of game development for high school students",
+        subtitle: "LOGD brings together high school game developers from all across Türkiye, fostering a culture of learning, creating, and sharing.",
         cta_primary: "Explore Events",
         cta_secondary: "View News",
         about_title: "What is LOGD?",
@@ -317,20 +323,12 @@ const translations = {
         // Showcase Page
         showcase_page_title: "Showcase",
         showcase_page_subtitle: "Great games developed by the LOGD community",
-        coming_soon: "Coming Soon",
-        coming_soon_text: "New games will appear here very soon! Follow the projects developed by our community.",
-        add_your_game: "Add Your Game",
-        your_project_here: "Your Project Could Be Here",
-        your_project_text: "Would you like to exhibit your game in the LOGD showcase? Contact us!",
-        apply: "Apply",
         showcase_coming_soon_title: "Coming Soon",
         showcase_coming_soon_text: "New games will appear here very soon! Follow the projects developed by our community.",
         showcase_add_game_btn: "Add Your Game",
         showcase_your_project_title: "Your Project Could Be Here",
-        showcase_your_project_text: "Would you like to exhibit your game in the LOGD showcase? Contact us!",
+        showcase_your_project_text: "Would you like to showcase your game in the LOGD showcase? Contact us!",
         showcase_apply_btn: "Apply",
-        play_game: "Play Game",
-        details: "Details",
         
         // News Page
         news_title: "News",
@@ -370,6 +368,8 @@ const translations = {
         footer_copyright: "© 2026 LOGD - High Schools Game Development Association. All rights reserved.",
         social_instagram: "Instagram",
         social_linkedin: "LinkedIn",
+        social_twitter: "Twitter",
+        social_discord: "Discord",
     }
 };
 
@@ -410,84 +410,248 @@ function changeLanguage(lang) {
         if (keys[index]) link.textContent = t[keys[index]];
     });
     
-    // HOME PAGE
+    // Countdown
+    const countdownTitle = document.getElementById('countdown-title');
+    const labelDays = document.getElementById('label-days');
+    const labelHours = document.getElementById('label-hours');
+    const labelMins = document.getElementById('label-mins');
+    if (countdownTitle) countdownTitle.textContent = t.countdown_title;
+    if (labelDays) labelDays.textContent = t.label_days;
+    if (labelHours) labelHours.textContent = t.label_hours;
+    if (labelMins) labelMins.textContent = t.label_mins;
+    
+    // Home Page
     const introSubtitle = document.getElementById('intro-subtitle');
     const mainTitle = document.getElementById('main-title');
     const subtitle = document.getElementById('subtitle');
     const ctaPrimary = document.getElementById('cta-primary');
     const ctaSecondary = document.getElementById('cta-secondary');
+    const aboutTitle = document.getElementById('about-title');
+    const aboutDescription = document.querySelector('.about-text');
+    const communitiesTitle = document.getElementById('communities-title');
     
     if (introSubtitle) introSubtitle.textContent = t.intro_subtitle;
     if (mainTitle) mainTitle.textContent = t.main_title;
     if (subtitle) subtitle.textContent = t.subtitle;
     if (ctaPrimary) ctaPrimary.textContent = t.cta_primary;
     if (ctaSecondary) ctaSecondary.textContent = t.cta_secondary;
-    
-    // About section
-    const aboutTitle = document.getElementById('about-title');
-    const aboutText = document.querySelector('.about-text');
     if (aboutTitle) aboutTitle.textContent = t.about_title;
-    if (aboutText) aboutText.textContent = t.about_description;
-    
-    const communitiesTitle = document.getElementById('communities-title');
+    if (aboutDescription) aboutDescription.textContent = t.about_description;
     if (communitiesTitle) communitiesTitle.textContent = t.communities_title;
     
-    // ABOUT PAGE
-    const aboutPageHeader = document.querySelector('#about .page-header h1');
-    const aboutPageSubtitle = document.querySelector('#about .page-header p');
+    // Events Page cards
+    const pageEventSnowyJamTitle = document.getElementById('page-event-snowyjam-title');
+    const pageEventSnowyJamDesc = document.getElementById('page-event-snowyjam-desc');
+    const pageEventGGJNextTitle = document.getElementById('page-event-ggjnext-title');
+    const pageEventGGJNextDesc = document.getElementById('page-event-ggjnext-desc');
+    const pageEventGodotTitle = document.getElementById('page-event-godot-title');
+    const pageEventGodotDesc = document.getElementById('page-event-godot-desc');
+
+    if (pageEventSnowyJamTitle) pageEventSnowyJamTitle.textContent = t.event_snowyjam_title;
+    if (pageEventSnowyJamDesc) pageEventSnowyJamDesc.textContent = t.event_snowyjam_desc;
+    if (pageEventGGJNextTitle) pageEventGGJNextTitle.textContent = t.event_ggjnext_title;
+    if (pageEventGGJNextDesc) pageEventGGJNextDesc.textContent = t.event_ggjnext_desc;
+    if (pageEventGodotTitle) pageEventGodotTitle.textContent = t.event_godot_title;
+    if (pageEventGodotDesc) pageEventGodotDesc.textContent = t.event_godot_desc;
+
+    // Secondary Event IDs (for other pages)
+    const snowyJamTitle = document.getElementById('event-snowyjam-title');
+    const snowyJamDesc = document.getElementById('event-snowyjam-desc');
+    if (snowyJamTitle) snowyJamTitle.textContent = t.event_snowyjam_title;
+    if (snowyJamDesc) snowyJamDesc.textContent = t.event_snowyjam_desc;
+
+    const ggjNextTitle = document.getElementById('event-ggjnext-title');
+    const ggjNextDesc = document.getElementById('event-ggjnext-desc');
+    if (ggjNextTitle) ggjNextTitle.textContent = t.event_ggjnext_title;
+    if (ggjNextDesc) ggjNextDesc.textContent = t.event_ggjnext_desc;
+
+    const godotTitle = document.getElementById('event-godot-title');
+    const godotDesc = document.getElementById('event-godot-desc');
+    if (godotTitle) godotTitle.textContent = t.event_godot_title;
+    if (godotDesc) godotDesc.textContent = t.event_godot_desc;
+
+    // About Page Content (Support multiple selector types)
+    const aboutPageHeader = document.querySelector('#about .page-header h1') || document.getElementById('about-page-title');
+    const aboutPageSubtitle = document.querySelector('#about .page-header p') || document.getElementById('about-page-subtitle');
     if (aboutPageHeader) aboutPageHeader.textContent = t.page_about_title;
     if (aboutPageSubtitle) aboutPageSubtitle.textContent = t.page_about_subtitle;
     
-    const storyTitle = document.querySelector('#about .event-detail-content h3');
-    const storyText = document.querySelector('#about .event-detail-content p');
-    if (storyTitle) storyTitle.textContent = t.story_title;
-    if (storyText) storyText.textContent = t.story_text;
+    const storyTitleEl = document.querySelector('#about .event-detail-content h3') || document.getElementById('story-title');
+    const storyTextEl = document.querySelector('#about .event-detail-content p') || document.getElementById('story-text');
+    if (storyTitleEl) storyTitleEl.textContent = t.story_title;
+    if (storyTextEl) storyTextEl.textContent = t.story_text;
     
-    const visionLabel = document.querySelectorAll('.vm-card h3')[0];
+    const visionLabel = document.querySelectorAll('.vm-card h3')[0] || document.getElementById('vision-label');
     const visionText = document.getElementById('vision-text');
-    const missionLabel = document.querySelectorAll('.vm-card h3')[1];
+    const missionLabel = document.querySelectorAll('.vm-card h3')[1] || document.getElementById('mission-label');
     const missionText = document.getElementById('mission-text');
     
     if (visionLabel) visionLabel.textContent = t.vision_label;
     if (visionText) visionText.textContent = t.vision_text;
     if (missionLabel) missionLabel.textContent = t.mission_label;
     if (missionText) missionText.textContent = t.mission_text;
-    
-    const sponsorsTitle = document.getElementById('sponsors-title');
-    if (sponsorsTitle) sponsorsTitle.textContent = t.sponsors_title;
-    
-    // EVENTS PAGE
-    const eventsPageHeader = document.getElementById('events-title');
-    const eventsPageSubtitle = document.getElementById('events-subtitle');
-    if (eventsPageHeader) eventsPageHeader.textContent = t.page_events_title;
-    if (eventsPageSubtitle) eventsPageSubtitle.textContent = t.page_events_subtitle;
 
-    // SHOWCASE PAGE
+    // Sponsorship section
+    const sponsorshipTitle = document.getElementById('sponsorship-title');
+    const sponsorshipText = document.getElementById('sponsorship-text');
+    if (sponsorshipTitle) sponsorshipTitle.textContent = t.sponsorship_title;
+    if (sponsorshipText) sponsorshipText.textContent = t.sponsorship_text;
+
+    // Showcase Page
     const showcaseHeader = document.getElementById('showcase-title');
     const showcaseSubtitle = document.getElementById('showcase-subtitle');
+    const yourProjectHere = document.getElementById('your-project-here');
+    const yourProjectText = document.getElementById('your-project-text');
+    const apply = document.getElementById('apply');
+
     if (showcaseHeader) showcaseHeader.textContent = t.showcase_page_title;
     if (showcaseSubtitle) showcaseSubtitle.textContent = t.showcase_page_subtitle;
+    if (yourProjectHere) yourProjectHere.textContent = t.your_project_here;
+    if (yourProjectText) yourProjectText.textContent = t.your_project_text;
+    if (apply) apply.textContent = t.apply_btn;
+
+    // Showcase Projects Mapping
+    const projectIDs = [
+        'project-1-tag', 'project-1-title', 'project-1-desc', 'project-1-play', 'project-1-details',
+        'project-2-tag', 'project-2-title', 'project-2-desc', 'project-2-play', 'project-2-details',
+        'project-3-tag', 'project-3-title', 'project-3-desc', 'project-3-play', 'project-3-details'
+    ];
     
-    // NEWS PAGE
+    projectIDs.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            if (id.includes('play')) el.textContent = t.play_btn;
+            else if (id.includes('details')) el.textContent = t.details_btn;
+            else el.textContent = t[id.replace(/-/g, '_')];
+        }
+    });
+
+    // Showcase items (from index.html)
+    const showcaseIDs = [
+        'showcase-coming-soon-title', 'showcase-coming-soon-text', 'showcase-add-game-btn',
+        'showcase-your-project-title', 'showcase-your-project-text', 'showcase-apply-btn'
+    ];
+    showcaseIDs.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = t[id.replace(/-/g, '_')];
+    });
+
+    // Game Jams Page
+    const gamejamsIDs = [
+        'gamejams-header-title', 'gamejams-header-subtitle', 'gamejams-what-title', 'gamejams-what-text',
+        'gamejams-featured-title', 'gamejams-list-item1', 'gamejams-list-item2', 'gamejams-list-item3',
+        'gamejams-list-item4', 'gamejams-contact-btn'
+    ];
+    gamejamsIDs.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = t[id.replace(/-/g, '_')];
+    });
+    
+    // Workshops Page
+    const workshopsIDs = [
+        'workshops-header-title', 'workshops-header-subtitle', 'workshops-what-title', 'workshops-what-text',
+        'workshops-topics-title', 'workshops-list-item1', 'workshops-list-item2', 'workshops-list-item3',
+        'workshops-list-item4', 'workshops-list-item5', 'workshops-list-item6', 'workshops-contact-btn'
+    ];
+    workshopsIDs.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = t[id.replace(/-/g, '_')];
+    });
+    
+    // Meetups Page
+    const meetupsIDs = [
+        'meetups-header-title', 'meetups-header-subtitle', 'meetups-what-title', 'meetups-what-text',
+        'meetups-formats-title', 'meetups-format-item1', 'meetups-format-item2', 'meetups-format-item3',
+        'meetups-format-item4', 'meetups-contact-btn'
+    ];
+    meetupsIDs.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = t[id.replace(/-/g, '_')];
+    });
+    
+    // DevTalks Page
+    const devtalksIDs = [
+        'devtalks-header-title', 'devtalks-header-subtitle', 'devtalks-what-title', 'devtalks-what-text',
+        'devtalks-speakers-title', 'devtalks-speaker-item1', 'devtalks-speaker-item2', 'devtalks-speaker-item3',
+        'devtalks-speaker-item4', 'devtalks-topics-title', 'devtalks-topic-item1', 'devtalks-topic-item2',
+        'devtalks-topic-item3', 'devtalks-topic-item4', 'devtalks-topic-item5', 'devtalks-topic-item6',
+        'devtalks-contact-btn'
+    ];
+    devtalksIDs.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = t[id.replace(/-/g, '_')];
+    });
+
+    // News Page
     const newsTitle = document.getElementById('news-title');
     const newsSubtitle = document.getElementById('news-subtitle');
+    const newsFeaturedTag = document.getElementById('news-featured-tag');
+    const newsFeaturedTitle = document.getElementById('news-featured-title');
+    const newsFeaturedDate = document.getElementById('news-featured-date');
+    const newsFeaturedText1 = document.getElementById('news-featured-text1');
+    const newsFeaturedText2 = document.getElementById('news-featured-text2');
+    const newsFeaturedFeaturesTitle = document.getElementById('news-featured-features-title');
+    const newsFeaturedFeature1 = document.getElementById('news-featured-feature1');
+    const newsFeaturedFeature2 = document.getElementById('news-featured-feature2');
+    const newsFeaturedFeature3 = document.getElementById('news-featured-feature3');
+    const newsFeaturedFeature4 = document.getElementById('news-featured-feature4');
+    const newsFeaturedBtn = document.getElementById('news-featured-btn');
+
     if (newsTitle) newsTitle.textContent = t.news_title;
     if (newsSubtitle) newsSubtitle.textContent = t.news_subtitle;
-    
-    // CONTACT PAGE
+    if (newsFeaturedTag) newsFeaturedTag.textContent = t.news_featured_tag;
+    if (newsFeaturedTitle) newsFeaturedTitle.textContent = t.news_featured_title;
+    if (newsFeaturedDate) newsFeaturedDate.textContent = t.news_featured_date;
+    if (newsFeaturedText1) newsFeaturedText1.textContent = t.news_featured_text1;
+    if (newsFeaturedText2) newsFeaturedText2.textContent = t.news_featured_text2;
+    if (newsFeaturedFeaturesTitle) newsFeaturedFeaturesTitle.textContent = t.news_featured_features_title;
+    if (newsFeaturedFeature1) newsFeaturedFeature1.textContent = t.news_featured_feature1;
+    if (newsFeaturedFeature2) newsFeaturedFeature2.textContent = t.news_featured_feature2;
+    if (newsFeaturedFeature3) newsFeaturedFeature3.textContent = t.news_featured_feature3;
+    if (newsFeaturedFeature4) newsFeaturedFeature4.textContent = t.news_featured_feature4;
+    if (newsFeaturedBtn) newsFeaturedBtn.textContent = t.news_featured_btn;
+
+    // Contact Page
     const contactHeader = document.getElementById('contact-title');
     const contactSubtitle = document.getElementById('contact-subtitle');
+    const generalContact = document.getElementById('general-contact');
+    const contactForm = document.getElementById('contact-form-title');
+    const submitBtn = document.getElementById('submit-contact');
+    const messageInput = document.getElementById('contact-message-input');
+    const contactEmail = document.getElementById('contact-email');
+
     if (contactHeader) contactHeader.textContent = t.contact_title;
     if (contactSubtitle) contactSubtitle.textContent = t.contact_subtitle;
-    
+    if (generalContact) generalContact.textContent = t.general_contact;
+    if (contactForm) contactForm.textContent = t.contact_form;
+    if (submitBtn && !submitBtn.disabled) submitBtn.textContent = t.send;
+    if (messageInput) messageInput.placeholder = t.message_placeholder;
+    if (contactEmail) {
+        contactEmail.textContent = 'business@izmirlogt.com';
+        contactEmail.href = 'mailto:business@izmirlogt.com';
+    }
+
+    // Contact form labels
+    const formLabels = document.querySelectorAll('.form-group label');
+    if (formLabels[0]) formLabels[0].textContent = t.full_name;
+    if (formLabels[1]) formLabels[1].textContent = t.email;
+    if (formLabels[2]) formLabels[2].textContent = t.your_message;
+
     // Footer
+    const footerAboutTitle = document.getElementById('footer-about-title');
+    const footerMenuTitle = document.getElementById('footer-menu-title');
+    const footerLegalTitle = document.getElementById('footer-legal-title');
     const footerText = document.getElementById('footer-text');
+    const footerCopyright = document.getElementById('footer-copyright');
+
+    if (footerAboutTitle) footerAboutTitle.textContent = t.footer_about;
+    if (footerMenuTitle) footerMenuTitle.textContent = t.footer_quick_menu;
+    if (footerLegalTitle) footerLegalTitle.textContent = t.footer_legal;
     if (footerText) footerText.textContent = t.footer_text;
-    
-    const footerSections = document.querySelectorAll('.footer-section h4');
-    if (footerSections[0]) footerSections[0].textContent = t.footer_about;
-    if (footerSections[1]) footerSections[1].textContent = t.footer_quick_menu;
-    if (footerSections[2]) footerSections[2].textContent = t.footer_legal;
+    if (footerCopyright) footerCopyright.textContent = t.footer_copyright;
+
+    const sponsorsTitle = document.getElementById('sponsors-title');
+    if (sponsorsTitle) sponsorsTitle.textContent = t.sponsors_title;
 
     const footerLinks = document.querySelectorAll('.footer-links li a');
     if (footerLinks[0]) footerLinks[0].textContent = t.nav_home;
@@ -499,7 +663,201 @@ function changeLanguage(lang) {
 
     const socialIcons = document.querySelectorAll('.social-icon');
     if (socialIcons[0]) socialIcons[0].title = t.social_instagram;
-    if (socialIcons[1]) socialIcons[1].title = t.social_linkedin;
+    if (socialIcons[1]) socialIcons[1].title = t.social_linkedin || t.social_twitter;
+    if (socialIcons[2]) socialIcons[2].title = t.social_discord;
+
+    // Update config with new language if SDK exists
+    if (window.elementSdk && window.elementSdk.config) {
+        const newConfig = { ...translations[lang] };
+        window.elementSdk.setConfig(newConfig);
+    }
+}
+
+// SDK Integration Logic
+const defaultConfig = {
+    language: 'tr',
+    ...translations.tr
+};
+
+function onConfigChange(newConfig) {
+    if (newConfig.language) {
+        changeLanguage(newConfig.language);
+    }
+}
+
+function mapToCapabilities(config) {
+    return {
+        canEdit: true,
+        canDelete: false
+    };
+}
+
+function mapToEditPanelValues(config) {
+    return [
+        ["main_title", config.main_title || defaultConfig.main_title],
+        ["subtitle", config.subtitle || defaultConfig.subtitle],
+        ["cta_primary", config.cta_primary || defaultConfig.cta_primary],
+        ["cta_secondary", config.cta_secondary || defaultConfig.cta_secondary],
+        ["about_title", config.about_title || defaultConfig.about_title],
+        ["footer_text", config.footer_text || defaultConfig.footer_text]
+    ];
+}
+
+// Countdown Logic
+function initCountdown() {
+    // Create and inject countdown HTML if it doesn't exist
+    if (!document.querySelector('.countdown-hanging-container')) {
+        const currentLang = localStorage.getItem('language') || 'tr';
+        const t = translations[currentLang];
+        
+        const countdownHTML = `
+            <div class="countdown-hanging-container">
+                <div class="chain chain-left"></div>
+                <div class="chain chain-right"></div>
+                <div class="countdown-sign">
+                    <div class="sign-inner">
+                        <h3 id="countdown-title">${t.countdown_title}</h3>
+                        <div class="timer-grid">
+                            <div class="timer-item">
+                                <span id="days">00</span>
+                                <small id="label-days">${t.label_days}</small>
+                            </div>
+                            <div class="timer-item">
+                                <span id="hours">00</span>
+                                <small id="label-hours">${t.label_hours}</small>
+                            </div>
+                            <div class="timer-item">
+                                <span id="minutes">00</span>
+                                <small id="label-mins">${t.label_mins}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page-transition-overlay">
+                <img src="images/logdLogo.png" class="logo-mini" alt="LOGD">
+            </div>
+        `;
+        document.body.insertAdjacentHTML('afterbegin', countdownHTML);
+    }
+
+    const targetDate = new Date('February 13, 2026 00:00:00').getTime();
+
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+
+        if (distance < 0) {
+            const container = document.querySelector('.countdown-hanging-container');
+            if (container) container.style.display = 'none';
+            return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+        const daysEl = document.getElementById('days');
+        const hoursEl = document.getElementById('hours');
+        const minutesEl = document.getElementById('minutes');
+
+        if (daysEl) daysEl.textContent = days.toString().padStart(2, '0');
+        if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
+        if (minutesEl) minutesEl.textContent = minutes.toString().padStart(2, '0');
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 10000); // Update every 10 seconds
+}
+
+function initPageTransitions() {
+    const links = document.querySelectorAll('a[href$=".html"]');
+    const container = document.querySelector('.countdown-hanging-container');
+    const overlay = document.querySelector('.page-transition-overlay');
+
+    // Sayfa yüklendiğinde geçiş flag'ini kontrol et
+    if (overlay && sessionStorage.getItem('pageTransition') === 'active') {
+        // Önce ekran kapalı başlasın (animasyonsuz)
+        overlay.classList.add('initial');
+        
+        // Çok kısa bir süre sonra animasyonu aç ve aşağı doğru kaydır
+        setTimeout(() => {
+            overlay.classList.remove('initial');
+            overlay.classList.add('exit');
+            sessionStorage.removeItem('pageTransition'); // Flag'i temizle
+        }, 50);
+    }
+
+    links.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            
+            if (!href || href === '#' || href === window.location.pathname.split('/').pop()) return;
+            
+            e.preventDefault();
+
+            // 1. Tabela düşsün
+            if (container) {
+                container.classList.add('falling');
+            }
+
+            // 2. Perde kapansın
+            setTimeout(() => {
+                if (overlay) {
+                    overlay.classList.remove('exit');
+                    overlay.classList.add('active');
+                    sessionStorage.setItem('pageTransition', 'active'); // Geçiş flag'ini set et
+                }
+            }, 500);
+
+            // 3. Sayfa değişsin
+            setTimeout(() => {
+                window.location.href = href;
+            }, 1200);
+        });
+    });
+}
+
+async function initializeApp() {
+    initCountdown();
+    initPageTransitions();
+    // Data SDK initialization
+    if (window.dataSdk) {
+        try {
+            const dataHandler = (data) => {
+                console.log("Data SDK update:", data);
+            };
+            const initResult = await window.dataSdk.init(dataHandler);
+            if (!initResult.isOk) {
+                console.error("Data SDK initialization failed");
+            }
+        } catch (e) {
+            console.error("Error initializing Data SDK:", e);
+        }
+    }
+
+    // Element SDK initialization
+    if (window.elementSdk) {
+        window.elementSdk.init({
+            defaultConfig,
+            onConfigChange,
+            mapToCapabilities,
+            mapToEditPanelValues
+        });
+    }
+
+    // Language selector initialization
+    const languageSelector = document.getElementById('language-selector');
+    const savedLanguage = localStorage.getItem('language') || 'tr';
+
+    if (languageSelector) {
+        languageSelector.value = savedLanguage;
+        changeLanguage(savedLanguage);
+        
+        languageSelector.addEventListener('change', (e) => {
+            changeLanguage(e.target.value);
+        });
+    }
 }
 
 // Contact form handler
@@ -542,20 +900,14 @@ if (contactForm) {
     });
 }
 
-// Language selector initialization
-const languageSelector = document.getElementById('language-selector');
-const savedLanguage = localStorage.getItem('language') || 'tr';
-
-if (languageSelector) {
-    languageSelector.value = savedLanguage;
-    changeLanguage(savedLanguage);
-    
-    languageSelector.addEventListener('change', (e) => {
-        changeLanguage(e.target.value);
-    });
+// Initialize on load
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeApp);
+} else {
+    initializeApp();
 }
 
-// Simplified navigateTo for backwards compatibility if needed
+// Simplified navigateTo for backwards compatibility
 function navigateTo(pageId) {
     const pageMap = {
         'home': 'index.html',

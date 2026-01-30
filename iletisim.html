@@ -1,35 +1,29 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="tr">
-<head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8T9H5EBMMT"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
+ <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8T9H5EBMMT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-        gtag('config', 'G-8T9H5EBMMT');
-    </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>İletişim - LOGD</title>
-    <link rel="icon" type="image/jpeg" href="images/solyukarilogo.jpeg">
+    gtag('config', 'G-8T9H5EBMMT');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>İletişim - LOGD</title>
+  <link rel="icon" type="image/jpeg" href="images/logdLogo.png">
     <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+ </head>
+ <body>
     <nav class="navbar">
         <div class="navbar-container">
-            <div class="logo" onclick="window.location.href='index.html'">
+            <a href="index.html" class="logo">
                 <img src="images/solyukarilogo.jpeg" alt="LOGD Logo">
                 <span>LOGD</span>
-            </div>
-            
-            <button class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-
+            </a>
             <ul class="nav-links">
                 <li><a href="index.html">Ana Sayfa</a></li>
                 <li><a href="hakkimizda.html">Hakkımızda</a></li>
@@ -38,64 +32,65 @@
                 <li><a href="haberler.html">Haberler</a></li>
                 <li><a href="iletisim.html" class="active">İletişim</a></li>
             </ul>
-
-            <div style="display: flex; align-items: center; gap: 1rem;">
+            <div class="nav-right-items">
                 <select id="language-selector" class="language-selector">
-                    <option value="tr">TR</option>
-                    <option value="en">EN</option>
+                    <option value="tr">🇹🇷 TR</option>
+                    <option value="en">🇬🇧 EN</option>
                 </select>
                 <button class="theme-toggle" id="theme-toggle" title="Tema Değiştir">
                     <svg class="sun-icon" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"></path></svg>
                     <svg class="moon-icon" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                </button>
+                <button class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </button>
             </div>
         </div>
     </nav>
 
     <main id="contact" class="page active">
-        <header class="page-header">
+        <div class="page-header">
             <h1 id="contact-title">İletişim</h1>
             <p id="contact-subtitle">Sorularınız, önerileriniz veya işbirliği talepleriniz için bizimle iletişime geçin.</p>
-        </header>
+        </div>
         
-        <div class="content-section">
+        <section class="content-section">
             <div class="contact-info">
                 <h3 id="general-contact">Genel İletişim</h3>
-                <p>📍 <strong>Adres:</strong> İzmir, Türkiye</p>
-                <p>📧 <strong>E-posta:</strong> <a href="mailto:aydintolga008@gmail.com">aydintolga008@gmail.com</a></p>
+                <p>📧 E-posta: <a href="mailto:business@izmirlogt.com" id="contact-email">business@izmirlogt.com</a></p>
             </div>
-
-            <div class="contact-info">
-                <h3 id="contact-form-title">İletişim Formu</h3>
+            
+            <h2 class="section-title" id="contact-form-title">İletişim Formu</h2>
+            <div class="form-container">
+                <div id="contact-message"></div>
                 <form id="contact-form" action="https://formsubmit.co/aydintolga008@gmail.com" method="POST">
-                    <input type="hidden" name="_subject" value="LOGD Web Sitesi İletişim Formu">
-                    <input type="hidden" name="_template" value="table">
-                    
-                    <div style="margin-bottom: 1.5rem;">
-                        <label for="name" style="display: block; margin-bottom: 0.5rem;" id="full-name-label">Ad Soyad *</label>
-                        <input type="text" id="name" name="name" required style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #ddd; background: var(--bg-color);">
+                    <div class="form-group">
+                        <label for="contact-name" id="full-name-label">Ad Soyad *</label>
+                        <input type="text" id="contact-name" name="name" required>
                     </div>
                     
-                    <div style="margin-bottom: 1.5rem;">
-                        <label for="email" style="display: block; margin-bottom: 0.5rem;" id="email-label">E-posta *</label>
-                        <input type="email" id="email" name="email" required style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #ddd; background: var(--bg-color);">
+                    <div class="form-group">
+                        <label for="contact-email-input" id="email-label">E-posta *</label>
+                        <input type="email" id="contact-email-input" name="email" required>
                     </div>
                     
-                    <div style="margin-bottom: 1.5rem;">
-                        <label for="message" style="display: block; margin-bottom: 0.5rem;" id="message-label">Mesajınız *</label>
-                        <textarea id="message" name="message" required rows="5" style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #ddd; background: var(--bg-color);" placeholder="Lütfen mesajınızı buraya yazın..."></textarea>
+                    <div class="form-group">
+                        <label for="contact-message-input" id="your-message-label">Mesajınız *</label>
+                        <textarea id="contact-message-input" name="message" required placeholder="Lütfen mesajınızı buraya yazın..."></textarea>
                     </div>
                     
-                    <button type="submit" class="btn-primary" id="submit-contact" style="width: 100%;">Gönder</button>
+                    <button type="submit" class="btn-primary" id="submit-contact">Gönder</button>
                 </form>
             </div>
-        </div>
+        </section>
     </main>
 
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-section">
-                <h4 id="footer-about-title">LOGD Hakkında</h4>
+                <h4>LOGD Hakkında</h4>
                 <p id="footer-text">Liseler Oyun Geliştirme Derneği - Türkiye'nin liseli oyun geliştiricileri için en kapsayıcı topluluk. Öğrenme, üretme ve paylaşma kültürünü birlikte büyütüyoruz.</p>
                 <div class="social-links">
                     <a href="https://www.instagram.com/izmirlogt?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener" class="social-icon">
@@ -106,8 +101,9 @@
                     </a>
                 </div>
             </div>
+            
             <div class="footer-section">
-                <h4 id="footer-menu-title">Hızlı Menü</h4>
+                <h4>Hızlı Menü</h4>
                 <ul class="footer-links">
                     <li><a href="index.html">Ana Sayfa</a></li>
                     <li><a href="hakkimizda.html">Hakkımızda</a></li>
@@ -117,19 +113,23 @@
                     <li><a href="iletisim.html">İletişim</a></li>
                 </ul>
             </div>
+            
             <div class="footer-section">
-                <h4 id="footer-legal-title">Yasal</h4>
+                <h4>Yasal</h4>
                 <ul class="footer-links">
                     <li><a href="#">KVKK</a></li>
-                    <li><a href="#">Kullanım Şartları</a></li>
+                    <li><a href="#">Gizlilik Politikası</a></li>
+                    <li><a href="#">Çerez Politikası</a></li>
+                    <li><a href="#">Kullanım Koşulları</a></li>
                 </ul>
             </div>
         </div>
+        
         <div class="footer-bottom">
-            <p id="footer-copyright">© 2026 LOGD - Liseler Oyun Geliştirme Derneği. Tüm hakları saklıdır.</p>
+            <p>© 2026 LOGD - Liseler Oyun Geliştirme Derneği. Tüm hakları saklıdır.</p>
         </div>
     </footer>
 
     <script src="js/script.js"></script>
-</body>
+ </body>
 </html>
