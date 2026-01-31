@@ -984,6 +984,10 @@ body.dark-mode .about-text {
     color: #7B3F00; /* Solid Brown */
 }
 
+body.dark-mode .section-title {
+    color: #CD853F; /* Peru - Lighter brown for dark mode */
+}
+
 .communities-section {
     padding: 5rem 2rem;
     background: #FDFDFD;
@@ -1132,9 +1136,15 @@ body.dark-mode .sponsors-section {
 }
 
 body.dark-mode .sponsor-item {
-    background: #1F1F1F;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    border-color: #333;
+    background: #ffffff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    border-color: #444;
+}
+
+body.dark-mode .sponsor-item:hover {
+    background: #ffffff;
+    box-shadow: 0 8px 25px rgba(205, 133, 63, 0.4);
+    border-color: #CD853F;
 }
 
 .sponsor-item:hover {
