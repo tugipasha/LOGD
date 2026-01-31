@@ -254,7 +254,7 @@ const translations = {
         team_title: "Management and Team",
         
         // Events Page
-        page_events_title: "Producing Together",
+        page_events_title: "We Produce Together",
         page_events_subtitle: "As LOGD, we organize events covering all areas of game development.",
         events_gamejam_desc: "Intensive production processes where participants develop games from scratch in a short time.",
         event_snowyjam_title: "Snowy Jam",
