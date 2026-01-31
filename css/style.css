@@ -1830,3 +1830,31 @@ body.dark-mode .language-selector:hover {
     background-color: #2F2F2F;
     border-color: #8E593E;
 }
+
+/* Click Animation */
+.click-ripple {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    background: rgba(139, 69, 19, 0.4); /* Brownish ripple */
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0);
+    animation: ripple-animation 0.6s ease-out;
+    z-index: 10001; /* Above everything */
+}
+
+body.dark-mode .click-ripple {
+    background: rgba(205, 133, 63, 0.4); /* Lighter brown for dark mode */
+}
+
+@keyframes ripple-animation {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(4);
+        opacity: 0;
+    }
+}

@@ -851,11 +851,27 @@ function initPageTransitions() {
     });
 }
 
+function initClickAnimation() {
+    document.addEventListener('click', function(e) {
+        const ripple = document.createElement('div');
+        ripple.className = 'click-ripple';
+        ripple.style.left = e.clientX + 'px';
+        ripple.style.top = e.clientY + 'px';
+        document.body.appendChild(ripple);
+
+        // Remove the ripple element after the animation finishes
+        setTimeout(() => {
+            ripple.remove();
+        }, 600);
+    });
+}
+
 async function initializeApp() {
     initThemeToggle();
     initHamburgerMenu();
     initCountdown();
     initPageTransitions();
+    initClickAnimation();
     // Data SDK initialization
     if (window.dataSdk) {
         try {
