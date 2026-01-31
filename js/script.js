@@ -395,30 +395,36 @@ const translations = {
 };
 
 // Dark mode toggle
-const themeToggle = document.getElementById('theme-toggle');
-const savedTheme = localStorage.getItem('theme');
+function initThemeToggle() {
+    const themeToggle = document.getElementById('theme-toggle');
+    const savedTheme = localStorage.getItem('theme');
 
-if (savedTheme === 'dark') {
-    document.body.classList.add('dark-mode');
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+    }
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            AudioManager.init(); // Initialize audio on interaction
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+    }
 }
 
-if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
-        const isDark = document.body.classList.contains('dark-mode');
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    });
-}
+// Hamburger menu logic
+function initHamburgerMenu() {
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.querySelector('.nav-links');
 
-// Hamburger Menu Toggle
-const hamburger = document.getElementById('hamburger');
-const navLinks = document.querySelector('.nav-links');
-
-if (hamburger) {
-    hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-        navLinks.classList.toggle('active');
-    });
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            AudioManager.init(); // Initialize audio on interaction
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+    }
 }
 
 function changeLanguage(lang) {
@@ -846,6 +852,8 @@ function initPageTransitions() {
 }
 
 async function initializeApp() {
+    initThemeToggle();
+    initHamburgerMenu();
     initCountdown();
     initPageTransitions();
     // Data SDK initialization
@@ -887,30 +895,6 @@ async function initializeApp() {
         });
     }
 }
-
-// Hamburger menu logic
-document.addEventListener('DOMContentLoaded', () => {
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.querySelector('.nav-links');
-
-    if (hamburger && navLinks) {
-        hamburger.addEventListener('click', () => {
-            AudioManager.init(); // Initialize audio on interaction
-            hamburger.classList.toggle('active');
-            navLinks.classList.toggle('active');
-        });
-    }
-
-    const themeToggle = document.getElementById('theme-toggle');
-    if (themeToggle) {
-        themeToggle.addEventListener('click', () => {
-            AudioManager.init(); // Initialize audio on interaction
-            document.body.classList.toggle('dark-mode');
-            const isDark = document.body.classList.contains('dark-mode');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        });
-    }
-});
 
 // Contact form handler
 const contactForm = document.getElementById('contact-form');
