@@ -1,3 +1,24 @@
+// Audio Manager for transitions
+const AudioManager = {
+    windSound: null,
+    isInitialized: false,
+
+    init() {
+        if (this.isInitialized) return;
+        // Create an audio element for the wind sound
+        // Using a reliable CDN for a short woosh/wind sound
+        this.windSound = new Audio('https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3');
+        this.windSound.volume = 0.4;
+        this.isInitialized = true;
+    },
+
+    playWind() {
+        if (!this.windSound) this.init();
+        this.windSound.currentTime = 0;
+        this.windSound.play().catch(e => console.log("Audio play blocked until user interaction"));
+    }
+};
+
 const translations = {
     tr: {
         // Navigation
@@ -784,6 +805,7 @@ function initPageTransitions() {
         setTimeout(() => {
             overlay.classList.remove('initial');
             overlay.classList.add('exit');
+            AudioManager.playWind(); // Play sound when curtain opens
             sessionStorage.removeItem('pageTransition'); // Flag'i temizle
         }, 50);
     }
@@ -795,6 +817,11 @@ function initPageTransitions() {
             if (!href || href === '#' || href === window.location.pathname.split('/').pop()) return;
             
             e.preventDefault();
+
+            // Initialize audio on first user interaction
+            AudioManager.init();
+            // Play sound when transition starts
+            AudioManager.playWind();
 
             // 1. Tabela düşsün
             if (container) {
@@ -855,10 +882,35 @@ async function initializeApp() {
         changeLanguage(savedLanguage);
         
         languageSelector.addEventListener('change', (e) => {
+            AudioManager.init(); // Initialize audio on interaction
             changeLanguage(e.target.value);
         });
     }
 }
+
+// Hamburger menu logic
+document.addEventListener('DOMContentLoaded', () => {
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            AudioManager.init(); // Initialize audio on interaction
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+    }
+
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            AudioManager.init(); // Initialize audio on interaction
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+    }
+});
 
 // Contact form handler
 const contactForm = document.getElementById('contact-form');

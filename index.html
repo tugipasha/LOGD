@@ -26,74 +26,152 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: #2C1810; /* Koyu Kahverengi Arka Plan */
+            background: radial-gradient(circle at center, #2c1810 0%, #000 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 9999;
-            animation: fadeOut 1s ease 4.0s forwards; /* Süre 1.5sn artırıldı (2.5s -> 4.0s) */
+            overflow: hidden;
+            perspective: 2000px;
+            animation: introExit 1.5s cubic-bezier(0.7, 0, 0.3, 1) 5.5s forwards;
         }
-        
-        @keyframes fadeOut {
-            to {
-                opacity: 0;
-                visibility: hidden;
-            }
+
+        @keyframes introExit {
+            0% { transform: translateZ(0); opacity: 1; }
+            100% { transform: translateZ(5000px); opacity: 0; visibility: hidden; }
+        }
+
+        #intro-screen::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.6) 100%);
+            pointer-events: none;
+        }
+
+        .intro-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            filter: blur(1px);
+        }
+
+        .particle {
+            position: absolute;
+            background: linear-gradient(135deg, #d4a373, #fff);
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(212, 163, 115, 0.4);
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
         }
         
         .intro-content {
             text-align: center;
             position: relative;
+            z-index: 2;
+            transform-style: preserve-3d;
+            transition: transform 0.2s ease-out;
         }
         
         .intro-logo {
-            font-size: 6.5rem; /* Biraz büyütüldü */
-            font-weight: 900;
+            font-size: 8rem;
+            font-weight: 950;
             color: white;
             margin-bottom: 0.5rem;
             letter-spacing: 0.2em;
             position: relative;
+            display: flex;
+            gap: 0.1em;
+            justify-content: center;
+            filter: drop-shadow(0 0 30px rgba(212, 163, 115, 0.4));
+            transform-style: preserve-3d;
+        }
+
+        .logo-char {
             display: inline-block;
-            background: linear-gradient(135deg, #FFFFFF, #F5F5F5); /* Beyaz/Krem Gradyan */
+            background: linear-gradient(135deg, #fff 0%, #d4a373 50%, #fff 100%);
+            background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            opacity: 0;
+            transform: translateZ(200px) scale(2);
+            filter: blur(20px);
             animation: 
-                logoReveal 1.5s cubic-bezier(0.77, 0, 0.175, 1),
-                logoPulse 3s ease-in-out 1.5s infinite; /* Yeni Nabız Animasyonu */
+                charReveal 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+                shimmer 4s linear infinite;
         }
 
-        @keyframes logoReveal {
-            0% {
-                transform: translateY(40px) scale(0.9);
-                opacity: 0;
-                letter-spacing: 0em;
-            }
-            100% {
-                transform: translateY(0) scale(1);
+        .logo-char-d {
+            transform-origin: center center;
+            position: relative;
+            animation: 
+                charReveal 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards,
+                shimmer 4s linear infinite,
+                dZoom 1.5s cubic-bezier(0.7, 0, 0.3, 1) 5.5s forwards;
+        }
+
+        @keyframes dZoom {
+            0% { transform: scale(1) translateZ(0); filter: blur(0); opacity: 1; }
+            40% { transform: scale(3) translateZ(500px); filter: blur(2px); opacity: 1; }
+            100% { transform: scale(100) translateZ(3000px); filter: blur(20px); opacity: 0; }
+        }
+
+        .logo-char:nth-child(1) { animation-delay: 0.1s; }
+        .logo-char:nth-child(2) { animation-delay: 0.2s; }
+        .logo-char:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes charReveal {
+            to {
                 opacity: 1;
-                letter-spacing: 0.2em;
+                transform: translateZ(0) scale(1);
+                filter: blur(0);
             }
         }
 
-        @keyframes logoPulse {
-            0%, 100% { transform: scale(1); filter: brightness(1); }
-            50% { transform: scale(1.05); filter: brightness(1.2); }
+        @keyframes shimmer {
+            to { background-position: 200% center; }
         }
         
+        .intro-subtitle-container {
+            height: 2rem;
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            animation: subtitleExit 0.8s ease 5s forwards;
+        }
+
+        @keyframes subtitleExit {
+            to { opacity: 0; transform: translateY(20px); }
+        }
+
         .intro-subtitle {
-            font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.85); /* Daha belirgin beyaz */
-            font-weight: 400;
-            letter-spacing: 0.3em;
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 500;
+            letter-spacing: 0.25em;
             text-transform: uppercase;
             overflow: hidden;
             white-space: nowrap;
-            border-right: 2px solid white; /* Beyaz imleç */
+            border-right: 3px solid #d4a373;
             width: 0;
-            margin: 0 auto;
             animation: 
-                typing 2.0s steps(35, end) 1.5s forwards, /* Yazım hızı ayarlandı */
-                blink-caret 0.75s step-end infinite;
+                typing 3s steps(45, end) 1.8s forwards,
+                blink-caret 0.8s step-end infinite;
+            text-shadow: 0 0 15px rgba(212, 163, 115, 0.6);
         }
         
         @keyframes typing {
@@ -103,19 +181,28 @@
         
         @keyframes blink-caret {
             from, to { border-color: transparent }
-            50% { border-color: white }
+            50% { border-color: #d4a373 }
         }
 
         .intro-line {
-            height: 2px;
+            height: 1px;
             width: 0;
-            background: linear-gradient(90deg, transparent, white, transparent); /* Beyaz Çizgi */
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(212, 163, 115, 0.2) 20%, 
+                #d4a373 50%, 
+                rgba(212, 163, 115, 0.2) 80%, 
+                transparent 100%
+            );
             margin: 1.5rem auto 0;
-            animation: lineExpand 1.2s ease 1.0s forwards;
+            box-shadow: 0 0 15px rgba(212, 163, 115, 0.3);
+            animation: 
+                lineExpand 2s cubic-bezier(0.22, 1, 0.36, 1) 0.5s forwards,
+                subtitleExit 0.8s ease 5.2s forwards;
         }
 
         @keyframes lineExpand {
-            to { width: 180px }
+            to { width: 450px }
         }
         
         .navbar {
@@ -1549,16 +1636,76 @@
   </style>
   <style>@view-transition { navigation: auto; }</style>
   <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+  <script>
+    // Immediate language check for intro
+    (function() {
+      const savedLanguage = localStorage.getItem('language') || 'tr';
+      const introTexts = {
+        'tr': 'Liseli Oyun Geliştiriciler Derneği',
+        'en': 'High Schools Game Developers Association'
+      };
+      document.addEventListener('DOMContentLoaded', () => {
+        const introSubtitle = document.getElementById('intro-subtitle');
+        if (introSubtitle) {
+          introSubtitle.textContent = introTexts[savedLanguage];
+        }
+        
+        // Trigger wind sound for intro exit
+        setTimeout(() => {
+          if (typeof AudioManager !== 'undefined') {
+            AudioManager.playWind();
+          }
+        }, 5000); // Intro exit starts at 5.5s, play sound slightly before
+        
+        // Particle generation
+        const container = document.getElementById('intro-particles');
+        const introScreen = document.getElementById('intro-screen');
+        
+        if (container) {
+          for (let i = 0; i < 40; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            const size = Math.random() * 5 + 2;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.top = Math.random() * 100 + 'vh';
+            particle.style.animationDelay = (Math.random() * -20) + 's';
+            particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+            container.appendChild(particle);
+          }
+        }
+
+        // Mouse interaction for intro
+        if (introScreen) {
+          introScreen.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 20;
+            const y = (e.clientY / window.innerHeight - 0.5) * 20;
+            const content = document.querySelector('.intro-content');
+            if (content) {
+              content.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
+            }
+          });
+        }
+      });
+    })();
+  </script>
  </head>
  <body><!-- Intro Screen -->
   <div id="intro-screen">
+   <div class="intro-particles" id="intro-particles"></div>
    <div class="intro-content">
-    <div class="intro-logo">
-     LOGD
-    </div>
+    <div class="intro-logo" id="intro-logo">
+      <span class="logo-char">L</span>
+      <span class="logo-char">O</span>
+      <span class="logo-char">G</span>
+      <span class="logo-char logo-char-d">D</span>
+     </div>
     <div class="intro-line"></div>
-    <div id="intro-subtitle" class="intro-subtitle">
-     Liseli Oyun Geliştiriciler Derneği
+    <div class="intro-subtitle-container">
+     <div id="intro-subtitle" class="intro-subtitle">
+      Liseli Oyun Geliştiriciler Derneği
+     </div>
     </div>
    </div>
   </div>
