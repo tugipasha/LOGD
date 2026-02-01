@@ -23,6 +23,7 @@ const translations = {
     tr: {
         // Navigation
         nav_home: "Ana Sayfa",
+        nav_gallery: "Galeri",
         nav_about: "Hakkımızda",
         nav_events: "Etkinlikler",
         nav_showcase: "Showcase",
@@ -44,6 +45,9 @@ const translations = {
         about_title: "LOGD Nedir?",
         about_description: "Liseli Oyun Geliştiriciler Derneği (LOGD), oyun geliştirmeye ilgi duyan lise öğrencilerini bir araya getiren, kâr amacı gütmeyen bir topluluktur. LOGD; öğrenci topluluklarını destekler, yeni toplulukların kurulmasına yardımcı olur ve genç geliştiricilere oyun sektörüne dair gerçek üretim deneyimleri sunar.",
         communities_title: "Öğrenci Topluluklarımız",
+        gallery_title: "Etkinlik Galerisi",
+        gallery_page_title: "Etkinlik Galerisi",
+        gallery_page_subtitle: "LOGD etkinliklerinden unutulmaz anlar",
         
         // Events
         gamejam_title: "Game Jams",
@@ -209,6 +213,7 @@ const translations = {
     en: {
         // Navigation
         nav_home: "Home",
+        nav_gallery: "Gallery",
         nav_about: "About",
         nav_events: "Events",
         nav_showcase: "Showcase",
@@ -230,6 +235,9 @@ const translations = {
         about_title: "What is LOGD?",
         about_description: "Liseli Oyun Geliştiriciler Derneği (LOGD) is a non-profit organization that brings together high school students interested in game development. LOGD supports student communities, helps establish new ones, and provides young developers with real-world game development experience.",
         communities_title: "Our Student Communities",
+        gallery_title: "Event Gallery",
+        gallery_page_title: "Event Gallery",
+        gallery_page_subtitle: "Unforgettable moments from LOGD events",
         
         // Events
         gamejam_title: "Game Jams",
@@ -433,7 +441,13 @@ function changeLanguage(lang) {
     
     // Navbar
     document.querySelectorAll('.nav-links a').forEach((link, index) => {
-        const keys = ['nav_home', 'nav_about', 'nav_events', 'nav_showcase', 'nav_news', 'nav_contact'];
+        const keys = ['nav_home', 'nav_gallery', 'nav_about', 'nav_events', 'nav_showcase', 'nav_news', 'nav_contact'];
+        if (keys[index]) link.textContent = t[keys[index]];
+    });
+
+    // Footer Links
+    document.querySelectorAll('.footer-links a').forEach((link, index) => {
+        const keys = ['nav_home', 'nav_gallery', 'nav_about', 'nav_events', 'nav_showcase', 'nav_news', 'nav_contact'];
         if (keys[index]) link.textContent = t[keys[index]];
     });
     
@@ -643,6 +657,12 @@ function changeLanguage(lang) {
     const contactSubtitle = document.getElementById('contact-subtitle');
     const generalContact = document.getElementById('general-contact');
     const contactForm = document.getElementById('contact-form-title');
+
+    // Gallery Page
+    const galleryPageTitle = document.getElementById('gallery-page-title');
+    const galleryPageSubtitle = document.getElementById('gallery-page-subtitle');
+    if (galleryPageTitle) galleryPageTitle.textContent = t.gallery_page_title;
+    if (galleryPageSubtitle) galleryPageSubtitle.textContent = t.gallery_page_subtitle;
     const submitBtn = document.getElementById('submit-contact');
     const messageInput = document.getElementById('contact-message-input');
     const contactEmail = document.getElementById('contact-email');
