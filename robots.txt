@@ -1,4 +1,10 @@
 User-agent: *
-Disallow:
+Allow: /
+
+# Gereksiz sistem dosyalarını engelle
+Disallow: /cgi-bin/
+Disallow: /wp-admin/
+Disallow: /wp-includes/
+Disallow: /assets/tmp/
 
 Sitemap: https://www.izmirlogt.com/sitemap.xml
