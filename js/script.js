@@ -967,8 +967,8 @@ function initScrollReveal() {
     };
 
     const observerOptions = {
-        threshold: 0.15, // Reveal when 15% of the item is visible
-        rootMargin: '0px 0px -50px 0px' // Trigger slightly before it enters the viewport
+        threshold: 0.1, // Reveal when 10% of the item is visible
+        rootMargin: '0px 0px -50px 0px'
     };
 
     const observer = new IntersectionObserver(revealCallback, observerOptions);
