@@ -886,12 +886,106 @@ function initClickAnimation() {
     });
 }
 
+// Lightbox functionality for Gallery
+function initGalleryLightbox() {
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    
+    // Create lightbox HTML if it doesn't exist
+    if (galleryItems.length > 0 && !document.querySelector('.lightbox-overlay')) {
+        const lightboxHTML = `
+            <div class="lightbox-overlay">
+                <div class="lightbox-content">
+                    <button class="lightbox-close">&times;</button>
+                    <img src="" alt="" class="lightbox-img">
+                </div>
+            </div>
+        `;
+        document.body.insertAdjacentHTML('beforeend', lightboxHTML);
+    }
+
+    const lightbox = document.querySelector('.lightbox-overlay');
+    const lightboxImg = document.querySelector('.lightbox-img');
+    const closeBtn = document.querySelector('.lightbox-close');
+
+    if (!lightbox || !closeBtn) return;
+
+    galleryItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const img = item.querySelector('img');
+            if (!img) return;
+
+            lightboxImg.src = img.src;
+            lightboxImg.alt = img.alt;
+            
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        });
+    });
+
+    const closeLightbox = () => {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = ''; // Restore scrolling
+    };
+
+    closeBtn.addEventListener('click', closeLightbox);
+    
+    // Close on click outside
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            closeLightbox();
+        }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+            closeLightbox();
+        }
+    });
+}
+
+// Scroll Reveal Animation for Gallery
+function initScrollReveal() {
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    
+    if (galleryItems.length === 0) return;
+
+    const revealCallback = (entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Add a small delay based on index for a staggered effect
+                const index = Array.from(galleryItems).indexOf(entry.target);
+                const delay = (index % 3) * 100; // Stagger by 100ms within each row
+                
+                setTimeout(() => {
+                    entry.target.classList.add('reveal');
+                }, delay);
+                
+                observer.unobserve(entry.target);
+            }
+        });
+    };
+
+    const observerOptions = {
+        threshold: 0.15, // Reveal when 15% of the item is visible
+        rootMargin: '0px 0px -50px 0px' // Trigger slightly before it enters the viewport
+    };
+
+    const observer = new IntersectionObserver(revealCallback, observerOptions);
+
+    galleryItems.forEach(item => {
+        observer.observe(item);
+    });
+}
+
 async function initializeApp() {
     initThemeToggle();
     initHamburgerMenu();
     initCountdown();
     initPageTransitions();
     initClickAnimation();
+    initGalleryLightbox();
+    initScrollReveal();
     // Data SDK initialization
     if (window.dataSdk) {
         try {

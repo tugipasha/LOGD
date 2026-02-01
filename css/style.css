@@ -1264,6 +1264,13 @@ body.dark-mode .gallery-section {
     cursor: pointer;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.gallery-item.reveal {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .gallery-item.large {
@@ -1298,6 +1305,85 @@ body.dark-mode .gallery-section {
 
 .gallery-item:hover img {
     transform: scale(1.1);
+}
+
+/* Lightbox Styles */
+.lightbox-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+}
+
+.lightbox-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90vh;
+    transform: scale(0.85);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.lightbox-overlay.active .lightbox-content {
+    transform: scale(1);
+}
+
+.lightbox-img {
+    max-width: 100%;
+    max-height: 80vh;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    object-fit: contain;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    color: white;
+    font-size: 2.5rem;
+    cursor: pointer;
+    line-height: 1;
+    transition: transform 0.3s ease;
+    background: none;
+    border: none;
+    padding: 10px;
+}
+
+.lightbox-close:hover {
+    transform: scale(1.2) rotate(90deg);
+}
+
+@media (max-width: 768px) {
+    .lightbox-close {
+        top: 10px;
+        right: 10px;
+        background: rgba(0,0,0,0.5);
+        border-radius: 50%;
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+    }
 }
 
 .gallery-category {
