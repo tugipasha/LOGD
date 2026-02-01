@@ -14,8 +14,12 @@ const AudioManager = {
 
     playWind() {
         if (!this.windSound) this.init();
-        this.windSound.currentTime = 0;
-        this.windSound.play().catch(e => console.log("Audio play blocked until user interaction"));
+        if (this.windSound) {
+            this.windSound.currentTime = 0;
+            this.windSound.play().catch(e => {
+                // Silently fail if blocked by browser policy
+            });
+        }
     }
 };
 

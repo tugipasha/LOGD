@@ -1186,6 +1186,15 @@ body.dark-mode .sponsor-item:hover {
     transform: scale(1.1);
 }
 
+.sponsor-item.pubg-stacked {
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.sponsor-item.pubg-stacked img {
+    height: 60px; /* Reduced height for stacked logos */
+}
+
 @media (max-width: 768px) {
     .partners-grid {
         gap: 3rem;
@@ -1205,6 +1214,10 @@ body.dark-mode .sponsor-item:hover {
     
     .sponsor-item img {
         height: 90px;
+    }
+
+    .sponsor-item.pubg-stacked img {
+        height: 50px; /* Even smaller on mobile to fit two */
     }
 }
 
