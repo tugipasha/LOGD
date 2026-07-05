@@ -1,28 +1,3 @@
-// Audio Manager for transitions
-const AudioManager = {
-    windSound: null,
-    isInitialized: false,
-
-    init() {
-        if (this.isInitialized) return;
-        // Create an audio element for the wind sound
-        // Using a reliable CDN for a short woosh/wind sound
-        this.windSound = new Audio('https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3');
-        this.windSound.volume = 0.4;
-        this.isInitialized = true;
-    },
-
-    playWind() {
-        if (!this.windSound) this.init();
-        if (this.windSound) {
-            this.windSound.currentTime = 0;
-            this.windSound.play().catch(e => {
-                // Silently fail if blocked by browser policy
-            });
-        }
-    }
-};
-
 const translations = {
     tr: {
         // Navigation
@@ -194,13 +169,28 @@ const translations = {
         contact_title: "İletişim",
         contact_subtitle: "Sorularınız, önerileriniz veya işbirliği talepleriniz için bizimle iletişime geçin.",
         general_contact: "Genel İletişim",
+        general_contact_text: "Sorularınız ve önerileriniz için bize yazın.",
+        partnership_contact: "İş Birliği & Sponsorluk",
+        partnership_contact_text: "Marka iş birlikleri, sponsorluk ve etkinlik teklifleri için bizimle iletişime geçin.",
         contact_form: "İletişim Formu",
+        reason_label: "Niçin ulaşmak istiyorsunuz? *",
+        reason_placeholder: "Kısaca talebinizi veya amacınızı yazın.",
+        subject_label: "Konu *",
+        subject_option_general: "Genel Bilgi",
+        subject_option_partnership: "İş Birliği / Sponsorluk",
+        subject_option_membership: "Üyelik / Topluluk",
+        subject_option_press: "Basın",
+        subject_option_other: "Diğer",
+        contact_form_subject_prefix: "LOGD İletişim Formu - ",
+        partnership_mail_subject: "İş Birliği Talebi",
         full_name: "Ad Soyad *",
         email: "E-posta *",
         your_message: "Mesajınız *",
         message_placeholder: "Lütfen mesajınızı buraya yazın...",
         send: "Gönder",
         sending: "Gönderiliyor...",
+        contact_success_message: "✅ Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.",
+        contact_error_message: "❌ Bir hata oluştu. Lütfen tekrar deneyin.",
         
         // Footer
         footer_about: "LOGD Hakkında",
@@ -384,13 +374,28 @@ const translations = {
         contact_title: "Contact",
         contact_subtitle: "Contact us for your questions, suggestions or collaboration requests.",
         general_contact: "General Contact",
+        general_contact_text: "Write to us for your questions and suggestions.",
+        partnership_contact: "Partnership & Sponsorship",
+        partnership_contact_text: "Contact us for brand partnerships, sponsorships and event proposals.",
         contact_form: "Contact Form",
+        reason_label: "Why are you reaching out? *",
+        reason_placeholder: "Briefly describe your request or goal.",
+        subject_label: "Subject *",
+        subject_option_general: "General Information",
+        subject_option_partnership: "Partnership / Sponsorship",
+        subject_option_membership: "Membership / Community",
+        subject_option_press: "Press",
+        subject_option_other: "Other",
+        contact_form_subject_prefix: "LOGD Contact Form - ",
+        partnership_mail_subject: "Partnership Request",
         full_name: "Full Name *",
         email: "E-mail *",
         your_message: "Your Message *",
         message_placeholder: "Please write your message here...",
         send: "Send",
         sending: "Sending...",
+        contact_success_message: "✅ Your message has been sent successfully! We will get back to you as soon as possible.",
+        contact_error_message: "❌ An error occurred. Please try again.",
         
         // Footer
         footer_about: "About LOGD",
@@ -406,6 +411,53 @@ const translations = {
     }
 };
 
+const contactSubjectOptionKeys = [
+    'subject_option_general',
+    'subject_option_partnership',
+    'subject_option_membership',
+    'subject_option_press',
+    'subject_option_other'
+];
+
+function updateContactFormSubject() {
+    const currentLang = localStorage.getItem('language') || 'tr';
+    const contactSubjectSelect = document.getElementById('contact-subject');
+    const contactSubjectHidden = document.getElementById('contact-form-subject-hidden');
+
+    if (contactSubjectSelect && contactSubjectHidden) {
+        contactSubjectHidden.value = `${translations[currentLang].contact_form_subject_prefix}${contactSubjectSelect.value}`;
+    }
+}
+
+function updateContactSubjectOptions(lang, selectedIndex) {
+    const contactSubjectSelect = document.getElementById('contact-subject');
+
+    if (!contactSubjectSelect) {
+        return;
+    }
+
+    const nextIndex = typeof selectedIndex === 'number'
+        ? selectedIndex
+        : Math.max(contactSubjectSelect.selectedIndex, 0);
+
+    contactSubjectSelect.innerHTML = '';
+
+    contactSubjectOptionKeys.forEach((key, index) => {
+        const option = document.createElement('option');
+        option.value = translations[lang][key];
+        option.textContent = translations[lang][key];
+        option.selected = index === nextIndex;
+        option.defaultSelected = index === 0;
+        contactSubjectSelect.appendChild(option);
+    });
+
+    if (contactSubjectSelect.selectedIndex === -1) {
+        contactSubjectSelect.selectedIndex = 0;
+    }
+
+    updateContactFormSubject();
+}
+
 // Dark mode toggle
 function initThemeToggle() {
     const themeToggle = document.getElementById('theme-toggle');
@@ -417,7 +469,6 @@ function initThemeToggle() {
 
     if (themeToggle) {
         themeToggle.addEventListener('click', () => {
-            AudioManager.init(); // Initialize audio on interaction
             document.body.classList.toggle('dark-mode');
             const isDark = document.body.classList.contains('dark-mode');
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
@@ -432,7 +483,6 @@ function initHamburgerMenu() {
 
     if (hamburger && navLinks) {
         hamburger.addEventListener('click', () => {
-            AudioManager.init(); // Initialize audio on interaction
             hamburger.classList.toggle('active');
             navLinks.classList.toggle('active');
         });
@@ -660,6 +710,9 @@ function changeLanguage(lang) {
     const contactHeader = document.getElementById('contact-title');
     const contactSubtitle = document.getElementById('contact-subtitle');
     const generalContact = document.getElementById('general-contact');
+    const generalContactText = document.getElementById('general-contact-text');
+    const partnershipContact = document.getElementById('partnership-contact');
+    const partnershipContactText = document.getElementById('partnership-contact-text');
     const contactForm = document.getElementById('contact-form-title');
 
     // Gallery Page
@@ -674,6 +727,9 @@ function changeLanguage(lang) {
     if (contactHeader) contactHeader.textContent = t.contact_title;
     if (contactSubtitle) contactSubtitle.textContent = t.contact_subtitle;
     if (generalContact) generalContact.textContent = t.general_contact;
+    if (generalContactText) generalContactText.textContent = t.general_contact_text;
+    if (partnershipContact) partnershipContact.textContent = t.partnership_contact;
+    if (partnershipContactText) partnershipContactText.textContent = t.partnership_contact_text;
     if (contactForm) contactForm.textContent = t.contact_form;
     if (submitBtn && !submitBtn.disabled) submitBtn.textContent = t.send;
     if (messageInput) messageInput.placeholder = t.message_placeholder;
@@ -681,12 +737,28 @@ function changeLanguage(lang) {
         contactEmail.textContent = 'business@izmirlogt.com';
         contactEmail.href = 'mailto:business@izmirlogt.com';
     }
+    const partnershipEmail = document.getElementById('partnership-email');
+    if (partnershipEmail) {
+        partnershipEmail.textContent = 'business@izmirlogt.com';
+        partnershipEmail.href = `mailto:business@izmirlogt.com?subject=${encodeURIComponent(t.partnership_mail_subject)}`;
+    }
 
     // Contact form labels
-    const formLabels = document.querySelectorAll('.form-group label');
-    if (formLabels[0]) formLabels[0].textContent = t.full_name;
-    if (formLabels[1]) formLabels[1].textContent = t.email;
-    if (formLabels[2]) formLabels[2].textContent = t.your_message;
+    const reasonLabel = document.getElementById('reason-label');
+    const reasonInput = document.getElementById('contact-reason');
+    const subjectLabel = document.getElementById('subject-label');
+    const fullNameLabel = document.getElementById('full-name-label');
+    const emailLabel = document.getElementById('email-label');
+    const yourMessageLabel = document.getElementById('your-message-label');
+
+    if (reasonLabel) reasonLabel.textContent = t.reason_label;
+    if (reasonInput) reasonInput.placeholder = t.reason_placeholder;
+    if (subjectLabel) subjectLabel.textContent = t.subject_label;
+    if (fullNameLabel) fullNameLabel.textContent = t.full_name;
+    if (emailLabel) emailLabel.textContent = t.email;
+    if (yourMessageLabel) yourMessageLabel.textContent = t.your_message;
+
+    updateContactSubjectOptions(lang);
 
     // Footer
     const footerAboutTitle = document.getElementById('footer-about-title');
@@ -785,9 +857,6 @@ function initCountdown() {
                     </div>
                 </div>
             </div>
-            <div class="page-transition-overlay">
-                <img src="images/logdLogo.png" class="logo-mini" alt="LOGD">
-            </div>
         `;
         document.body.insertAdjacentHTML('afterbegin', countdownHTML);
     }
@@ -821,74 +890,7 @@ function initCountdown() {
     setInterval(updateCountdown, 10000); // Update every 10 seconds
 }
 
-function initPageTransitions() {
-    const links = document.querySelectorAll('a[href$=".html"]');
-    const container = document.querySelector('.countdown-hanging-container');
-    const overlay = document.querySelector('.page-transition-overlay');
 
-    // Sayfa yüklendiğinde geçiş flag'ini kontrol et
-    if (overlay && sessionStorage.getItem('pageTransition') === 'active') {
-        // Önce ekran kapalı başlasın (animasyonsuz)
-        overlay.classList.add('initial');
-        
-        // Çok kısa bir süre sonra animasyonu aç ve aşağı doğru kaydır
-        setTimeout(() => {
-            overlay.classList.remove('initial');
-            overlay.classList.add('exit');
-            AudioManager.playWind(); // Play sound when curtain opens
-            sessionStorage.removeItem('pageTransition'); // Flag'i temizle
-        }, 50);
-    }
-
-    links.forEach(link => {
-        link.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            
-            if (!href || href === '#' || href === window.location.pathname.split('/').pop()) return;
-            
-            e.preventDefault();
-
-            // Initialize audio on first user interaction
-            AudioManager.init();
-            // Play sound when transition starts
-            AudioManager.playWind();
-
-            // 1. Tabela düşsün
-            if (container) {
-                container.classList.add('falling');
-            }
-
-            // 2. Perde kapansın
-            setTimeout(() => {
-                if (overlay) {
-                    overlay.classList.remove('exit');
-                    overlay.classList.add('active');
-                    sessionStorage.setItem('pageTransition', 'active'); // Geçiş flag'ini set et
-                }
-            }, 500);
-
-            // 3. Sayfa değişsin
-            setTimeout(() => {
-                window.location.href = href;
-            }, 1200);
-        });
-    });
-}
-
-function initClickAnimation() {
-    document.addEventListener('click', function(e) {
-        const ripple = document.createElement('div');
-        ripple.className = 'click-ripple';
-        ripple.style.left = e.clientX + 'px';
-        ripple.style.top = e.clientY + 'px';
-        document.body.appendChild(ripple);
-
-        // Remove the ripple element after the animation finishes
-        setTimeout(() => {
-            ripple.remove();
-        }, 600);
-    });
-}
 
 // Lightbox functionality for Gallery
 function initGalleryLightbox() {
@@ -986,8 +988,6 @@ async function initializeApp() {
     initThemeToggle();
     initHamburgerMenu();
     initCountdown();
-    initPageTransitions();
-    initClickAnimation();
     initGalleryLightbox();
     initScrollReveal();
     // Data SDK initialization
@@ -1024,7 +1024,6 @@ async function initializeApp() {
         changeLanguage(savedLanguage);
         
         languageSelector.addEventListener('change', (e) => {
-            AudioManager.init(); // Initialize audio on interaction
             changeLanguage(e.target.value);
         });
     }
@@ -1033,18 +1032,29 @@ async function initializeApp() {
 // Contact form handler
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
+    const contactSubjectSelect = document.getElementById('contact-subject');
+
+    if (contactSubjectSelect) {
+        contactSubjectSelect.addEventListener('change', updateContactFormSubject);
+    }
+
     contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
-        const submitBtn = document.getElementById('submit-contact');
-        submitBtn.disabled = true;
         const currentLang = localStorage.getItem('language') || 'tr';
+        const submitBtn = document.getElementById('submit-contact');
+
+        if (!contactForm.reportValidity()) {
+            return;
+        }
+
+        updateContactFormSubject();
+        submitBtn.disabled = true;
         submitBtn.textContent = translations[currentLang].sending;
 
         const formData = new FormData(contactForm);
 
         try {
-            const response = await fetch('https://formsubmit.co/ajax/aydintolga008@gmail.com', {
+            const response = await fetch('https://formsubmit.co/ajax/business@izmirlogt.com', {
                 method: 'POST',
                 body: formData,
                 headers: {
@@ -1053,16 +1063,14 @@ if (contactForm) {
             });
 
             if (response.ok) {
-                const successMsg = currentLang === 'tr' ? '✅ Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.' : '✅ Your message has been sent successfully! We will get back to you as soon as possible.';
-                alert(successMsg);
+                alert(translations[currentLang].contact_success_message);
                 contactForm.reset();
+                updateContactSubjectOptions(currentLang, 0);
             } else {
-                const errorMsg = currentLang === 'tr' ? '❌ Bir hata oluştu. Lütfen tekrar deneyin.' : '❌ An error occurred. Please try again.';
-                alert(errorMsg);
+                alert(translations[currentLang].contact_error_message);
             }
         } catch (error) {
-            const errorMsg = currentLang === 'tr' ? '❌ Bir hata oluştu. Lütfen tekrar deneyin.' : '❌ An error occurred. Please try again.';
-            alert(errorMsg);
+            alert(translations[currentLang].contact_error_message);
         }
 
         submitBtn.disabled = false;

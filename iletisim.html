@@ -58,31 +58,64 @@
         </div>
         
         <section class="content-section">
-            <div class="contact-info">
-                <h3 id="general-contact">Genel İletişim</h3>
-                <p>📧 E-posta: <a href="mailto:business@izmirlogt.com" id="contact-email">business@izmirlogt.com</a></p>
+            <div class="contact-cards-grid">
+                <div class="contact-info">
+                    <h3 id="general-contact">Genel İletişim</h3>
+                    <p id="general-contact-text">Sorularınız ve önerileriniz için bize yazın.</p>
+                    <p>📧 E-posta: <a href="mailto:business@izmirlogt.com" id="contact-email">business@izmirlogt.com</a></p>
+                </div>
+
+                <div class="contact-info">
+                    <h3 id="partnership-contact">İş Birliği &amp; Sponsorluk</h3>
+                    <p id="partnership-contact-text">Marka iş birlikleri, sponsorluk ve etkinlik teklifleri için bizimle iletişime geçin.</p>
+                    <p>📧 E-posta: <a href="mailto:business@izmirlogt.com?subject=%C4%B0%C5%9F%20Birli%C4%9Fi%20Talebi" id="partnership-email">business@izmirlogt.com</a></p>
+                </div>
             </div>
             
             <h2 class="section-title" id="contact-form-title">İletişim Formu</h2>
             <div class="form-container">
                 <div id="contact-message"></div>
-                <form id="contact-form" action="https://formsubmit.co/aydintolga008@gmail.com" method="POST">
-                    <div class="form-group">
-                        <label for="contact-name" id="full-name-label">Ad Soyad *</label>
-                        <input type="text" id="contact-name" name="name" required>
+                <form id="contact-form" action="https://formsubmit.co/business@izmirlogt.com" method="POST">
+                    <input type="hidden" name="_subject" id="contact-form-subject-hidden" value="LOGD İletişim Formu - Genel">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_captcha" value="false">
+
+                    <div class="contact-form-grid">
+                        <div class="form-group form-group-full">
+                            <label for="contact-reason" id="reason-label">Niçin ulaşmak istiyorsunuz? *</label>
+                            <input type="text" id="contact-reason" name="reason" required placeholder="Kısaca talebinizi veya amacınızı yazın.">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contact-name" id="full-name-label">Ad Soyad *</label>
+                            <input type="text" id="contact-name" name="name" required autocomplete="name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contact-email-input" id="email-label">E-posta *</label>
+                            <input type="email" id="contact-email-input" name="email" required autocomplete="email">
+                        </div>
+
+                        <div class="form-group form-group-full">
+                            <label for="contact-subject" id="subject-label">Konu *</label>
+                            <select id="contact-subject" name="subject" required>
+                                <option value="Genel Bilgi" selected>Genel Bilgi</option>
+                                <option value="İş Birliği / Sponsorluk">İş Birliği / Sponsorluk</option>
+                                <option value="Üyelik / Topluluk">Üyelik / Topluluk</option>
+                                <option value="Basın">Basın</option>
+                                <option value="Diğer">Diğer</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group form-group-full">
+                            <label for="contact-message-input" id="your-message-label">Mesajınız *</label>
+                            <textarea id="contact-message-input" name="message" required placeholder="Lütfen mesajınızı buraya yazın..."></textarea>
+                        </div>
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="contact-email-input" id="email-label">E-posta *</label>
-                        <input type="email" id="contact-email-input" name="email" required>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary" id="submit-contact">Gönder</button>
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="contact-message-input" id="your-message-label">Mesajınız *</label>
-                        <textarea id="contact-message-input" name="message" required placeholder="Lütfen mesajınızı buraya yazın..."></textarea>
-                    </div>
-                    
-                    <button type="submit" class="btn-primary" id="submit-contact">Gönder</button>
                 </form>
             </div>
         </section>
@@ -131,7 +164,6 @@
             <p>© 2026 LOGD - Liseler Oyun Geliştirme Derneği. Tüm hakları saklıdır.</p>
         </div>
     </footer>
-
     <script src="js/script.js"></script>
  </body>
 </html>
