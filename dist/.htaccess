@@ -1,0 +1,41 @@
+# Enable mod_rewrite
+RewriteEngine On
+
+# Security headers
+<IfModule mod_headers.c>
+  Header always set X-Frame-Options "DENY"
+  Header always set X-XSS-Protection "1; mode=block"
+  Header always set X-Content-Type-Options "nosniff"
+</IfModule>
+
+# Cache configuration
+<IfModule mod_expires.c>
+  ExpiresActive On
+  
+  # HTML: No cache
+  ExpiresByType text/html "access plus 0 seconds"
+  
+  # CSS, JS, images: 1 year
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/gif "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  
+  # Default
+  ExpiresDefault "access plus 0 seconds"
+</IfModule>
+
+<IfModule mod_headers.c>
+  # HTML: Must revalidate
+  <FilesMatch "\.html$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+  
+  # Hashed assets: Immutable
+  <FilesMatch "\.[0-9a-f]{8}\.(css|js|jpg|jpeg|png|gif|webp|svg|heic)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>

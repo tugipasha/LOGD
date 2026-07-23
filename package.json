@@ -1,0 +1,9 @@
+{
+  "name": "logd-website",
+  "version": "1.0.0",
+  "description": "LOGD website with caching optimization",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "devDependencies": {}
+}
