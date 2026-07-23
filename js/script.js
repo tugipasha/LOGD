@@ -789,106 +789,10 @@ function changeLanguage(lang) {
     if (socialIcons[1]) socialIcons[1].title = t.social_linkedin || t.social_twitter;
     if (socialIcons[2]) socialIcons[2].title = t.social_discord;
 
-    // Update config with new language if SDK exists
-    if (window.elementSdk && window.elementSdk.config) {
-        const newConfig = { ...translations[lang] };
-        window.elementSdk.setConfig(newConfig);
-    }
+
 }
 
-// SDK Integration Logic
-const defaultConfig = {
-    language: 'tr',
-    ...translations.tr
-};
 
-function onConfigChange(newConfig) {
-    if (newConfig.language) {
-        changeLanguage(newConfig.language);
-    }
-}
-
-function mapToCapabilities(config) {
-    return {
-        canEdit: true,
-        canDelete: false
-    };
-}
-
-function mapToEditPanelValues(config) {
-    return [
-        ["main_title", config.main_title || defaultConfig.main_title],
-        ["subtitle", config.subtitle || defaultConfig.subtitle],
-        ["cta_primary", config.cta_primary || defaultConfig.cta_primary],
-        ["cta_secondary", config.cta_secondary || defaultConfig.cta_secondary],
-        ["about_title", config.about_title || defaultConfig.about_title],
-        ["footer_text", config.footer_text || defaultConfig.footer_text]
-    ];
-}
-
-// Countdown Logic
-function initCountdown() {
-    // Create and inject countdown HTML if it doesn't exist
-    if (!document.querySelector('.countdown-hanging-container')) {
-        const currentLang = localStorage.getItem('language') || 'tr';
-        const t = translations[currentLang];
-        
-        const countdownHTML = `
-            <div class="countdown-hanging-container">
-                <div class="chain chain-left"></div>
-                <div class="chain chain-right"></div>
-                <div class="countdown-sign">
-                    <div class="sign-inner">
-                        <h3 id="countdown-title">${t.countdown_title}</h3>
-                        <div class="timer-grid">
-                            <div class="timer-item">
-                                <span id="days">00</span>
-                                <small id="label-days">${t.label_days}</small>
-                            </div>
-                            <div class="timer-item">
-                                <span id="hours">00</span>
-                                <small id="label-hours">${t.label_hours}</small>
-                            </div>
-                            <div class="timer-item">
-                                <span id="minutes">00</span>
-                                <small id="label-mins">${t.label_mins}</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
-        document.body.insertAdjacentHTML('afterbegin', countdownHTML);
-    }
-
-    const targetDate = new Date('February 13, 2026 00:00:00').getTime();
-
-    function updateCountdown() {
-        const now = new Date().getTime();
-        const distance = targetDate - now;
-
-        if (distance < 0) {
-            const container = document.querySelector('.countdown-hanging-container');
-            if (container) container.style.display = 'none';
-            return;
-        }
-
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-
-        const daysEl = document.getElementById('days');
-        const hoursEl = document.getElementById('hours');
-        const minutesEl = document.getElementById('minutes');
-
-        if (daysEl) daysEl.textContent = days.toString().padStart(2, '0');
-        if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
-        if (minutesEl) minutesEl.textContent = minutes.toString().padStart(2, '0');
-    }
-
-    updateCountdown();
-    setInterval(updateCountdown, 10000); // Update every 10 seconds
-}
 
 
 
@@ -987,33 +891,8 @@ function initScrollReveal() {
 async function initializeApp() {
     initThemeToggle();
     initHamburgerMenu();
-    initCountdown();
     initGalleryLightbox();
     initScrollReveal();
-    // Data SDK initialization
-    if (window.dataSdk) {
-        try {
-            const dataHandler = (data) => {
-                console.log("Data SDK update:", data);
-            };
-            const initResult = await window.dataSdk.init(dataHandler);
-            if (!initResult.isOk) {
-                console.error("Data SDK initialization failed");
-            }
-        } catch (e) {
-            console.error("Error initializing Data SDK:", e);
-        }
-    }
-
-    // Element SDK initialization
-    if (window.elementSdk) {
-        window.elementSdk.init({
-            defaultConfig,
-            onConfigChange,
-            mapToCapabilities,
-            mapToEditPanelValues
-        });
-    }
 
     // Language selector initialization
     const languageSelector = document.getElementById('language-selector');
