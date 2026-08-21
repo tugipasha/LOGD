@@ -1,6 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+let CleanCSS, Terser;
+try { CleanCSS = require('clean-css'); } catch (e) { /* optional */ }
+try { Terser = require('terser'); } catch (e) { /* optional */ }
 
 // Create dist directory
 const distDir = path.join(__dirname, 'dist');
@@ -39,51 +42,75 @@ collectImages(path.join(__dirname, 'images'), 'images');
 // Map of original paths to hashed paths
 const assetMap = {};
 
-// Copy and hash assets
-for (const asset of assets) {
-  const srcPath = path.join(__dirname, asset.src);
-  const ext = path.extname(asset.src);
-  const baseName = path.basename(asset.src, ext);
-  const hash = getFileHash(srcPath);
-  const hashedName = `${baseName}.${hash}${ext}`;
-  const destRelPath = path.join(asset.destDir, hashedName).replace(/\\/g, '/');
-  const destPath = path.join(distDir, destRelPath);
-  
-  const destDirPath = path.dirname(destPath);
-  if (!fs.existsSync(destDirPath)) {
-    fs.mkdirSync(destDirPath, { recursive: true });
+// Copy and hash assets (CSS/JS are minified before hashing so the dist output stays small)
+async function processAssets() {
+  for (const asset of assets) {
+    const srcPath = path.join(__dirname, asset.src);
+    const ext = path.extname(asset.src);
+    const baseName = path.basename(asset.src, ext);
+
+    let content = fs.readFileSync(srcPath);
+
+    if (ext === '.css' && CleanCSS) {
+      const output = new CleanCSS({ level: 2 }).minify(content.toString('utf8'));
+      if (!output.errors || output.errors.length === 0) {
+        content = Buffer.from(output.styles, 'utf8');
+      } else {
+        console.warn(`CleanCSS errors for ${asset.src}:`, output.errors);
+      }
+    } else if (ext === '.js' && Terser) {
+      const result = await Terser.minify(content.toString('utf8'), { compress: true, mangle: true });
+      if (result.code) {
+        content = Buffer.from(result.code, 'utf8');
+      } else if (result.error) {
+        console.warn(`Terser error for ${asset.src}:`, result.error);
+      }
+    }
+
+    const hash = crypto.createHash('md5').update(content).digest('hex').slice(0, 8);
+    const hashedName = `${baseName}.${hash}${ext}`;
+    const destRelPath = path.join(asset.destDir, hashedName).replace(/\\/g, '/');
+    const destPath = path.join(distDir, destRelPath);
+
+    const destDirPath = path.dirname(destPath);
+    if (!fs.existsSync(destDirPath)) {
+      fs.mkdirSync(destDirPath, { recursive: true });
+    }
+
+    fs.writeFileSync(destPath, content);
+    assetMap[asset.src] = destRelPath;
+    console.log(`Processed ${asset.src} → ${destRelPath}`);
   }
-  
-  fs.copyFileSync(srcPath, destPath);
-  assetMap[asset.src] = destRelPath;
-  console.log(`Copied ${asset.src} → ${destRelPath}`);
 }
 
-// Copy HTML files and replace asset references
-const htmlFiles = ['index.html', 'hakkimizda.html', 'etkinlikler.html', 'galeri.html', 'haberler.html', 'iletisim.html', 'showcase.html'];
-for (const htmlFile of htmlFiles) {
-  let content = fs.readFileSync(path.join(__dirname, htmlFile), 'utf8');
-  
-  // Replace asset references
-  for (const [original, hashed] of Object.entries(assetMap)) {
-    content = content.replace(new RegExp(original, 'g'), hashed);
-  }
-  
-  fs.writeFileSync(path.join(distDir, htmlFile), content, 'utf8');
-  console.log(`Processed ${htmlFile}`);
-}
+async function processHtmlAndStaticFiles() {
+  // Copy HTML files and replace asset references
+  const htmlFiles = ['index.html', 'hakkimizda.html', 'etkinlikler.html', 'galeri.html', 'haberler.html', 'iletisim.html', 'showcase.html'];
+  for (const htmlFile of htmlFiles) {
+    let content = fs.readFileSync(path.join(__dirname, htmlFile), 'utf8');
 
-// Copy other static files
-const otherStaticFiles = ['robots.txt', 'sitemap.xml', 'CNAME'];
-for (const file of otherStaticFiles) {
-  const srcPath = path.join(__dirname, file);
-  if (fs.existsSync(srcPath)) {
-    fs.copyFileSync(srcPath, path.join(distDir, file));
-    console.log(`Copied ${file}`);
+    // Replace asset references
+    for (const [original, hashed] of Object.entries(assetMap)) {
+      content = content.replace(new RegExp(original, 'g'), hashed);
+    }
+
+    fs.writeFileSync(path.join(distDir, htmlFile), content, 'utf8');
+    console.log(`Processed ${htmlFile}`);
+  }
+
+  // Copy other static files
+  const otherStaticFiles = ['robots.txt', 'sitemap.xml', 'CNAME'];
+  for (const file of otherStaticFiles) {
+    const srcPath = path.join(__dirname, file);
+    if (fs.existsSync(srcPath)) {
+      fs.copyFileSync(srcPath, path.join(distDir, file));
+      console.log(`Copied ${file}`);
+    }
   }
 }
 
 // Create hosting configuration files
+function writeHostingConfigs() {
 
 // 1. Netlify (_headers file)
 const netlifyHeaders = `
@@ -192,3 +219,11 @@ fs.writeFileSync(path.join(distDir, '.htaccess'), htaccess.trim(), 'utf8');
 console.log('Created .htaccess (Apache)');
 
 console.log('\nBuild complete! Output in dist/');
+}
+
+// Run build pipeline
+(async () => {
+  await processAssets();
+  await processHtmlAndStaticFiles();
+  writeHostingConfigs();
+})();

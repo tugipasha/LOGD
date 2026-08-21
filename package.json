@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "node server.js",
     "build": "node build.js",
+    "optimize-images": "node optimize-images.js",
     "start": "node server.js",
     "lint": "node -e \"console.log('No lint errors')\""
   },
@@ -14,5 +15,8 @@
     "express": "^5.2.1",
     "sharp": "^0.35.3"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "clean-css": "^5.3.3",
+    "terser": "^5.36.0"
+  }
 }
